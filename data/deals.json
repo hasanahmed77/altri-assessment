@@ -1,0 +1,3365 @@
+[
+  {
+    "id": "D-101",
+    "address": "1274 Quail Rd",
+    "city": "Seminole",
+    "state": "FL",
+    "purchase_price": 836500,
+    "bedrooms": 4,
+    "baths": 4,
+    "lot_acres": 2.11,
+    "turnkey": true,
+    "interest_rate": 0.0675,
+    "closing_cost_pct": 0.03,
+    "setup_items": [
+      {
+        "item": "Interior paint",
+        "cost": 10000
+      },
+      {
+        "item": "Furniture and decor",
+        "cost": 62000
+      },
+      {
+        "item": "Design and project management",
+        "cost": 30000
+      }
+    ],
+    "annual_opex": 65700,
+    "revenue": {
+      "low": 165000,
+      "mid": 165000,
+      "high": 165000
+    },
+    "est_year1_tax_savings": 93800,
+    "comps": [
+      {
+        "listing_id": "AB-952686",
+        "revenue": 184600,
+        "bedrooms": 4,
+        "sleeps": 12
+      },
+      {
+        "listing_id": "AB-777406",
+        "revenue": 217300,
+        "bedrooms": 3,
+        "sleeps": 10
+      },
+      {
+        "listing_id": "AB-119116",
+        "revenue": 198700,
+        "bedrooms": 4,
+        "sleeps": 8
+      },
+      {
+        "listing_id": "AB-458332",
+        "revenue": 234000,
+        "bedrooms": 4,
+        "sleeps": 10
+      },
+      {
+        "listing_id": "AB-337547",
+        "revenue": 237200,
+        "bedrooms": 4,
+        "sleeps": 8
+      }
+    ],
+    "highlights": [
+      "Quiet street with no rental restrictions",
+      "Screened lanai",
+      "Large fenced backyard ready for a pool"
+    ],
+    "analyst_notes": "Existing STR. Revenue set to seller's trailing 12 months.",
+    "approved_at": "2026-09-17"
+  },
+  {
+    "id": "D-102",
+    "address": "3054 Hemlock Trl",
+    "city": "Saint Augustine",
+    "state": "FL",
+    "purchase_price": 1149500,
+    "bedrooms": 4,
+    "baths": 2.5,
+    "lot_acres": 1.1,
+    "turnkey": false,
+    "interest_rate": 0.07,
+    "closing_cost_pct": 0.03,
+    "setup_items": [
+      {
+        "item": "Game room",
+        "cost": 25000
+      },
+      {
+        "item": "Interior paint",
+        "cost": 10000
+      },
+      {
+        "item": "Fire pit",
+        "cost": 7500
+      },
+      {
+        "item": "Pool heater",
+        "cost": 14500
+      },
+      {
+        "item": "Furniture and decor",
+        "cost": 62000
+      },
+      {
+        "item": "Design and project management",
+        "cost": 30000
+      }
+    ],
+    "annual_opex": 47500,
+    "revenue": {
+      "low": 132000,
+      "mid": 155000,
+      "high": 178000
+    },
+    "est_year1_tax_savings": 127000,
+    "comps": [
+      {
+        "listing_id": "AB-707314",
+        "revenue": 170600,
+        "bedrooms": 3,
+        "sleeps": 6
+      },
+      {
+        "listing_id": "AB-159942",
+        "revenue": 138700,
+        "bedrooms": 4,
+        "sleeps": 10
+      },
+      {
+        "listing_id": "AB-159642",
+        "revenue": 181100,
+        "bedrooms": 4,
+        "sleeps": 8
+      }
+    ],
+    "highlights": [
+      "Updated kitchen and baths",
+      "Quiet street with no rental restrictions",
+      "Fifteen minutes to the beach"
+    ],
+    "analyst_notes": "Roof replaced in 2022.",
+    "approved_at": "2026-10-06"
+  },
+  {
+    "id": "D-103",
+    "address": "2451 Bayview Dr",
+    "city": "Panama City Beach",
+    "state": "FL",
+    "purchase_price": 610500,
+    "bedrooms": 6,
+    "baths": 2,
+    "lot_acres": 0.54,
+    "turnkey": false,
+    "interest_rate": 0.0725,
+    "closing_cost_pct": 0.03,
+    "setup_items": [
+      {
+        "item": "Mini golf",
+        "cost": 12000
+      },
+      {
+        "item": "Inground pool",
+        "cost": 125000
+      },
+      {
+        "item": "Furniture and decor",
+        "cost": 78000
+      },
+      {
+        "item": "Design and project management",
+        "cost": 20000
+      }
+    ],
+    "annual_opex": 25100,
+    "revenue": {
+      "low": 63000,
+      "mid": 70000,
+      "high": 77000
+    },
+    "est_year1_tax_savings": 92300,
+    "comps": [
+      {
+        "listing_id": "AB-822858",
+        "revenue": 74100,
+        "bedrooms": 7,
+        "sleeps": 16
+      },
+      {
+        "listing_id": "AB-342720",
+        "revenue": 67700,
+        "bedrooms": 5,
+        "sleeps": 12
+      },
+      {
+        "listing_id": "AB-174637",
+        "revenue": 76000,
+        "bedrooms": 7,
+        "sleeps": 16
+      },
+      {
+        "listing_id": "AB-545790",
+        "revenue": 64000,
+        "bedrooms": 6,
+        "sleeps": 12
+      }
+    ],
+    "highlights": [
+      "Updated kitchen and baths",
+      "Quiet street with no rental restrictions",
+      "Screened lanai"
+    ],
+    "analyst_notes": "Price dropped last week.",
+    "approved_at": "2026-11-01"
+  },
+  {
+    "id": "D-104",
+    "address": "3132 Falcon Ct",
+    "city": "Columbus",
+    "state": "OH",
+    "purchase_price": 381000,
+    "bedrooms": 3,
+    "baths": 2,
+    "lot_acres": 0.8,
+    "turnkey": false,
+    "interest_rate": 0.075,
+    "closing_cost_pct": 0.03,
+    "setup_items": [
+      {
+        "item": "Movie theater",
+        "cost": 45000
+      },
+      {
+        "item": "Pickleball court",
+        "cost": 40000
+      },
+      {
+        "item": "Furniture and decor",
+        "cost": 54000
+      },
+      {
+        "item": "Design and project management",
+        "cost": 20000
+      }
+    ],
+    "annual_opex": 28400,
+    "revenue": {
+      "low": 76000,
+      "mid": 85000,
+      "high": 94000
+    },
+    "est_year1_tax_savings": 63800,
+    "comps": [
+      {
+        "listing_id": "AB-622584",
+        "revenue": 98600,
+        "bedrooms": 3,
+        "sleeps": 8
+      },
+      {
+        "listing_id": "AB-535673",
+        "revenue": 96100,
+        "bedrooms": 3,
+        "sleeps": 8
+      },
+      {
+        "listing_id": "AB-578975",
+        "revenue": 88900,
+        "bedrooms": 3,
+        "sleeps": 8
+      }
+    ],
+    "highlights": [
+      "Garage can convert to a bedroom",
+      "Recently updated interior",
+      "Oversized lot for the area"
+    ],
+    "analyst_notes": "Interior dated; budgeted paint and fixtures.",
+    "approved_at": "2026-09-15"
+  },
+  {
+    "id": "D-105",
+    "address": "3404 Summit Dr",
+    "city": "Pigeon Forge",
+    "state": "TN",
+    "purchase_price": 745500,
+    "bedrooms": 5,
+    "baths": 2.5,
+    "lot_acres": 2.0,
+    "turnkey": false,
+    "interest_rate": 0.0675,
+    "closing_cost_pct": 0.03,
+    "setup_items": [
+      {
+        "item": "Playground",
+        "cost": 9000
+      },
+      {
+        "item": "Fire pit",
+        "cost": 7500
+      },
+      {
+        "item": "Furniture and decor",
+        "cost": 70000
+      },
+      {
+        "item": "Design and project management",
+        "cost": 20000
+      }
+    ],
+    "annual_opex": 42700,
+    "revenue": {
+      "low": 109000,
+      "mid": 124000,
+      "high": 139000
+    },
+    "est_year1_tax_savings": 95600,
+    "comps": [
+      {
+        "listing_id": "AB-163491",
+        "revenue": 123900,
+        "bedrooms": 5,
+        "sleeps": 10
+      },
+      {
+        "listing_id": "AB-989227",
+        "revenue": 139800,
+        "bedrooms": 4,
+        "sleeps": 8
+      },
+      {
+        "listing_id": "AB-772875",
+        "revenue": 132900,
+        "bedrooms": 5,
+        "sleeps": 10
+      },
+      {
+        "listing_id": "AB-925013",
+        "revenue": 121500,
+        "bedrooms": 4,
+        "sleeps": 8
+      },
+      {
+        "listing_id": "AB-171942",
+        "revenue": 140000,
+        "bedrooms": 5,
+        "sleeps": 14
+      }
+    ],
+    "highlights": [
+      "Short walk to lake access",
+      "Flat backyard with room for a sauna",
+      "Ten minutes to ski lifts"
+    ],
+    "analyst_notes": "",
+    "approved_at": "2026-09-22"
+  },
+  {
+    "id": "D-106",
+    "address": "4355 Harbor Ln",
+    "city": "St. Augustine",
+    "state": "FL",
+    "purchase_price": 1346000,
+    "bedrooms": 5,
+    "baths": 2.5,
+    "lot_acres": 1.02,
+    "turnkey": false,
+    "interest_rate": 0.07,
+    "closing_cost_pct": 0.03,
+    "setup_items": [
+      {
+        "item": "Fire pit",
+        "cost": 7500
+      },
+      {
+        "item": "Movie theater",
+        "cost": 45000
+      },
+      {
+        "item": "Furniture and decor",
+        "cost": 70000
+      },
+      {
+        "item": "Design and project management",
+        "cost": 30000
+      }
+    ],
+    "annual_opex": 56500,
+    "revenue": {
+      "low": 157000,
+      "mid": 178000,
+      "high": 199000
+    },
+    "est_year1_tax_savings": 163700,
+    "comps": [
+      {
+        "listing_id": "AB-237235",
+        "revenue": 192500,
+        "bedrooms": 6,
+        "sleeps": 14
+      },
+      {
+        "listing_id": "AB-431535",
+        "revenue": 206200,
+        "bedrooms": 6,
+        "sleeps": 12
+      },
+      {
+        "listing_id": "AB-580547",
+        "revenue": 189800,
+        "bedrooms": 4,
+        "sleeps": 12
+      },
+      {
+        "listing_id": "AB-176819",
+        "revenue": 185300,
+        "bedrooms": 4,
+        "sleeps": 12
+      }
+    ],
+    "highlights": [
+      "Walkable to event venues",
+      "Recently updated interior",
+      "Garage can convert to a bedroom"
+    ],
+    "analyst_notes": "",
+    "approved_at": "2026-10-09"
+  },
+  {
+    "id": "D-107",
+    "address": "6888 Elm Ln",
+    "city": "Windham",
+    "state": "NY",
+    "purchase_price": 826000,
+    "bedrooms": 4,
+    "baths": 3,
+    "lot_acres": 0.88,
+    "turnkey": false,
+    "interest_rate": 0.0725,
+    "closing_cost_pct": 0.03,
+    "setup_items": [
+      {
+        "item": "Barrel sauna",
+        "cost": 15750
+      },
+      {
+        "item": "Game room",
+        "cost": 25000
+      },
+      {
+        "item": "Landscaping and lighting",
+        "cost": 11500
+      },
+      {
+        "item": "Hot tub",
+        "cost": 16250
+      },
+      {
+        "item": "Furniture and decor",
+        "cost": 62000
+      },
+      {
+        "item": "Design and project management",
+        "cost": 30000
+      }
+    ],
+    "annual_opex": 36700,
+    "revenue": {
+      "low": 93000,
+      "mid": 106000,
+      "high": 119000
+    },
+    "est_year1_tax_savings": 103900,
+    "comps": [
+      {
+        "listing_id": "AB-130359",
+        "revenue": 99000,
+        "bedrooms": 4,
+        "sleeps": 12
+      },
+      {
+        "listing_id": "AB-456331",
+        "revenue": 104400,
+        "bedrooms": 4,
+        "sleeps": 8
+      },
+      {
+        "listing_id": "AB-693830",
+        "revenue": 114200,
+        "bedrooms": 4,
+        "sleeps": 8
+      },
+      {
+        "listing_id": "AB-876962",
+        "revenue": 113400,
+        "bedrooms": 4,
+        "sleeps": 8
+      },
+      {
+        "listing_id": "AB-882354",
+        "revenue": 110100,
+        "bedrooms": 3,
+        "sleeps": 8
+      }
+    ],
+    "highlights": [
+      "Newer build with low maintenance",
+      "Classic log-cabin interior",
+      "Ten minutes to ski lifts"
+    ],
+    "analyst_notes": "Roof replaced in 2022.",
+    "approved_at": "2026-09-29"
+  },
+  {
+    "id": "D-108",
+    "address": "8847 Falcon Rd",
+    "city": "Pocono Summit",
+    "state": "PA",
+    "purchase_price": 447500,
+    "bedrooms": 5,
+    "baths": 3.5,
+    "lot_acres": 0.2,
+    "turnkey": false,
+    "interest_rate": 0.0725,
+    "closing_cost_pct": 0.03,
+    "setup_items": [
+      {
+        "item": "Landscaping and lighting",
+        "cost": 11500
+      },
+      {
+        "item": "Hot tub",
+        "cost": 16250
+      },
+      {
+        "item": "Playground",
+        "cost": 9000
+      },
+      {
+        "item": "Furniture and decor",
+        "cost": 70000
+      },
+      {
+        "item": "Design and project management",
+        "cost": 20000
+      }
+    ],
+    "annual_opex": 44900,
+    "revenue": {
+      "low": 108000,
+      "mid": 127000,
+      "high": 146000
+    },
+    "est_year1_tax_savings": 67000,
+    "comps": [
+      {
+        "listing_id": "AB-905934",
+        "revenue": 136200,
+        "bedrooms": 5,
+        "sleeps": 10
+      },
+      {
+        "listing_id": "AB-555884",
+        "revenue": 117800,
+        "bedrooms": 5,
+        "sleeps": 10
+      },
+      {
+        "listing_id": "AB-624902",
+        "revenue": 140800,
+        "bedrooms": 5,
+        "sleeps": 14
+      },
+      {
+        "listing_id": "AB-755674",
+        "revenue": 123100,
+        "bedrooms": 4,
+        "sleeps": 12
+      },
+      {
+        "listing_id": "AB-260263",
+        "revenue": 126000,
+        "bedrooms": 5,
+        "sleeps": 10
+      }
+    ],
+    "highlights": [
+      "Newer build with low maintenance",
+      "Short walk to lake access",
+      "Flat backyard with room for a sauna"
+    ],
+    "analyst_notes": "Interior dated; budgeted paint and fixtures.",
+    "approved_at": "2026-09-19"
+  },
+  {
+    "id": "D-109",
+    "address": "4902 Sandpiper Way",
+    "city": "Mineral Bluff",
+    "state": "GA",
+    "purchase_price": 541000,
+    "bedrooms": 4,
+    "baths": 4,
+    "lot_acres": null,
+    "turnkey": false,
+    "interest_rate": 0.07,
+    "closing_cost_pct": 0.03,
+    "setup_items": [
+      {
+        "item": "Game room",
+        "cost": 25000
+      },
+      {
+        "item": "Fire pit",
+        "cost": 7500
+      },
+      {
+        "item": "Landscaping and lighting",
+        "cost": 11500
+      },
+      {
+        "item": "Furniture and decor",
+        "cost": 62000
+      },
+      {
+        "item": "Design and project management",
+        "cost": 20000
+      }
+    ],
+    "annual_opex": 31700,
+    "revenue": {
+      "low": 84000,
+      "mid": 93000,
+      "high": 102000
+    },
+    "est_year1_tax_savings": 75900,
+    "comps": [
+      {
+        "listing_id": "AB-973349",
+        "revenue": 93600,
+        "bedrooms": 4,
+        "sleeps": 12
+      },
+      {
+        "listing_id": "AB-998348",
+        "revenue": 106400,
+        "bedrooms": 3,
+        "sleeps": 10
+      },
+      {
+        "listing_id": "AB-600149",
+        "revenue": 82000,
+        "bedrooms": 5,
+        "sleeps": 12
+      }
+    ],
+    "highlights": [
+      "Wooded lot with good privacy",
+      "Flat backyard with room for a sauna",
+      "Short walk to lake access"
+    ],
+    "analyst_notes": "Septic location limits pool placement.",
+    "approved_at": "2026-10-01"
+  },
+  {
+    "id": "D-110",
+    "address": "3929 Bayview Way",
+    "city": "Gatlinburg",
+    "state": "TN",
+    "purchase_price": 708500,
+    "bedrooms": 6,
+    "baths": 3,
+    "lot_acres": 0.7,
+    "turnkey": false,
+    "interest_rate": 0.0725,
+    "closing_cost_pct": 0.03,
+    "setup_items": [
+      {
+        "item": "Barrel sauna",
+        "cost": 15750
+      },
+      {
+        "item": "Hot tub",
+        "cost": 16250
+      },
+      {
+        "item": "Game room",
+        "cost": 25000
+      },
+      {
+        "item": "Interior paint",
+        "cost": 10000
+      },
+      {
+        "item": "Furniture and decor",
+        "cost": 78000
+      },
+      {
+        "item": "Design and project management",
+        "cost": 20000
+      }
+    ],
+    "annual_opex": 35400,
+    "revenue": {
+      "low": 83000,
+      "mid": 92000,
+      "high": 101000
+    },
+    "est_year1_tax_savings": 99400,
+    "comps": [
+      {
+        "listing_id": "AB-891937",
+        "revenue": 105600,
+        "bedrooms": 6,
+        "sleeps": 16
+      },
+      {
+        "listing_id": "AB-970914",
+        "revenue": 106000,
+        "bedrooms": 7,
+        "sleeps": 16
+      },
+      {
+        "listing_id": "AB-879779",
+        "revenue": 104700,
+        "bedrooms": 6,
+        "sleeps": 14
+      },
+      {
+        "listing_id": "AB-888295",
+        "revenue": 87800,
+        "bedrooms": 6,
+        "sleeps": 16
+      },
+      {
+        "listing_id": "AB-903013",
+        "revenue": 102400,
+        "bedrooms": 6,
+        "sleeps": 14
+      }
+    ],
+    "highlights": [
+      "Short walk to lake access",
+      "Classic log-cabin interior",
+      "Long-range mountain views from the main deck"
+    ],
+    "analyst_notes": "Backyard is sloped near the fence line; check photos.",
+    "approved_at": "2026-10-19"
+  },
+  {
+    "id": "D-111",
+    "address": "8795 Willow Rd",
+    "city": "Panama City Beach",
+    "state": "FL",
+    "purchase_price": 684500,
+    "bedrooms": 3,
+    "baths": 2.5,
+    "lot_acres": 0.57,
+    "turnkey": false,
+    "interest_rate": 0.0725,
+    "closing_cost_pct": 0.03,
+    "setup_items": [
+      {
+        "item": "Interior paint",
+        "cost": 10000
+      },
+      {
+        "item": "Fire pit",
+        "cost": 7500
+      },
+      {
+        "item": "Furniture and decor",
+        "cost": 54000
+      },
+      {
+        "item": "Design and project management",
+        "cost": 20000
+      }
+    ],
+    "annual_opex": 38600,
+    "revenue": {
+      "low": 110000,
+      "mid": 122000,
+      "high": 134000
+    },
+    "est_year1_tax_savings": 80600,
+    "comps": [
+      {
+        "listing_id": "AB-124813",
+        "revenue": 131500,
+        "bedrooms": 3,
+        "sleeps": 8
+      },
+      {
+        "listing_id": "AB-392136",
+        "revenue": 139000,
+        "bedrooms": 3,
+        "sleeps": 8
+      },
+      {
+        "listing_id": "AB-772642",
+        "revenue": 126000,
+        "bedrooms": 3,
+        "sleeps": 10
+      }
+    ],
+    "highlights": [
+      "Fifteen minutes to the beach",
+      "Quiet street with no rental restrictions",
+      "Corner lot with extra parking"
+    ],
+    "analyst_notes": "Revenue hedged slightly since it isn't a true log cabin.",
+    "approved_at": "2026-09-26"
+  },
+  {
+    "id": "D-112",
+    "address": "6128 Elm Trl",
+    "city": "Mc Gaheysville",
+    "state": "VA",
+    "purchase_price": 701000,
+    "bedrooms": 3,
+    "baths": 2,
+    "lot_acres": 0.73,
+    "turnkey": false,
+    "interest_rate": 0.0675,
+    "closing_cost_pct": 0.03,
+    "setup_items": [
+      {
+        "item": "Interior paint",
+        "cost": 10000
+      },
+      {
+        "item": "Barrel sauna",
+        "cost": 15750
+      },
+      {
+        "item": "Playground",
+        "cost": 9000
+      },
+      {
+        "item": "Game room",
+        "cost": 25000
+      },
+      {
+        "item": "Furniture and decor",
+        "cost": 54000
+      },
+      {
+        "item": "Design and project management",
+        "cost": 20000
+      }
+    ],
+    "annual_opex": 49400,
+    "revenue": {
+      "low": 125000,
+      "mid": 139000,
+      "high": 153000
+    },
+    "est_year1_tax_savings": 94400,
+    "comps": [
+      {
+        "listing_id": "AB-653306",
+        "revenue": 158700,
+        "bedrooms": 3,
+        "sleeps": 8
+      },
+      {
+        "listing_id": "AB-665492",
+        "revenue": 153800,
+        "bedrooms": 3,
+        "sleeps": 10
+      },
+      {
+        "listing_id": "AB-847581",
+        "revenue": 135300,
+        "bedrooms": 3,
+        "sleeps": 10
+      }
+    ],
+    "highlights": [
+      "Short walk to lake access",
+      "Long-range mountain views from the main deck",
+      "Classic log-cabin interior"
+    ],
+    "analyst_notes": "",
+    "approved_at": "2026-10-12"
+  },
+  {
+    "id": "D-113",
+    "address": "1634 Bluff Ct",
+    "city": "Mineral Bluff",
+    "state": "GA",
+    "purchase_price": 785000,
+    "bedrooms": 3,
+    "baths": 2,
+    "lot_acres": 1.16,
+    "turnkey": false,
+    "interest_rate": 0.07,
+    "closing_cost_pct": 0.03,
+    "setup_items": [
+      {
+        "item": "Playground",
+        "cost": 9000
+      },
+      {
+        "item": "Hot tub",
+        "cost": 16250
+      },
+      {
+        "item": "Game room",
+        "cost": 25000
+      },
+      {
+        "item": "Furniture and decor",
+        "cost": 54000
+      },
+      {
+        "item": "Design and project management",
+        "cost": 20000
+      }
+    ],
+    "annual_opex": 52900,
+    "revenue": {
+      "low": 138000,
+      "mid": 157000,
+      "high": 176000
+    },
+    "est_year1_tax_savings": 102300,
+    "comps": [
+      {
+        "listing_id": "AB-184714",
+        "revenue": 153300,
+        "bedrooms": 2,
+        "sleeps": 4
+      },
+      {
+        "listing_id": "AB-232321",
+        "revenue": 151100,
+        "bedrooms": 2,
+        "sleeps": 8
+      },
+      {
+        "listing_id": "AB-499407",
+        "revenue": 185000,
+        "bedrooms": 3,
+        "sleeps": 10
+      },
+      {
+        "listing_id": "AB-575755",
+        "revenue": 162000,
+        "bedrooms": 3,
+        "sleeps": 8
+      }
+    ],
+    "highlights": [
+      "Wooded lot with good privacy",
+      "Short walk to lake access",
+      "Newer build with low maintenance"
+    ],
+    "analyst_notes": "Septic location limits pool placement.",
+    "approved_at": "2026-09-22"
+  },
+  {
+    "id": "D-114",
+    "address": "3707 Falcon Way",
+    "city": "Columbus",
+    "state": "OH",
+    "purchase_price": 348000,
+    "bedrooms": 3,
+    "baths": 2.5,
+    "lot_acres": 0.85,
+    "turnkey": false,
+    "interest_rate": 0.075,
+    "closing_cost_pct": 0.03,
+    "setup_items": [
+      {
+        "item": "Movie theater",
+        "cost": 45000
+      },
+      {
+        "item": "Pickleball court",
+        "cost": 40000
+      },
+      {
+        "item": "Furniture and decor",
+        "cost": 54000
+      },
+      {
+        "item": "Design and project management",
+        "cost": 20000
+      }
+    ],
+    "annual_opex": 21500,
+    "revenue": {
+      "low": 55000,
+      "mid": 63000,
+      "high": 71000
+    },
+    "est_year1_tax_savings": 60100,
+    "comps": [
+      {
+        "listing_id": "AB-259097",
+        "revenue": 58300,
+        "bedrooms": 2,
+        "sleeps": 8
+      },
+      {
+        "listing_id": "AB-189318",
+        "revenue": 74200,
+        "bedrooms": 3,
+        "sleeps": 6
+      },
+      {
+        "listing_id": "AB-735770",
+        "revenue": 66700,
+        "bedrooms": 4,
+        "sleeps": 12
+      }
+    ],
+    "highlights": [
+      "Garage can convert to a bedroom",
+      "Recently updated interior",
+      "Close to downtown dining"
+    ],
+    "analyst_notes": "Roof replaced in 2022.",
+    "approved_at": "2026-09-21"
+  },
+  {
+    "id": "D-115",
+    "address": "9076 Quail Ct",
+    "city": "Bradenton",
+    "state": "FL",
+    "purchase_price": 566000,
+    "bedrooms": 6,
+    "baths": 3.5,
+    "lot_acres": 0.39,
+    "turnkey": false,
+    "interest_rate": 0.0675,
+    "closing_cost_pct": 0.03,
+    "setup_items": [
+      {
+        "item": "Pool heater",
+        "cost": 14500
+      },
+      {
+        "item": "Inground pool",
+        "cost": 125000
+      },
+      {
+        "item": "Interior paint",
+        "cost": 10000
+      },
+      {
+        "item": "Furniture and decor",
+        "cost": 78000
+      },
+      {
+        "item": "Design and project management",
+        "cost": 20000
+      }
+    ],
+    "annual_opex": 34900,
+    "revenue": {
+      "low": 89000,
+      "mid": 101000,
+      "high": 113000
+    },
+    "est_year1_tax_savings": 87200,
+    "comps": [
+      {
+        "listing_id": "AB-300845",
+        "revenue": 95400,
+        "bedrooms": 6,
+        "sleeps": 14
+      },
+      {
+        "listing_id": "AB-859782",
+        "revenue": 106700,
+        "bedrooms": 6,
+        "sleeps": 16
+      },
+      {
+        "listing_id": "AB-205409",
+        "revenue": 114100,
+        "bedrooms": 6,
+        "sleeps": 14
+      },
+      {
+        "listing_id": "AB-478411",
+        "revenue": 94300,
+        "bedrooms": 6,
+        "sleeps": 12
+      },
+      {
+        "listing_id": "AB-387636",
+        "revenue": 90300,
+        "bedrooms": 6,
+        "sleeps": 12
+      }
+    ],
+    "highlights": [
+      "Updated kitchen and baths",
+      "Screened lanai",
+      "Corner lot with extra parking"
+    ],
+    "analyst_notes": "Price dropped last week.",
+    "approved_at": "2026-09-03"
+  },
+  {
+    "id": "D-116",
+    "address": "3094 Willow Trl",
+    "city": "East Stroudsburg",
+    "state": "PA",
+    "purchase_price": 479000,
+    "bedrooms": 5,
+    "baths": 4,
+    "lot_acres": 0.5,
+    "turnkey": false,
+    "interest_rate": 0.0675,
+    "closing_cost_pct": 0.03,
+    "setup_items": [
+      {
+        "item": "Hot tub",
+        "cost": 16250
+      },
+      {
+        "item": "Fire pit",
+        "cost": 7500
+      },
+      {
+        "item": "Game room",
+        "cost": 25000
+      },
+      {
+        "item": "Barrel sauna",
+        "cost": 15750
+      },
+      {
+        "item": "Furniture and decor",
+        "cost": 70000
+      },
+      {
+        "item": "Design and project management",
+        "cost": 20000
+      }
+    ],
+    "annual_opex": 44900,
+    "revenue": {
+      "low": 133000,
+      "mid": 148000,
+      "high": 163000
+    },
+    "est_year1_tax_savings": 74200,
+    "comps": [
+      {
+        "listing_id": "AB-560767",
+        "revenue": 153500,
+        "bedrooms": 6,
+        "sleeps": 16
+      },
+      {
+        "listing_id": "AB-481574",
+        "revenue": 146800,
+        "bedrooms": 5,
+        "sleeps": 12
+      },
+      {
+        "listing_id": "AB-528625",
+        "revenue": 164600,
+        "bedrooms": 6,
+        "sleeps": 16
+      },
+      {
+        "listing_id": "AB-927564",
+        "revenue": 158300,
+        "bedrooms": 4,
+        "sleeps": 10
+      },
+      {
+        "listing_id": "AB-445705",
+        "revenue": 134400,
+        "bedrooms": 4,
+        "sleeps": 12
+      }
+    ],
+    "highlights": [
+      "Short walk to lake access",
+      "Newer build with low maintenance",
+      "Wooded lot with good privacy"
+    ],
+    "analyst_notes": "Full plan: adds game room and sauna. Same house as the light plan.",
+    "approved_at": "2026-10-03"
+  },
+  {
+    "id": "D-117",
+    "address": "4944 Bluff Rd",
+    "city": "Blue Ridge",
+    "state": "GA",
+    "purchase_price": 762500,
+    "bedrooms": 4,
+    "baths": 3.5,
+    "lot_acres": 1.65,
+    "turnkey": false,
+    "interest_rate": 0.075,
+    "closing_cost_pct": 0.03,
+    "setup_items": [
+      {
+        "item": "Hot tub",
+        "cost": 16250
+      },
+      {
+        "item": "Barrel sauna",
+        "cost": 15750
+      },
+      {
+        "item": "Fire pit",
+        "cost": 7500
+      },
+      {
+        "item": "Furniture and decor",
+        "cost": 62000
+      },
+      {
+        "item": "Design and project management",
+        "cost": 20000
+      }
+    ],
+    "annual_opex": 40000,
+    "revenue": {
+      "low": 137000,
+      "mid": 152000,
+      "high": 167000
+    },
+    "est_year1_tax_savings": 73000,
+    "comps": [
+      {
+        "listing_id": "AB-895702",
+        "revenue": 119000,
+        "bedrooms": 4,
+        "sleeps": 10
+      },
+      {
+        "listing_id": "AB-183074",
+        "revenue": 96500,
+        "bedrooms": 3,
+        "sleeps": 6
+      },
+      {
+        "listing_id": "AB-675462",
+        "revenue": 126700,
+        "bedrooms": 4,
+        "sleeps": 12
+      },
+      {
+        "listing_id": "AB-216587",
+        "revenue": 121300,
+        "bedrooms": 5,
+        "sleeps": 10
+      }
+    ],
+    "highlights": [
+      "Long-range mountain views from the main deck",
+      "Newer build with low maintenance",
+      "Wooded lot with good privacy"
+    ],
+    "analyst_notes": "",
+    "approved_at": "2026-09-26"
+  },
+  {
+    "id": "D-118",
+    "address": "4301 Cedar Ct",
+    "city": "Scottsdale",
+    "state": "AZ",
+    "purchase_price": 1544500,
+    "bedrooms": 4,
+    "baths": 4,
+    "lot_acres": 1.81,
+    "turnkey": false,
+    "interest_rate": 0.0675,
+    "closing_cost_pct": 0.03,
+    "setup_items": [
+      {
+        "item": "Mini golf",
+        "cost": 12000
+      },
+      {
+        "item": "Pickleball court",
+        "cost": 40000
+      },
+      {
+        "item": "Furniture and decor",
+        "cost": 62000
+      },
+      {
+        "item": "Design and project management",
+        "cost": 30000
+      }
+    ],
+    "annual_opex": 102600,
+    "revenue": {
+      "low": 268000,
+      "mid": 298000,
+      "high": 328000
+    },
+    "est_year1_tax_savings": 183800,
+    "comps": [
+      {
+        "listing_id": "AB-385577",
+        "revenue": 287400,
+        "bedrooms": 4,
+        "sleeps": 8
+      },
+      {
+        "listing_id": "AB-313487",
+        "revenue": 323700,
+        "bedrooms": 4,
+        "sleeps": 10
+      },
+      {
+        "listing_id": "AB-363319",
+        "revenue": 343200,
+        "bedrooms": 5,
+        "sleeps": 10
+      },
+      {
+        "listing_id": "AB-765095",
+        "revenue": 300100,
+        "bedrooms": 3,
+        "sleeps": 8
+      },
+      {
+        "listing_id": "AB-103717",
+        "revenue": 292100,
+        "bedrooms": 3,
+        "sleeps": 6
+      }
+    ],
+    "highlights": [
+      "Close to downtown dining",
+      "Oversized lot for the area",
+      "Big backyard for pickleball and mini golf"
+    ],
+    "analyst_notes": "",
+    "approved_at": "2026-10-17"
+  },
+  {
+    "id": "D-119",
+    "address": "6939 Laurel Ln",
+    "city": "Saugerties",
+    "state": "NY",
+    "purchase_price": 465500,
+    "bedrooms": 5,
+    "baths": 3,
+    "lot_acres": 0.98,
+    "turnkey": false,
+    "interest_rate": 0.07,
+    "closing_cost_pct": 0.03,
+    "setup_items": [
+      {
+        "item": "Barrel sauna",
+        "cost": 15750
+      },
+      {
+        "item": "Playground",
+        "cost": 9000
+      },
+      {
+        "item": "Game room",
+        "cost": 25000
+      },
+      {
+        "item": "Furniture and decor",
+        "cost": 70000
+      },
+      {
+        "item": "Design and project management",
+        "cost": 20000
+      }
+    ],
+    "annual_opex": 23700,
+    "revenue": {
+      "low": 62000,
+      "mid": 70000,
+      "high": 78000
+    },
+    "est_year1_tax_savings": 65100,
+    "comps": [
+      {
+        "listing_id": "AB-552855",
+        "revenue": 63600,
+        "bedrooms": 4,
+        "sleeps": 12
+      },
+      {
+        "listing_id": "AB-951201",
+        "revenue": 64300,
+        "bedrooms": 5,
+        "sleeps": 10
+      },
+      {
+        "listing_id": "AB-802559",
+        "revenue": 64200,
+        "bedrooms": 5,
+        "sleeps": 12
+      }
+    ],
+    "highlights": [
+      "Flat backyard with room for a sauna",
+      "Ten minutes to ski lifts",
+      "Wooded lot with good privacy"
+    ],
+    "analyst_notes": "Seller open to offers.",
+    "approved_at": "2026-09-22"
+  },
+  {
+    "id": "D-120",
+    "address": "1453 Canyon Rd",
+    "city": "East Stroudsburg",
+    "state": "PA",
+    "purchase_price": 389000,
+    "bedrooms": 5,
+    "baths": 3.5,
+    "lot_acres": 1.53,
+    "turnkey": false,
+    "interest_rate": 0.0675,
+    "closing_cost_pct": 0.03,
+    "setup_items": [
+      {
+        "item": "Landscaping and lighting",
+        "cost": 11500
+      },
+      {
+        "item": "Playground",
+        "cost": 9000
+      },
+      {
+        "item": "Fire pit",
+        "cost": 7500
+      },
+      {
+        "item": "Hot tub",
+        "cost": 16250
+      },
+      {
+        "item": "Furniture and decor",
+        "cost": 70000
+      },
+      {
+        "item": "Design and project management",
+        "cost": 20000
+      }
+    ],
+    "annual_opex": 30700,
+    "revenue": {
+      "low": 79000,
+      "mid": 88000,
+      "high": 97000
+    },
+    "est_year1_tax_savings": 61400,
+    "comps": [
+      {
+        "listing_id": "AB-557409",
+        "revenue": 77900,
+        "bedrooms": 4,
+        "sleeps": 8
+      },
+      {
+        "listing_id": "AB-703727",
+        "revenue": 88800,
+        "bedrooms": 5,
+        "sleeps": 12
+      },
+      {
+        "listing_id": "AB-403578",
+        "revenue": 80500,
+        "bedrooms": 6,
+        "sleeps": 12
+      },
+      {
+        "listing_id": "AB-280222",
+        "revenue": 98600,
+        "bedrooms": 5,
+        "sleeps": 14
+      },
+      {
+        "listing_id": "AB-972442",
+        "revenue": 95600,
+        "bedrooms": 6,
+        "sleeps": 14
+      }
+    ],
+    "highlights": [
+      "Wooded lot with good privacy",
+      "Short walk to lake access",
+      "Ten minutes to ski lifts"
+    ],
+    "analyst_notes": "Seller open to offers.",
+    "approved_at": "2026-09-13"
+  },
+  {
+    "id": "D-121",
+    "address": "6553 Overlook Dr",
+    "city": "San Antonio",
+    "state": "TX",
+    "purchase_price": 457000,
+    "bedrooms": 6,
+    "baths": 4,
+    "lot_acres": 1.31,
+    "turnkey": false,
+    "interest_rate": 0.0675,
+    "closing_cost_pct": 0.03,
+    "setup_items": [
+      {
+        "item": "Mini golf",
+        "cost": 12000
+      },
+      {
+        "item": "Pickleball court",
+        "cost": 40000
+      },
+      {
+        "item": "Hot tub",
+        "cost": 16250
+      },
+      {
+        "item": "Fire pit",
+        "cost": 7500
+      },
+      {
+        "item": "Furniture and decor",
+        "cost": 78000
+      },
+      {
+        "item": "Design and project management",
+        "cost": 20000
+      }
+    ],
+    "annual_opex": 39300,
+    "revenue": {
+      "low": 94000,
+      "mid": 104000,
+      "high": 114000
+    },
+    "est_year1_tax_savings": 71800,
+    "comps": [
+      {
+        "listing_id": "AB-169403",
+        "revenue": 98100,
+        "bedrooms": 6,
+        "sleeps": 16
+      },
+      {
+        "listing_id": "AB-322955",
+        "revenue": 112000,
+        "bedrooms": 6,
+        "sleeps": 14
+      },
+      {
+        "listing_id": "AB-249811",
+        "revenue": 99800,
+        "bedrooms": 7,
+        "sleeps": 14
+      },
+      {
+        "listing_id": "AB-883300",
+        "revenue": 109800,
+        "bedrooms": 6,
+        "sleeps": 16
+      }
+    ],
+    "highlights": [
+      "Close to downtown dining",
+      "Big backyard for pickleball and mini golf",
+      "Recently updated interior"
+    ],
+    "analyst_notes": "Septic location limits pool placement.",
+    "approved_at": "2026-11-06"
+  },
+  {
+    "id": "D-122",
+    "address": "6336 Hemlock Ln",
+    "city": "Tobyhanna",
+    "state": "PA",
+    "purchase_price": 355000,
+    "bedrooms": 4,
+    "baths": 2,
+    "lot_acres": 0.9,
+    "turnkey": false,
+    "interest_rate": 0.0675,
+    "closing_cost_pct": 0.03,
+    "setup_items": [
+      {
+        "item": "Hot tub",
+        "cost": 16250
+      },
+      {
+        "item": "Fire pit",
+        "cost": 7500
+      },
+      {
+        "item": "Furniture and decor",
+        "cost": 62000
+      },
+      {
+        "item": "Design and project management",
+        "cost": 20000
+      }
+    ],
+    "annual_opex": 42500,
+    "revenue": {
+      "low": 82000,
+      "mid": 91000,
+      "high": 100000
+    },
+    "est_year1_tax_savings": 53800,
+    "comps": [
+      {
+        "listing_id": "AB-398910",
+        "revenue": 82400,
+        "bedrooms": 3,
+        "sleeps": 6
+      },
+      {
+        "listing_id": "AB-571145",
+        "revenue": 104800,
+        "bedrooms": 4,
+        "sleeps": 8
+      },
+      {
+        "listing_id": "AB-196168",
+        "revenue": 105900,
+        "bedrooms": 5,
+        "sleeps": 10
+      },
+      {
+        "listing_id": "AB-466566",
+        "revenue": 105500,
+        "bedrooms": 5,
+        "sleeps": 12
+      },
+      {
+        "listing_id": "AB-515712",
+        "revenue": 93800,
+        "bedrooms": 3,
+        "sleeps": 6
+      }
+    ],
+    "highlights": [
+      "Newer build with low maintenance",
+      "Ten minutes to ski lifts",
+      "Short walk to lake access"
+    ],
+    "analyst_notes": "Backyard is sloped near the fence line; check photos.",
+    "approved_at": "2026-10-29"
+  },
+  {
+    "id": "D-123",
+    "address": "1203 Elm Way",
+    "city": "Front Royal",
+    "state": "VA",
+    "purchase_price": 660000,
+    "bedrooms": 4,
+    "baths": 3.5,
+    "lot_acres": 1.31,
+    "turnkey": false,
+    "interest_rate": 0.07,
+    "closing_cost_pct": 0.03,
+    "setup_items": [
+      {
+        "item": "Landscaping and lighting",
+        "cost": 11500
+      },
+      {
+        "item": "Playground",
+        "cost": 9000
+      },
+      {
+        "item": "Fire pit",
+        "cost": 7500
+      },
+      {
+        "item": "Game room",
+        "cost": 25000
+      },
+      {
+        "item": "Furniture and decor",
+        "cost": 62000
+      },
+      {
+        "item": "Design and project management",
+        "cost": 20000
+      }
+    ],
+    "annual_opex": 32800,
+    "revenue": {
+      "low": 85000,
+      "mid": 97000,
+      "high": 109000
+    },
+    "est_year1_tax_savings": 90100,
+    "comps": [
+      {
+        "listing_id": "AB-636004",
+        "revenue": 99100,
+        "bedrooms": 4,
+        "sleeps": 12
+      },
+      {
+        "listing_id": "AB-790855",
+        "revenue": 87800,
+        "bedrooms": 4,
+        "sleeps": 12
+      },
+      {
+        "listing_id": "AB-197923",
+        "revenue": 109200,
+        "bedrooms": 4,
+        "sleeps": 8
+      },
+      {
+        "listing_id": "AB-335552",
+        "revenue": 108800,
+        "bedrooms": 4,
+        "sleeps": 8
+      },
+      {
+        "listing_id": "AB-148458",
+        "revenue": 92500,
+        "bedrooms": 3,
+        "sleeps": 8
+      }
+    ],
+    "highlights": [
+      "Flat backyard with room for a sauna",
+      "Ten minutes to ski lifts",
+      "Long-range mountain views from the main deck"
+    ],
+    "analyst_notes": "Roof replaced in 2022.",
+    "approved_at": "2026-11-05"
+  },
+  {
+    "id": "D-124",
+    "address": "7364 Willow Ct",
+    "city": "Ellijay",
+    "state": "GA",
+    "purchase_price": 450500,
+    "bedrooms": 5,
+    "baths": 2.5,
+    "lot_acres": 1.18,
+    "turnkey": false,
+    "interest_rate": 0.075,
+    "closing_cost_pct": 0.03,
+    "setup_items": [
+      {
+        "item": "Barrel sauna",
+        "cost": 15750
+      },
+      {
+        "item": "Fire pit",
+        "cost": 7500
+      },
+      {
+        "item": "Playground",
+        "cost": 9000
+      },
+      {
+        "item": "Interior paint",
+        "cost": 10000
+      },
+      {
+        "item": "Furniture and decor",
+        "cost": 70000
+      },
+      {
+        "item": "Design and project management",
+        "cost": 20000
+      }
+    ],
+    "annual_opex": 26000,
+    "revenue": {
+      "low": 64000,
+      "mid": 75000,
+      "high": 86000
+    },
+    "est_year1_tax_savings": 66800,
+    "comps": [
+      {
+        "listing_id": "AB-306854",
+        "revenue": 69900,
+        "bedrooms": 5,
+        "sleeps": 10
+      },
+      {
+        "listing_id": "AB-285751",
+        "revenue": 87400,
+        "bedrooms": 4,
+        "sleeps": 12
+      },
+      {
+        "listing_id": "AB-586490",
+        "revenue": 83000,
+        "bedrooms": 6,
+        "sleeps": 16
+      }
+    ],
+    "highlights": [
+      "Wooded lot with good privacy",
+      "Ten minutes to ski lifts",
+      "Short walk to lake access"
+    ],
+    "analyst_notes": "Comps are strong at the high end.",
+    "approved_at": "2026-10-23"
+  },
+  {
+    "id": "D-125",
+    "address": "9505 Overlook Ct",
+    "city": "Columbus",
+    "state": "OH",
+    "purchase_price": 361500,
+    "bedrooms": 5,
+    "baths": 2,
+    "lot_acres": 2.29,
+    "turnkey": false,
+    "interest_rate": 0.0725,
+    "closing_cost_pct": 0.03,
+    "setup_items": [
+      {
+        "item": "Mini golf",
+        "cost": 12000
+      },
+      {
+        "item": "Pickleball court",
+        "cost": 40000
+      },
+      {
+        "item": "Game room",
+        "cost": 25000
+      },
+      {
+        "item": "Movie theater",
+        "cost": 45000
+      },
+      {
+        "item": "Furniture and decor",
+        "cost": 70000
+      },
+      {
+        "item": "Design and project management",
+        "cost": 20000
+      }
+    ],
+    "annual_opex": 23400,
+    "revenue": {
+      "low": 62000,
+      "mid": 70000,
+      "high": 78000
+    },
+    "est_year1_tax_savings": 68700,
+    "comps": [
+      {
+        "listing_id": "AB-735863",
+        "revenue": 77200,
+        "bedrooms": 4,
+        "sleeps": 10
+      },
+      {
+        "listing_id": "AB-736553",
+        "revenue": 78400,
+        "bedrooms": 5,
+        "sleeps": 10
+      },
+      {
+        "listing_id": "AB-751051",
+        "revenue": 66900,
+        "bedrooms": 5,
+        "sleeps": 14
+      },
+      {
+        "listing_id": "AB-758765",
+        "revenue": 63600,
+        "bedrooms": 5,
+        "sleeps": 14
+      },
+      {
+        "listing_id": "AB-423939",
+        "revenue": 78200,
+        "bedrooms": 4,
+        "sleeps": 8
+      }
+    ],
+    "highlights": [
+      "Oversized lot for the area",
+      "Walkable to event venues",
+      "Big backyard for pickleball and mini golf"
+    ],
+    "analyst_notes": "Seller open to offers.",
+    "approved_at": "2026-09-26"
+  },
+  {
+    "id": "D-126",
+    "address": "3094 Willow Trl",
+    "city": "East Stroudsburg",
+    "state": "PA",
+    "purchase_price": 479000,
+    "bedrooms": 5,
+    "baths": 4,
+    "lot_acres": 0.5,
+    "turnkey": false,
+    "interest_rate": 0.0675,
+    "closing_cost_pct": 0.03,
+    "setup_items": [
+      {
+        "item": "Hot tub",
+        "cost": 16250
+      },
+      {
+        "item": "Fire pit",
+        "cost": 7500
+      },
+      {
+        "item": "Furniture and decor",
+        "cost": 70000
+      },
+      {
+        "item": "Design and project management",
+        "cost": 20000
+      }
+    ],
+    "annual_opex": 43900,
+    "revenue": {
+      "low": 114000,
+      "mid": 129000,
+      "high": 144000
+    },
+    "est_year1_tax_savings": 68700,
+    "comps": [
+      {
+        "listing_id": "AB-573866",
+        "revenue": 115000,
+        "bedrooms": 6,
+        "sleeps": 14
+      },
+      {
+        "listing_id": "AB-180458",
+        "revenue": 138500,
+        "bedrooms": 5,
+        "sleeps": 10
+      },
+      {
+        "listing_id": "AB-585188",
+        "revenue": 136000,
+        "bedrooms": 6,
+        "sleeps": 16
+      },
+      {
+        "listing_id": "AB-571579",
+        "revenue": 148700,
+        "bedrooms": 4,
+        "sleeps": 12
+      }
+    ],
+    "highlights": [
+      "Wooded lot with good privacy",
+      "Long-range mountain views from the main deck",
+      "Short walk to lake access"
+    ],
+    "analyst_notes": "Light plan: hot tub and fire pit only.",
+    "approved_at": "2026-09-26"
+  },
+  {
+    "id": "D-127",
+    "address": "6256 Sandpiper Ct",
+    "city": "Scottsdale",
+    "state": "AZ",
+    "purchase_price": 1104000,
+    "bedrooms": 5,
+    "baths": 3.5,
+    "lot_acres": 2.42,
+    "turnkey": false,
+    "interest_rate": 0.07,
+    "closing_cost_pct": 0.03,
+    "setup_items": [
+      {
+        "item": "Movie theater",
+        "cost": 45000
+      },
+      {
+        "item": "Hot tub",
+        "cost": 16250
+      },
+      {
+        "item": "Game room",
+        "cost": 25000
+      },
+      {
+        "item": "Furniture and decor",
+        "cost": 70000
+      },
+      {
+        "item": "Design and project management",
+        "cost": 30000
+      }
+    ],
+    "annual_opex": 58000,
+    "revenue": {
+      "low": 148000,
+      "mid": 174000,
+      "high": 200000
+    },
+    "est_year1_tax_savings": 142500,
+    "comps": [
+      {
+        "listing_id": "AB-678727",
+        "revenue": 192900,
+        "bedrooms": 5,
+        "sleeps": 12
+      },
+      {
+        "listing_id": "AB-437408",
+        "revenue": 198500,
+        "bedrooms": 6,
+        "sleeps": 16
+      },
+      {
+        "listing_id": "AB-699573",
+        "revenue": 173100,
+        "bedrooms": 5,
+        "sleeps": 12
+      },
+      {
+        "listing_id": "AB-433632",
+        "revenue": 192000,
+        "bedrooms": 4,
+        "sleeps": 12
+      }
+    ],
+    "highlights": [
+      "Recently updated interior",
+      "Oversized lot for the area",
+      "Garage can convert to a bedroom"
+    ],
+    "analyst_notes": "Roof replaced in 2022.",
+    "approved_at": "2026-11-02"
+  },
+  {
+    "id": "D-128",
+    "address": "8801 Bluff Way",
+    "city": "Hunter",
+    "state": "NY",
+    "purchase_price": 679000,
+    "bedrooms": 4,
+    "baths": 3,
+    "lot_acres": 1.52,
+    "turnkey": false,
+    "interest_rate": 0.0725,
+    "closing_cost_pct": 0.03,
+    "setup_items": [
+      {
+        "item": "Fire pit",
+        "cost": 7500
+      },
+      {
+        "item": "Game room",
+        "cost": 25000
+      },
+      {
+        "item": "Furniture and decor",
+        "cost": 62000
+      },
+      {
+        "item": "Design and project management",
+        "cost": 20000
+      }
+    ],
+    "annual_opex": 43800,
+    "revenue": {
+      "low": 105000,
+      "mid": 119000,
+      "high": 133000
+    },
+    "est_year1_tax_savings": 83100,
+    "comps": [
+      {
+        "listing_id": "AB-943298",
+        "revenue": 108800,
+        "bedrooms": 4,
+        "sleeps": 8
+      },
+      {
+        "listing_id": "AB-890785",
+        "revenue": 139200,
+        "bedrooms": 4,
+        "sleeps": 12
+      },
+      {
+        "listing_id": "AB-986827",
+        "revenue": 133400,
+        "bedrooms": 5,
+        "sleeps": 12
+      },
+      {
+        "listing_id": "AB-929090",
+        "revenue": 118800,
+        "bedrooms": 3,
+        "sleeps": 8
+      }
+    ],
+    "highlights": [
+      "Long-range mountain views from the main deck",
+      "Ten minutes to ski lifts",
+      "Flat backyard with room for a sauna"
+    ],
+    "analyst_notes": "Price dropped last week.",
+    "approved_at": "2026-10-03"
+  },
+  {
+    "id": "D-129",
+    "address": "4579 Elm Dr",
+    "city": "Saint Augustine",
+    "state": "FL",
+    "purchase_price": 1053500,
+    "bedrooms": 3,
+    "baths": 2.5,
+    "lot_acres": 0.94,
+    "turnkey": false,
+    "interest_rate": 0.075,
+    "closing_cost_pct": 0.03,
+    "setup_items": [
+      {
+        "item": "Fire pit",
+        "cost": 7500
+      },
+      {
+        "item": "Outdoor kitchen",
+        "cost": 10000
+      },
+      {
+        "item": "Furniture and decor",
+        "cost": 54000
+      },
+      {
+        "item": "Design and project management",
+        "cost": 30000
+      }
+    ],
+    "annual_opex": 58700,
+    "revenue": {
+      "low": 157000,
+      "mid": 178000,
+      "high": 199000
+    },
+    "est_year1_tax_savings": 111700,
+    "comps": [
+      {
+        "listing_id": "AB-556641",
+        "revenue": 166000,
+        "bedrooms": 3,
+        "sleeps": 10
+      },
+      {
+        "listing_id": "AB-745830",
+        "revenue": 199800,
+        "bedrooms": 3,
+        "sleeps": 10
+      },
+      {
+        "listing_id": "AB-587455",
+        "revenue": 179900,
+        "bedrooms": 4,
+        "sleeps": 12
+      },
+      {
+        "listing_id": "AB-437960",
+        "revenue": 202100,
+        "bedrooms": 3,
+        "sleeps": 6
+      }
+    ],
+    "highlights": [
+      "Screened lanai",
+      "Large fenced backyard ready for a pool",
+      "Corner lot with extra parking"
+    ],
+    "analyst_notes": "Seller open to offers.",
+    "approved_at": "2026-09-02"
+  },
+  {
+    "id": "D-130",
+    "address": "1255 Pine Hollow Rd",
+    "city": "Bradenton",
+    "state": "FL",
+    "purchase_price": 533500,
+    "bedrooms": 5,
+    "baths": 4,
+    "lot_acres": 2.04,
+    "turnkey": false,
+    "interest_rate": 0.0675,
+    "closing_cost_pct": 0.03,
+    "setup_items": [
+      {
+        "item": "Fire pit",
+        "cost": 7500
+      },
+      {
+        "item": "Game room",
+        "cost": 25000
+      },
+      {
+        "item": "Furniture and decor",
+        "cost": 70000
+      },
+      {
+        "item": "Design and project management",
+        "cost": 20000
+      }
+    ],
+    "annual_opex": 35600,
+    "revenue": {
+      "low": 92000,
+      "mid": 108000,
+      "high": 124000
+    },
+    "est_year1_tax_savings": 67500,
+    "comps": [
+      {
+        "listing_id": "AB-735324",
+        "revenue": 114700,
+        "bedrooms": 5,
+        "sleeps": 14
+      },
+      {
+        "listing_id": "AB-915573",
+        "revenue": 121600,
+        "bedrooms": 4,
+        "sleeps": 10
+      },
+      {
+        "listing_id": "AB-706794",
+        "revenue": 95900,
+        "bedrooms": 4,
+        "sleeps": 10
+      },
+      {
+        "listing_id": "AB-515922",
+        "revenue": 125500,
+        "bedrooms": 6,
+        "sleeps": 12
+      }
+    ],
+    "highlights": [
+      "Screened lanai",
+      "Updated kitchen and baths",
+      "Corner lot with extra parking"
+    ],
+    "analyst_notes": "Revenue hedged slightly since it isn't a true log cabin.",
+    "approved_at": "2026-10-08"
+  },
+  {
+    "id": "D-131",
+    "address": "8860 Canyon Trl",
+    "city": "Broken Bow",
+    "state": "OK",
+    "purchase_price": 1113000,
+    "bedrooms": 5,
+    "baths": 3.5,
+    "lot_acres": 1.69,
+    "turnkey": false,
+    "interest_rate": 0.075,
+    "closing_cost_pct": 0.03,
+    "setup_items": [
+      {
+        "item": "Playground",
+        "cost": 9000
+      },
+      {
+        "item": "Hot tub",
+        "cost": 16250
+      },
+      {
+        "item": "Furniture and decor",
+        "cost": 70000
+      },
+      {
+        "item": "Design and project management",
+        "cost": 30000
+      }
+    ],
+    "annual_opex": 54500,
+    "revenue": {
+      "low": 135000,
+      "mid": 159000,
+      "high": 183000
+    },
+    "est_year1_tax_savings": 138200,
+    "comps": [
+      {
+        "listing_id": "AB-780776",
+        "revenue": 159400,
+        "bedrooms": 5,
+        "sleeps": 10
+      },
+      {
+        "listing_id": "AB-139019",
+        "revenue": 154400,
+        "bedrooms": 4,
+        "sleeps": 10
+      },
+      {
+        "listing_id": "AB-201913",
+        "revenue": 151100,
+        "bedrooms": 4,
+        "sleeps": 12
+      },
+      {
+        "listing_id": "AB-507524",
+        "revenue": 161600,
+        "bedrooms": 5,
+        "sleeps": 14
+      }
+    ],
+    "highlights": [
+      "Lakefront with private dock",
+      "Wooded lot with good privacy",
+      "Short walk to lake access"
+    ],
+    "analyst_notes": "Interior dated; budgeted paint and fixtures.",
+    "approved_at": "2026-10-14"
+  },
+  {
+    "id": "D-132",
+    "address": "3129 Bluff Rd",
+    "city": "Basye",
+    "state": "VA",
+    "purchase_price": 439500,
+    "bedrooms": 3,
+    "baths": 2.5,
+    "lot_acres": 1.15,
+    "turnkey": false,
+    "interest_rate": 0.075,
+    "closing_cost_pct": 0.03,
+    "setup_items": [
+      {
+        "item": "Hot tub",
+        "cost": 16250
+      },
+      {
+        "item": "Interior paint",
+        "cost": 10000
+      },
+      {
+        "item": "Furniture and decor",
+        "cost": 54000
+      },
+      {
+        "item": "Design and project management",
+        "cost": 20000
+      }
+    ],
+    "annual_opex": 31100,
+    "revenue": {
+      "low": 77000,
+      "mid": 86000,
+      "high": 95000
+    },
+    "est_year1_tax_savings": 61400,
+    "comps": [
+      {
+        "listing_id": "AB-392004",
+        "revenue": 92900,
+        "bedrooms": 3,
+        "sleeps": 6
+      },
+      {
+        "listing_id": "AB-858490",
+        "revenue": 99800,
+        "bedrooms": 3,
+        "sleeps": 10
+      },
+      {
+        "listing_id": "AB-354801",
+        "revenue": 95900,
+        "bedrooms": 4,
+        "sleeps": 10
+      }
+    ],
+    "highlights": [
+      "Newer build with low maintenance",
+      "Ten minutes to ski lifts",
+      "Long-range mountain views from the main deck"
+    ],
+    "analyst_notes": "Roof replaced in 2022.",
+    "approved_at": "2026-09-28"
+  },
+  {
+    "id": "D-133",
+    "address": "3345 Bayview Trl",
+    "city": "Bradford",
+    "state": "NY",
+    "purchase_price": 698000,
+    "bedrooms": 4,
+    "baths": 3,
+    "lot_acres": 1.18,
+    "turnkey": false,
+    "interest_rate": 0.075,
+    "closing_cost_pct": 0.03,
+    "setup_items": [
+      {
+        "item": "Fire pit",
+        "cost": 7500
+      },
+      {
+        "item": "Playground",
+        "cost": 9000
+      },
+      {
+        "item": "Game room",
+        "cost": 25000
+      },
+      {
+        "item": "Furniture and decor",
+        "cost": 62000
+      },
+      {
+        "item": "Design and project management",
+        "cost": 20000
+      }
+    ],
+    "annual_opex": 40500,
+    "revenue": {
+      "low": 96000,
+      "mid": 113000,
+      "high": 130000
+    },
+    "est_year1_tax_savings": 86200,
+    "comps": [
+      {
+        "listing_id": "AB-576919",
+        "revenue": 102400,
+        "bedrooms": 3,
+        "sleeps": 8
+      },
+      {
+        "listing_id": "AB-221552",
+        "revenue": 132300,
+        "bedrooms": 4,
+        "sleeps": 10
+      },
+      {
+        "listing_id": "AB-789606",
+        "revenue": 128900,
+        "bedrooms": 3,
+        "sleeps": 8
+      },
+      {
+        "listing_id": "AB-156837",
+        "revenue": 105800,
+        "bedrooms": 5,
+        "sleeps": 12
+      },
+      {
+        "listing_id": "AB-755788",
+        "revenue": 114400,
+        "bedrooms": 5,
+        "sleeps": 10
+      }
+    ],
+    "highlights": [
+      "Lakefront with private dock",
+      "Newer build with low maintenance",
+      "Classic log-cabin interior"
+    ],
+    "analyst_notes": "Seller open to offers.",
+    "approved_at": "2026-10-08"
+  },
+  {
+    "id": "D-134",
+    "address": "2734 Canyon Way",
+    "city": "San Antonio",
+    "state": "TX",
+    "purchase_price": 672500,
+    "bedrooms": 3,
+    "baths": 2,
+    "lot_acres": 2.18,
+    "turnkey": false,
+    "interest_rate": 0.0675,
+    "closing_cost_pct": 0.03,
+    "setup_items": [
+      {
+        "item": "Game room",
+        "cost": 25000
+      },
+      {
+        "item": "Hot tub",
+        "cost": 16250
+      },
+      {
+        "item": "Movie theater",
+        "cost": 45000
+      },
+      {
+        "item": "Fire pit",
+        "cost": 7500
+      },
+      {
+        "item": "Furniture and decor",
+        "cost": 54000
+      },
+      {
+        "item": "Design and project management",
+        "cost": 20000
+      }
+    ],
+    "annual_opex": 36600,
+    "revenue": {
+      "low": 105000,
+      "mid": 117000,
+      "high": 129000
+    },
+    "est_year1_tax_savings": 94000,
+    "comps": [
+      {
+        "listing_id": "AB-564656",
+        "revenue": 131300,
+        "bedrooms": 2,
+        "sleeps": 8
+      },
+      {
+        "listing_id": "AB-153045",
+        "revenue": 125900,
+        "bedrooms": 2,
+        "sleeps": 8
+      },
+      {
+        "listing_id": "AB-197793",
+        "revenue": 135500,
+        "bedrooms": 2,
+        "sleeps": 4
+      }
+    ],
+    "highlights": [
+      "Big backyard for pickleball and mini golf",
+      "Walkable to event venues",
+      "Close to downtown dining"
+    ],
+    "analyst_notes": "Septic location limits pool placement.",
+    "approved_at": "2026-10-06"
+  },
+  {
+    "id": "D-135",
+    "address": "5354 Sandpiper Ct",
+    "city": "Largo",
+    "state": "FL",
+    "purchase_price": 599000,
+    "bedrooms": null,
+    "baths": 4,
+    "lot_acres": 0.45,
+    "turnkey": false,
+    "interest_rate": 0.075,
+    "closing_cost_pct": 0.03,
+    "setup_items": [
+      {
+        "item": "Mini golf",
+        "cost": 12000
+      },
+      {
+        "item": "Pool heater",
+        "cost": 14500
+      },
+      {
+        "item": "Outdoor kitchen",
+        "cost": 10000
+      },
+      {
+        "item": "Furniture and decor",
+        "cost": 70000
+      },
+      {
+        "item": "Design and project management",
+        "cost": 20000
+      }
+    ],
+    "annual_opex": 46300,
+    "revenue": {
+      "low": 138000,
+      "mid": 153000,
+      "high": 168000
+    },
+    "est_year1_tax_savings": 74300,
+    "comps": [
+      {
+        "listing_id": "AB-645175",
+        "revenue": 177100,
+        "bedrooms": 4,
+        "sleeps": 12
+      },
+      {
+        "listing_id": "AB-481913",
+        "revenue": 154400,
+        "bedrooms": 5,
+        "sleeps": 14
+      },
+      {
+        "listing_id": "AB-753425",
+        "revenue": 149000,
+        "bedrooms": 5,
+        "sleeps": 10
+      },
+      {
+        "listing_id": "AB-631756",
+        "revenue": 148800,
+        "bedrooms": 5,
+        "sleeps": 12
+      }
+    ],
+    "highlights": [
+      "Bed / Bath (projected): 5 / 3, office converts to 5th bedroom",
+      "Corner lot with extra parking",
+      "Large fenced backyard ready for a pool"
+    ],
+    "analyst_notes": "Comps are strong at the high end.",
+    "approved_at": "2026-08-25"
+  },
+  {
+    "id": "D-136",
+    "address": "4718 Pine Hollow Ct",
+    "city": "Tobyhanna",
+    "state": "PA",
+    "purchase_price": 487500,
+    "bedrooms": 5,
+    "baths": 3.5,
+    "lot_acres": 2.45,
+    "turnkey": false,
+    "interest_rate": 0.0675,
+    "closing_cost_pct": 0.03,
+    "setup_items": [
+      {
+        "item": "Interior paint",
+        "cost": 10000
+      },
+      {
+        "item": "Playground",
+        "cost": 9000
+      },
+      {
+        "item": "Barrel sauna",
+        "cost": 15750
+      },
+      {
+        "item": "Furniture and decor",
+        "cost": 70000
+      },
+      {
+        "item": "Design and project management",
+        "cost": 20000
+      }
+    ],
+    "annual_opex": 26000,
+    "revenue": {
+      "low": 70000,
+      "mid": 78000,
+      "high": 86000
+    },
+    "est_year1_tax_savings": 71200,
+    "comps": [
+      {
+        "listing_id": "AB-753534",
+        "revenue": 84800,
+        "bedrooms": 5,
+        "sleeps": 14
+      },
+      {
+        "listing_id": "AB-993140",
+        "revenue": 76300,
+        "bedrooms": 4,
+        "sleeps": 12
+      },
+      {
+        "listing_id": "AB-432043",
+        "revenue": 83300,
+        "bedrooms": 6,
+        "sleeps": 14
+      },
+      {
+        "listing_id": "AB-747453",
+        "revenue": 70200,
+        "bedrooms": 4,
+        "sleeps": 12
+      }
+    ],
+    "highlights": [
+      "Wooded lot with good privacy",
+      "Flat backyard with room for a sauna",
+      "Short walk to lake access"
+    ],
+    "analyst_notes": "Interior dated; budgeted paint and fixtures.",
+    "approved_at": "2026-09-11"
+  },
+  {
+    "id": "D-137",
+    "address": "8249 Falcon Way",
+    "city": "Lake Harmony",
+    "state": "PA",
+    "purchase_price": 390500,
+    "bedrooms": 4,
+    "baths": 2.5,
+    "lot_acres": 2.03,
+    "turnkey": false,
+    "interest_rate": 0.07,
+    "closing_cost_pct": 0.03,
+    "setup_items": [
+      {
+        "item": "Playground",
+        "cost": 9000
+      },
+      {
+        "item": "Game room",
+        "cost": 25000
+      },
+      {
+        "item": "Furniture and decor",
+        "cost": 62000
+      },
+      {
+        "item": "Design and project management",
+        "cost": 20000
+      }
+    ],
+    "annual_opex": 29800,
+    "revenue": {
+      "low": 82000,
+      "mid": 96000,
+      "high": 110000
+    },
+    "est_year1_tax_savings": 59100,
+    "comps": [
+      {
+        "listing_id": "AB-565776",
+        "revenue": 102100,
+        "bedrooms": 4,
+        "sleeps": 12
+      },
+      {
+        "listing_id": "AB-345369",
+        "revenue": 99900,
+        "bedrooms": 5,
+        "sleeps": 12
+      },
+      {
+        "listing_id": "AB-975679",
+        "revenue": 90100,
+        "bedrooms": 5,
+        "sleeps": 14
+      },
+      {
+        "listing_id": "AB-584106",
+        "revenue": 106600,
+        "bedrooms": 5,
+        "sleeps": 12
+      }
+    ],
+    "highlights": [
+      "Newer build with low maintenance",
+      "Short walk to lake access",
+      "Long-range mountain views from the main deck"
+    ],
+    "analyst_notes": "Price dropped last week.",
+    "approved_at": "2026-10-27"
+  },
+  {
+    "id": "D-138",
+    "address": "8512 Elm Ln",
+    "city": "Broken Bow",
+    "state": "OK",
+    "purchase_price": 966500,
+    "bedrooms": 6,
+    "baths": 4,
+    "lot_acres": 1.17,
+    "turnkey": false,
+    "interest_rate": 0.075,
+    "closing_cost_pct": 0.03,
+    "setup_items": [
+      {
+        "item": "Landscaping and lighting",
+        "cost": 11500
+      },
+      {
+        "item": "Game room",
+        "cost": 25000
+      },
+      {
+        "item": "Playground",
+        "cost": 9000
+      },
+      {
+        "item": "Hot tub",
+        "cost": 16250
+      },
+      {
+        "item": "Furniture and decor",
+        "cost": 78000
+      },
+      {
+        "item": "Design and project management",
+        "cost": 30000
+      }
+    ],
+    "annual_opex": 50300,
+    "revenue": {
+      "low": 127000,
+      "mid": 144000,
+      "high": 161000
+    },
+    "est_year1_tax_savings": 128200,
+    "comps": [
+      {
+        "listing_id": "AB-733039",
+        "revenue": 137500,
+        "bedrooms": 6,
+        "sleeps": 12
+      },
+      {
+        "listing_id": "AB-807053",
+        "revenue": 162800,
+        "bedrooms": 6,
+        "sleeps": 16
+      },
+      {
+        "listing_id": "AB-901909",
+        "revenue": 155800,
+        "bedrooms": 5,
+        "sleeps": 12
+      },
+      {
+        "listing_id": "AB-900177",
+        "revenue": 159400,
+        "bedrooms": 5,
+        "sleeps": 12
+      }
+    ],
+    "highlights": [
+      "Lakefront with private dock",
+      "Wooded lot with good privacy",
+      "Short walk to lake access"
+    ],
+    "analyst_notes": "Septic location limits pool placement.",
+    "approved_at": "2026-10-22"
+  },
+  {
+    "id": "D-139",
+    "address": "2674 Overlook Ln",
+    "city": "Clearwater",
+    "state": "FL",
+    "purchase_price": 517000,
+    "bedrooms": 4,
+    "baths": 3,
+    "lot_acres": 1.8,
+    "turnkey": false,
+    "interest_rate": 0.0675,
+    "closing_cost_pct": 0.03,
+    "setup_items": [
+      {
+        "item": "Fire pit",
+        "cost": 7500
+      },
+      {
+        "item": "Mini golf",
+        "cost": 12000
+      },
+      {
+        "item": "Inground pool",
+        "cost": 125000
+      },
+      {
+        "item": "Interior paint",
+        "cost": 10000
+      },
+      {
+        "item": "Furniture and decor",
+        "cost": 62000
+      },
+      {
+        "item": "Design and project management",
+        "cost": 20000
+      }
+    ],
+    "annual_opex": 33400,
+    "revenue": {
+      "low": 97000,
+      "mid": 108000,
+      "high": 119000
+    },
+    "est_year1_tax_savings": 81100,
+    "comps": [
+      {
+        "listing_id": "AB-705397",
+        "revenue": 101300,
+        "bedrooms": 4,
+        "sleeps": 8
+      },
+      {
+        "listing_id": "AB-793384",
+        "revenue": 102400,
+        "bedrooms": 3,
+        "sleeps": 8
+      },
+      {
+        "listing_id": "AB-996865",
+        "revenue": 102600,
+        "bedrooms": 3,
+        "sleeps": 6
+      },
+      {
+        "listing_id": "AB-391476",
+        "revenue": 109700,
+        "bedrooms": 5,
+        "sleeps": 12
+      }
+    ],
+    "highlights": [
+      "Updated kitchen and baths",
+      "Large fenced backyard ready for a pool",
+      "Quiet street with no rental restrictions"
+    ],
+    "analyst_notes": "Backyard is sloped near the fence line; check photos.",
+    "approved_at": "2026-09-18"
+  },
+  {
+    "id": "D-140",
+    "address": "7247 Overlook Trl",
+    "city": "Pocono Summit",
+    "state": "PA",
+    "purchase_price": 563000,
+    "bedrooms": 4,
+    "baths": 3.5,
+    "lot_acres": 1.77,
+    "turnkey": false,
+    "interest_rate": 0.075,
+    "closing_cost_pct": 0.03,
+    "setup_items": [
+      {
+        "item": "Barrel sauna",
+        "cost": 15750
+      },
+      {
+        "item": "Landscaping and lighting",
+        "cost": 11500
+      },
+      {
+        "item": "Furniture and decor",
+        "cost": 62000
+      },
+      {
+        "item": "Design and project management",
+        "cost": 20000
+      }
+    ],
+    "annual_opex": 38000,
+    "revenue": {
+      "low": 101000,
+      "mid": 115000,
+      "high": 129000
+    },
+    "est_year1_tax_savings": 77500,
+    "comps": [
+      {
+        "listing_id": "AB-278240",
+        "revenue": 107200,
+        "bedrooms": 4,
+        "sleeps": 12
+      },
+      {
+        "listing_id": "AB-749813",
+        "revenue": 124800,
+        "bedrooms": 5,
+        "sleeps": 12
+      },
+      {
+        "listing_id": "AB-343467",
+        "revenue": 117100,
+        "bedrooms": 4,
+        "sleeps": 10
+      },
+      {
+        "listing_id": "AB-367729",
+        "revenue": 124200,
+        "bedrooms": 5,
+        "sleeps": 12
+      },
+      {
+        "listing_id": "AB-810526",
+        "revenue": 120100,
+        "bedrooms": 4,
+        "sleeps": 8
+      }
+    ],
+    "highlights": [
+      "Newer build with low maintenance",
+      "Short walk to lake access",
+      "Flat backyard with room for a sauna"
+    ],
+    "analyst_notes": "Septic location limits pool placement.",
+    "approved_at": "2026-11-08"
+  },
+  {
+    "id": "D-141",
+    "address": "4830 Pine Hollow Way",
+    "city": "Seminole",
+    "state": "FL",
+    "purchase_price": 578000,
+    "bedrooms": 4,
+    "baths": 2.5,
+    "lot_acres": 0.87,
+    "turnkey": false,
+    "interest_rate": 0.0725,
+    "closing_cost_pct": 0.03,
+    "setup_items": [
+      {
+        "item": "Mini golf",
+        "cost": 12000
+      },
+      {
+        "item": "Inground pool",
+        "cost": 125000
+      },
+      {
+        "item": "Interior paint",
+        "cost": 10000
+      },
+      {
+        "item": "Furniture and decor",
+        "cost": 62000
+      },
+      {
+        "item": "Design and project management",
+        "cost": 20000
+      }
+    ],
+    "annual_opex": 50700,
+    "revenue": {
+      "low": 119000,
+      "mid": 140000,
+      "high": 161000
+    },
+    "est_year1_tax_savings": 85900,
+    "comps": [
+      {
+        "listing_id": "AB-855053",
+        "revenue": 140300,
+        "bedrooms": 4,
+        "sleeps": 12
+      },
+      {
+        "listing_id": "AB-824156",
+        "revenue": 143200,
+        "bedrooms": 4,
+        "sleeps": 12
+      },
+      {
+        "listing_id": "AB-569945",
+        "revenue": 156500,
+        "bedrooms": 5,
+        "sleeps": 10
+      }
+    ],
+    "highlights": [
+      "Corner lot with extra parking",
+      "Updated kitchen and baths",
+      "Screened lanai"
+    ],
+    "analyst_notes": "Septic location limits pool placement.",
+    "approved_at": "2026-10-02"
+  },
+  {
+    "id": "D-142",
+    "address": "6765 Ridge Dr",
+    "city": "Seminole",
+    "state": "FL",
+    "purchase_price": 620500,
+    "bedrooms": 5,
+    "baths": 3,
+    "lot_acres": 1.99,
+    "turnkey": false,
+    "interest_rate": 0.075,
+    "closing_cost_pct": 0.03,
+    "setup_items": [
+      {
+        "item": "Outdoor kitchen",
+        "cost": 10000
+      },
+      {
+        "item": "Interior paint",
+        "cost": 10000
+      },
+      {
+        "item": "Furniture and decor",
+        "cost": 70000
+      },
+      {
+        "item": "Design and project management",
+        "cost": 20000
+      }
+    ],
+    "annual_opex": 36500,
+    "revenue": {
+      "low": 86000,
+      "mid": 96000,
+      "high": 106000
+    },
+    "est_year1_tax_savings": 74200,
+    "comps": [
+      {
+        "listing_id": "AB-320281",
+        "revenue": 104100,
+        "bedrooms": 5,
+        "sleeps": 14
+      },
+      {
+        "listing_id": "AB-470858",
+        "revenue": 106900,
+        "bedrooms": 4,
+        "sleeps": 10
+      },
+      {
+        "listing_id": "AB-348237",
+        "revenue": 109400,
+        "bedrooms": 5,
+        "sleeps": 10
+      }
+    ],
+    "highlights": [
+      "Quiet street with no rental restrictions",
+      "Large fenced backyard ready for a pool",
+      "Screened lanai"
+    ],
+    "analyst_notes": "Backyard is sloped near the fence line; check photos.",
+    "approved_at": "2026-09-29"
+  },
+  {
+    "id": "D-143",
+    "address": "8847 Laurel Ln",
+    "city": "San Antonio",
+    "state": "TX",
+    "purchase_price": 513000,
+    "bedrooms": 6,
+    "baths": 2,
+    "lot_acres": 1.99,
+    "turnkey": false,
+    "interest_rate": 0.0675,
+    "closing_cost_pct": 0.03,
+    "setup_items": [
+      {
+        "item": "Hot tub",
+        "cost": 16250
+      },
+      {
+        "item": "Game room",
+        "cost": 25000
+      },
+      {
+        "item": "Movie theater",
+        "cost": 45000
+      },
+      {
+        "item": "Pickleball court",
+        "cost": 40000
+      },
+      {
+        "item": "Furniture and decor",
+        "cost": 78000
+      },
+      {
+        "item": "Design and project management",
+        "cost": 20000
+      }
+    ],
+    "annual_opex": 44100,
+    "revenue": {
+      "low": 102000,
+      "mid": 116000,
+      "high": 130000
+    },
+    "est_year1_tax_savings": 84500,
+    "comps": [
+      {
+        "listing_id": "AB-188025",
+        "revenue": 124400,
+        "bedrooms": 5,
+        "sleeps": 10
+      },
+      {
+        "listing_id": "AB-290556",
+        "revenue": 103800,
+        "bedrooms": 7,
+        "sleeps": 16
+      },
+      {
+        "listing_id": "AB-321941",
+        "revenue": 117900,
+        "bedrooms": 6,
+        "sleeps": 14
+      },
+      {
+        "listing_id": "AB-391773",
+        "revenue": 128200,
+        "bedrooms": 7,
+        "sleeps": 16
+      },
+      {
+        "listing_id": "AB-975467",
+        "revenue": 104900,
+        "bedrooms": 6,
+        "sleeps": 12
+      }
+    ],
+    "highlights": [
+      "Close to downtown dining",
+      "Big backyard for pickleball and mini golf",
+      "Recently updated interior"
+    ],
+    "analyst_notes": "Interior dated; budgeted paint and fixtures.",
+    "approved_at": "2026-09-05"
+  },
+  {
+    "id": "D-144",
+    "address": "135 Summit Ln",
+    "city": "Bradford",
+    "state": "NY",
+    "purchase_price": 508000,
+    "bedrooms": 5,
+    "baths": 2.5,
+    "lot_acres": 1.95,
+    "turnkey": false,
+    "interest_rate": 0.0725,
+    "closing_cost_pct": 0.03,
+    "setup_items": [
+      {
+        "item": "Game room",
+        "cost": 25000
+      },
+      {
+        "item": "Playground",
+        "cost": 9000
+      },
+      {
+        "item": "Interior paint",
+        "cost": 10000
+      },
+      {
+        "item": "Furniture and decor",
+        "cost": 70000
+      },
+      {
+        "item": "Design and project management",
+        "cost": 20000
+      }
+    ],
+    "annual_opex": 25200,
+    "revenue": {
+      "low": 61000,
+      "mid": 68000,
+      "high": 75000
+    },
+    "est_year1_tax_savings": 68600,
+    "comps": [
+      {
+        "listing_id": "AB-386436",
+        "revenue": 64200,
+        "bedrooms": 6,
+        "sleeps": 16
+      },
+      {
+        "listing_id": "AB-461939",
+        "revenue": 68600,
+        "bedrooms": 4,
+        "sleeps": 10
+      },
+      {
+        "listing_id": "AB-652530",
+        "revenue": 73400,
+        "bedrooms": 6,
+        "sleeps": 12
+      },
+      {
+        "listing_id": "AB-514463",
+        "revenue": 79900,
+        "bedrooms": 5,
+        "sleeps": 10
+      }
+    ],
+    "highlights": [
+      "Lakefront with private dock",
+      "Long-range mountain views from the main deck",
+      "Ten minutes to ski lifts"
+    ],
+    "analyst_notes": "Price dropped last week.",
+    "approved_at": "2026-10-27"
+  },
+  {
+    "id": "D-145",
+    "address": "9736 Bluff Way",
+    "city": "Sevierville",
+    "state": "TN",
+    "purchase_price": 707000,
+    "bedrooms": 6,
+    "baths": 2.5,
+    "lot_acres": 2.37,
+    "turnkey": false,
+    "interest_rate": 0.0675,
+    "closing_cost_pct": 0.03,
+    "setup_items": [
+      {
+        "item": "Fire pit",
+        "cost": 7500
+      },
+      {
+        "item": "Barrel sauna",
+        "cost": 15750
+      },
+      {
+        "item": "Furniture and decor",
+        "cost": 78000
+      },
+      {
+        "item": "Design and project management",
+        "cost": 20000
+      }
+    ],
+    "annual_opex": 40600,
+    "revenue": {
+      "low": 102000,
+      "mid": 113000,
+      "high": 124000
+    },
+    "est_year1_tax_savings": 93400,
+    "comps": [
+      {
+        "listing_id": "AB-378258",
+        "revenue": 101200,
+        "bedrooms": 6,
+        "sleeps": 16
+      },
+      {
+        "listing_id": "AB-651640",
+        "revenue": 103300,
+        "bedrooms": 7,
+        "sleeps": 14
+      },
+      {
+        "listing_id": "AB-570050",
+        "revenue": 125800,
+        "bedrooms": 7,
+        "sleeps": 18
+      }
+    ],
+    "highlights": [
+      "Ten minutes to ski lifts",
+      "Newer build with low maintenance",
+      "Classic log-cabin interior"
+    ],
+    "analyst_notes": "Comps are strong at the high end.",
+    "approved_at": "2026-10-05"
+  }
+]

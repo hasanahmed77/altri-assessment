@@ -1,0 +1,186 @@
+[
+  {
+    "id": "M-01",
+    "name": "Poconos",
+    "state": "PA",
+    "towns": [
+      "Tobyhanna",
+      "East Stroudsburg",
+      "Pocono Summit",
+      "Albrightsville"
+    ],
+    "setting": "lake_mountain",
+    "typical_traveler": "Families and friend groups from NYC and Philadelphia, mostly drive-to",
+    "annual_appreciation": 0.0425,
+    "land_value_pct": 0.16
+  },
+  {
+    "id": "M-02",
+    "name": "Smoky Mountains",
+    "state": "TN",
+    "towns": [
+      "Gatlinburg",
+      "Pigeon Forge",
+      "Sevierville"
+    ],
+    "setting": "lake_mountain",
+    "typical_traveler": "Families and multi-generational groups",
+    "annual_appreciation": 0.0475,
+    "land_value_pct": 0.18
+  },
+  {
+    "id": "M-03",
+    "name": "Blue Ridge",
+    "state": "GA",
+    "towns": [
+      "Blue Ridge",
+      "Ellijay",
+      "Mineral Bluff"
+    ],
+    "setting": "lake_mountain",
+    "typical_traveler": "Couples and small families from Atlanta",
+    "annual_appreciation": 0.045,
+    "land_value_pct": 0.18
+  },
+  {
+    "id": "M-04",
+    "name": "Shenandoah Valley",
+    "state": "VA",
+    "towns": [
+      "Luray",
+      "Front Royal",
+      "McGaheysville",
+      "Basye"
+    ],
+    "setting": "lake_mountain",
+    "typical_traveler": "Couples and families from the DC area",
+    "annual_appreciation": 0.0425,
+    "land_value_pct": 0.18
+  },
+  {
+    "id": "M-05",
+    "name": "Catskills",
+    "state": "NY",
+    "towns": [
+      "Windham",
+      "Hunter",
+      "Saugerties"
+    ],
+    "setting": "lake_mountain",
+    "typical_traveler": "Skiers and hikers from NYC, year-round",
+    "annual_appreciation": 0.0425,
+    "land_value_pct": 0.25
+  },
+  {
+    "id": "M-06",
+    "name": "Finger Lakes",
+    "state": "NY",
+    "towns": [
+      "Bradford",
+      "Hammondsport",
+      "Watkins Glen"
+    ],
+    "setting": "lake_mountain",
+    "typical_traveler": "Couples and wine-country groups, strong summer season",
+    "annual_appreciation": 0.0425,
+    "land_value_pct": 0.25
+  },
+  {
+    "id": "M-07",
+    "name": "Broken Bow",
+    "state": "OK",
+    "towns": [
+      "Broken Bow"
+    ],
+    "setting": "lake_mountain",
+    "typical_traveler": "Families and couples from Dallas and Oklahoma City",
+    "annual_appreciation": 0.0425,
+    "land_value_pct": 0.18
+  },
+  {
+    "id": "M-08",
+    "name": "Clearwater Area",
+    "state": "FL",
+    "towns": [
+      "Clearwater",
+      "Largo",
+      "Seminole"
+    ],
+    "setting": "beach_coastal",
+    "typical_traveler": "Families on beach vacations",
+    "annual_appreciation": 0.05,
+    "land_value_pct": 0.28
+  },
+  {
+    "id": "M-09",
+    "name": "Bradenton",
+    "state": "FL",
+    "towns": [
+      "Bradenton"
+    ],
+    "setting": "beach_coastal",
+    "typical_traveler": "Families and snowbirds",
+    "annual_appreciation": 0.05,
+    "land_value_pct": 0.28
+  },
+  {
+    "id": "M-10",
+    "name": "Panama City Beach",
+    "state": "FL",
+    "towns": [
+      "Panama City Beach"
+    ],
+    "setting": "beach_coastal",
+    "typical_traveler": "Families in summer, spring-break groups in March",
+    "annual_appreciation": 0.0475,
+    "land_value_pct": 0.25
+  },
+  {
+    "id": "M-11",
+    "name": "Saint Augustine",
+    "state": "FL",
+    "towns": [
+      "Saint Augustine"
+    ],
+    "setting": "beach_coastal",
+    "typical_traveler": "Couples and families, history and beach",
+    "annual_appreciation": 0.055,
+    "land_value_pct": 0.3
+  },
+  {
+    "id": "M-12",
+    "name": "Scottsdale",
+    "state": "AZ",
+    "towns": [
+      "Scottsdale"
+    ],
+    "setting": "urban_hybrid",
+    "typical_traveler": "Golf trips, bachelor and bachelorette parties",
+    "annual_appreciation": 0.055,
+    "land_value_pct": 0.2
+  },
+  {
+    "id": "M-13",
+    "name": "San Antonio",
+    "state": "TX",
+    "towns": [
+      "San Antonio"
+    ],
+    "setting": "urban_hybrid",
+    "typical_traveler": "Families and event groups",
+    "annual_appreciation": 0.045,
+    "land_value_pct": 0.2
+  },
+  {
+    "id": "M-14",
+    "name": "Columbus",
+    "state": "OH",
+    "towns": [
+      "Columbus"
+    ],
+    "setting": "urban_hybrid",
+    "typical_traveler": "Sports and event groups",
+    "annual_appreciation": 0.04,
+    "land_value_pct": 0.16
+  }
+]

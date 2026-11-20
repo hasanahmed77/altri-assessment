@@ -1,0 +1,485 @@
+[
+  {
+    "client_id": "C-03",
+    "deal_id": "D-135",
+    "reaction": "down",
+    "comment": "Location isn't great.",
+    "created_at": "2026-09-03"
+  },
+  {
+    "client_id": "C-06",
+    "deal_id": "D-129",
+    "reaction": "down",
+    "comment": "Returns are too thin at the low end.",
+    "created_at": "2026-09-04"
+  },
+  {
+    "client_id": "C-15",
+    "deal_id": "D-115",
+    "reaction": "down",
+    "comment": "Price feels high for the size.",
+    "created_at": "2026-09-05"
+  },
+  {
+    "client_id": "C-10",
+    "deal_id": "D-143",
+    "reaction": "down",
+    "comment": "Doesn't have a cabin feel inside.",
+    "created_at": "2026-09-11"
+  },
+  {
+    "client_id": "C-14",
+    "deal_id": "D-120",
+    "reaction": "down",
+    "comment": "Price feels high for the size.",
+    "created_at": "2026-09-16"
+  },
+  {
+    "client_id": "C-07",
+    "deal_id": "D-101",
+    "reaction": "down",
+    "comment": "Price feels high for the size.",
+    "created_at": "2026-09-20"
+  },
+  {
+    "client_id": "C-03",
+    "deal_id": "D-139",
+    "reaction": "down",
+    "comment": "",
+    "created_at": "2026-09-23"
+  },
+  {
+    "client_id": "C-14",
+    "deal_id": "D-104",
+    "reaction": "down",
+    "comment": "Price feels high for the size.",
+    "created_at": "2026-09-23"
+  },
+  {
+    "client_id": "C-02",
+    "deal_id": "D-105",
+    "reaction": "down",
+    "comment": "Returns are too thin at the low end.",
+    "created_at": "2026-09-24"
+  },
+  {
+    "client_id": "C-08",
+    "deal_id": "D-119",
+    "reaction": "down",
+    "comment": "Price feels high for the size.",
+    "created_at": "2026-09-26"
+  },
+  {
+    "client_id": "C-11",
+    "deal_id": "D-113",
+    "reaction": "down",
+    "comment": "Too close to the neighbors.",
+    "created_at": "2026-09-27"
+  },
+  {
+    "client_id": "C-07",
+    "deal_id": "D-135",
+    "reaction": "down",
+    "comment": "Price feels high for the size.",
+    "created_at": "2026-09-30"
+  },
+  {
+    "client_id": "C-01",
+    "deal_id": "D-101",
+    "reaction": "down",
+    "comment": "Price feels high for the size.",
+    "created_at": "2026-10-02"
+  },
+  {
+    "client_id": "C-01",
+    "deal_id": "D-117",
+    "reaction": "up",
+    "comment": "This is close to what we pictured.",
+    "created_at": "2026-10-02"
+  },
+  {
+    "client_id": "C-03",
+    "deal_id": "D-142",
+    "reaction": "down",
+    "comment": "Location isn't great.",
+    "created_at": "2026-10-02"
+  },
+  {
+    "client_id": "C-15",
+    "deal_id": "D-101",
+    "reaction": "down",
+    "comment": "Pass for now.",
+    "created_at": "2026-10-02"
+  },
+  {
+    "client_id": "C-01",
+    "deal_id": "D-126",
+    "reaction": "up",
+    "comment": "Like this house a lot.",
+    "created_at": "2026-10-03"
+  },
+  {
+    "client_id": "C-02",
+    "deal_id": "D-107",
+    "reaction": "down",
+    "comment": "Location isn't great.",
+    "created_at": "2026-10-04"
+  },
+  {
+    "client_id": "C-15",
+    "deal_id": "D-111",
+    "reaction": "down",
+    "comment": "Too far from anything to do.",
+    "created_at": "2026-10-04"
+  },
+  {
+    "client_id": "C-15",
+    "deal_id": "D-139",
+    "reaction": "down",
+    "comment": "Location isn't great.",
+    "created_at": "2026-10-05"
+  },
+  {
+    "client_id": "C-02",
+    "deal_id": "D-128",
+    "reaction": "down",
+    "comment": "",
+    "created_at": "2026-10-06"
+  },
+  {
+    "client_id": "C-11",
+    "deal_id": "D-132",
+    "reaction": "up",
+    "comment": "Numbers look solid. What would the hot tub add?",
+    "created_at": "2026-10-06"
+  },
+  {
+    "client_id": "C-01",
+    "deal_id": "D-141",
+    "reaction": "down",
+    "comment": "Backyard feels too small for what we'd want to add.",
+    "created_at": "2026-10-07"
+  },
+  {
+    "client_id": "C-04",
+    "deal_id": "D-116",
+    "reaction": "down",
+    "comment": "Price feels high for the size.",
+    "created_at": "2026-10-07"
+  },
+  {
+    "client_id": "C-01",
+    "deal_id": "D-116",
+    "reaction": "down",
+    "comment": "Same house as before? Way more cash than we want to put in.",
+    "created_at": "2026-10-09"
+  },
+  {
+    "client_id": "C-07",
+    "deal_id": "D-129",
+    "reaction": "down",
+    "comment": "Too close to the neighbors.",
+    "created_at": "2026-10-10"
+  },
+  {
+    "client_id": "C-06",
+    "deal_id": "D-102",
+    "reaction": "down",
+    "comment": "Location isn't great.",
+    "created_at": "2026-10-11"
+  },
+  {
+    "client_id": "C-15",
+    "deal_id": "D-101",
+    "reaction": "up",
+    "comment": "Actually, looked again with my partner. We like it.",
+    "created_at": "2026-10-11"
+  },
+  {
+    "client_id": "C-06",
+    "deal_id": "D-106",
+    "reaction": "down",
+    "comment": "Price feels high for the size.",
+    "created_at": "2026-10-12"
+  },
+  {
+    "client_id": "C-15",
+    "deal_id": "D-130",
+    "reaction": "up",
+    "comment": "Love this one, can we get a walkthrough video?",
+    "created_at": "2026-10-13"
+  },
+  {
+    "client_id": "C-02",
+    "deal_id": "D-145",
+    "reaction": "down",
+    "comment": "Great house, honestly. Just bad timing for us this month.",
+    "created_at": "2026-10-14"
+  },
+  {
+    "client_id": "C-11",
+    "deal_id": "D-109",
+    "reaction": "up",
+    "comment": "",
+    "created_at": "2026-10-14"
+  },
+  {
+    "client_id": "C-14",
+    "deal_id": "D-126",
+    "reaction": "up",
+    "comment": "Numbers look solid. What would the hot tub add?",
+    "created_at": "2026-10-14"
+  },
+  {
+    "client_id": "C-03",
+    "deal_id": "D-134",
+    "reaction": "down",
+    "comment": "Returns are too thin at the low end.",
+    "created_at": "2026-10-15"
+  },
+  {
+    "client_id": "C-05",
+    "deal_id": "D-133",
+    "reaction": "up",
+    "comment": "Being on the water is a must for us now.",
+    "created_at": "2026-10-15"
+  },
+  {
+    "client_id": "C-10",
+    "deal_id": "D-104",
+    "reaction": "down",
+    "comment": "Doesn't have a cabin feel inside.",
+    "created_at": "2026-10-15"
+  },
+  {
+    "client_id": "C-05",
+    "deal_id": "D-105",
+    "reaction": "down",
+    "comment": "Not feeling it.",
+    "created_at": "2026-10-16"
+  },
+  {
+    "client_id": "C-04",
+    "deal_id": "D-104",
+    "reaction": "down",
+    "comment": "Oh sure, I'd love to fix a 1970s kitchen on vacation. Pass.",
+    "created_at": "2026-10-19"
+  },
+  {
+    "client_id": "C-09",
+    "deal_id": "D-110",
+    "reaction": "up",
+    "comment": "This is close to what we pictured.",
+    "created_at": "2026-10-21"
+  },
+  {
+    "client_id": "C-09",
+    "deal_id": "D-145",
+    "reaction": "down",
+    "comment": "Too far from anything to do.",
+    "created_at": "2026-10-22"
+  },
+  {
+    "client_id": "C-11",
+    "deal_id": "D-112",
+    "reaction": "down",
+    "comment": "Hmm. Maybe? Not sure.",
+    "created_at": "2026-10-22"
+  },
+  {
+    "client_id": "C-05",
+    "deal_id": "D-131",
+    "reaction": "up",
+    "comment": "Love the lake access.",
+    "created_at": "2026-10-23"
+  },
+  {
+    "client_id": "C-02",
+    "deal_id": "D-119",
+    "reaction": "down",
+    "comment": "",
+    "created_at": "2026-10-24"
+  },
+  {
+    "client_id": "C-05",
+    "deal_id": "D-110",
+    "reaction": "down",
+    "comment": "Feels like every other cabin up there.",
+    "created_at": "2026-10-25"
+  },
+  {
+    "client_id": "C-09",
+    "deal_id": "D-118",
+    "reaction": "down",
+    "comment": "This is a party town, not what we want.",
+    "created_at": "2026-10-25"
+  },
+  {
+    "client_id": "C-13",
+    "deal_id": "D-110",
+    "reaction": "up",
+    "comment": "Great views, this is the vibe we want.",
+    "created_at": "2026-10-25"
+  },
+  {
+    "client_id": "C-02",
+    "deal_id": "D-131",
+    "reaction": "down",
+    "comment": "Price feels high for the size.",
+    "created_at": "2026-10-26"
+  },
+  {
+    "client_id": "C-01",
+    "deal_id": "D-120",
+    "reaction": "down",
+    "comment": "Too close to the neighbors.",
+    "created_at": "2026-10-27"
+  },
+  {
+    "client_id": "C-05",
+    "deal_id": "D-138",
+    "reaction": "up",
+    "comment": "The dock sold us.",
+    "created_at": "2026-10-28"
+  },
+  {
+    "client_id": "C-11",
+    "deal_id": "D-124",
+    "reaction": "down",
+    "comment": "Too close to the neighbors.",
+    "created_at": "2026-10-28"
+  },
+  {
+    "client_id": "C-04",
+    "deal_id": "D-122",
+    "reaction": "down",
+    "comment": "Too much renovation for us.",
+    "created_at": "2026-11-02"
+  },
+  {
+    "client_id": "C-13",
+    "deal_id": "D-145",
+    "reaction": "down",
+    "comment": "Location isn't great.",
+    "created_at": "2026-11-02"
+  },
+  {
+    "client_id": "C-14",
+    "deal_id": "D-137",
+    "reaction": "down",
+    "comment": "Too far from anything to do.",
+    "created_at": "2026-11-03"
+  },
+  {
+    "client_id": "C-08",
+    "deal_id": "D-128",
+    "reaction": "down",
+    "comment": "Doesn't have a cabin feel inside.",
+    "created_at": "2026-11-04"
+  },
+  {
+    "client_id": "C-15",
+    "deal_id": "D-103",
+    "reaction": "down",
+    "comment": "Too close to the neighbors.",
+    "created_at": "2026-11-04"
+  },
+  {
+    "client_id": "C-06",
+    "deal_id": "D-118",
+    "reaction": "down",
+    "comment": "Doesn't have a cabin feel inside.",
+    "created_at": "2026-11-05"
+  },
+  {
+    "client_id": "C-09",
+    "deal_id": "D-127",
+    "reaction": "down",
+    "comment": "Too close to the neighbors.",
+    "created_at": "2026-11-05"
+  },
+  {
+    "client_id": "C-01",
+    "deal_id": "D-139",
+    "reaction": "up",
+    "comment": "Great views, this is the vibe we want.",
+    "created_at": "2026-11-06"
+  },
+  {
+    "client_id": "C-04",
+    "deal_id": "D-137",
+    "reaction": "down",
+    "comment": "Location isn't great.",
+    "created_at": "2026-11-06"
+  },
+  {
+    "client_id": "C-13",
+    "deal_id": "D-131",
+    "reaction": "down",
+    "comment": "Returns are too thin at the low end.",
+    "created_at": "2026-11-07"
+  },
+  {
+    "client_id": "C-11",
+    "deal_id": "D-123",
+    "reaction": "up",
+    "comment": "",
+    "created_at": "2026-11-08"
+  },
+  {
+    "client_id": "C-13",
+    "deal_id": "D-105",
+    "reaction": "down",
+    "comment": "Too much renovation for us.",
+    "created_at": "2026-11-09"
+  },
+  {
+    "client_id": "C-14",
+    "deal_id": "D-122",
+    "reaction": "down",
+    "comment": "Returns are too thin at the low end.",
+    "created_at": "2026-11-10"
+  },
+  {
+    "client_id": "C-04",
+    "deal_id": "D-120",
+    "reaction": "up",
+    "comment": "Great views, this is the vibe we want.",
+    "created_at": "2026-11-11"
+  },
+  {
+    "client_id": "C-04",
+    "deal_id": "D-140",
+    "reaction": "up",
+    "comment": "This is close to what we pictured.",
+    "created_at": "2026-11-12"
+  },
+  {
+    "client_id": "C-08",
+    "deal_id": "D-126",
+    "reaction": "down",
+    "comment": "Location isn't great.",
+    "created_at": "2026-11-12"
+  },
+  {
+    "client_id": "C-09",
+    "deal_id": "D-105",
+    "reaction": "down",
+    "comment": "Too close to the neighbors.",
+    "created_at": "2026-11-12"
+  },
+  {
+    "client_id": "C-10",
+    "deal_id": "D-121",
+    "reaction": "down",
+    "comment": "Price feels high for the size.",
+    "created_at": "2026-11-12"
+  },
+  {
+    "client_id": "C-13",
+    "deal_id": "D-138",
+    "reaction": "up",
+    "comment": "Numbers look solid. What would the hot tub add?",
+    "created_at": "2026-11-12"
+  }
+]

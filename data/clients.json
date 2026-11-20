@@ -1,0 +1,418 @@
+[
+  {
+    "id": "C-01",
+    "name": "Priya S.",
+    "budget_range": "$200K-$300K",
+    "budget": 300000,
+    "budget_flexibility": "flexible",
+    "down_payment_pct": 0.2,
+    "cohost_fee_pct": 0.12,
+    "main_focus": "cash_flow",
+    "market_preferences": [
+      "Poconos",
+      "Blue Ridge",
+      "Florida"
+    ],
+    "avoid_markets": [
+      "Charlotte"
+    ],
+    "setting_rank": {
+      "lake_mountain": 1,
+      "beach_coastal": 2,
+      "urban_hybrid": 3
+    },
+    "renovation_appetite": "medium",
+    "wow_factors": [
+      "views",
+      "seclusion"
+    ],
+    "wants_turnkey": false,
+    "min_bedrooms": 4,
+    "notes": "Lives in NJ, wants something within a drive. Prefers newer cabins.",
+    "onboarded_at": "2026-09-29"
+  },
+  {
+    "id": "C-02",
+    "name": "Marcus T.",
+    "budget_range": "$300K-$400K",
+    "budget": 350000,
+    "budget_flexibility": "strict",
+    "down_payment_pct": 0.1,
+    "cohost_fee_pct": 0.0,
+    "main_focus": "tax_savings",
+    "market_preferences": [
+      "All"
+    ],
+    "avoid_markets": [],
+    "setting_rank": {
+      "lake_mountain": 1,
+      "beach_coastal": 2,
+      "urban_hybrid": 3
+    },
+    "renovation_appetite": "heavy",
+    "wow_factors": [],
+    "wants_turnkey": false,
+    "min_bedrooms": 4,
+    "notes": "W-2 earner, main goal is offsetting income this tax year.",
+    "onboarded_at": "2026-08-14"
+  },
+  {
+    "id": "C-03",
+    "name": "Elena and Joe R.",
+    "budget_range": "$300K-$400K",
+    "budget": 500000,
+    "budget_flexibility": "flexible",
+    "down_payment_pct": 0.1,
+    "cohost_fee_pct": 0.1,
+    "main_focus": "cash_flow",
+    "market_preferences": [
+      "Charlotte",
+      "Florida",
+      "San Antonio"
+    ],
+    "avoid_markets": [
+      "Blue Ridge",
+      "Shenandoah"
+    ],
+    "setting_rank": {
+      "lake_mountain": 3,
+      "beach_coastal": 1,
+      "urban_hybrid": 2
+    },
+    "renovation_appetite": "medium",
+    "wow_factors": [],
+    "wants_turnkey": false,
+    "min_bedrooms": 4,
+    "notes": "",
+    "onboarded_at": "2026-09-02"
+  },
+  {
+    "id": "C-04",
+    "name": "Dev K.",
+    "budget_range": "< $200K",
+    "budget": 200000,
+    "budget_flexibility": "strict",
+    "down_payment_pct": 0.1,
+    "cohost_fee_pct": 0.0,
+    "main_focus": "cash_flow",
+    "market_preferences": [
+      "All"
+    ],
+    "avoid_markets": [],
+    "setting_rank": {
+      "lake_mountain": 1,
+      "beach_coastal": 2,
+      "urban_hybrid": 3
+    },
+    "renovation_appetite": "light",
+    "wow_factors": [],
+    "wants_turnkey": true,
+    "min_bedrooms": 3,
+    "notes": "Doesn't want to overspend on amenities.",
+    "onboarded_at": "2026-10-01"
+  },
+  {
+    "id": "C-05",
+    "name": "Hannah L.",
+    "budget_range": "$200K-$300K",
+    "budget": 275000,
+    "budget_flexibility": "flexible",
+    "down_payment_pct": 0.1,
+    "cohost_fee_pct": 0.0,
+    "main_focus": "cash_flow",
+    "market_preferences": [
+      "Smokies",
+      "Blue Ridge"
+    ],
+    "avoid_markets": [],
+    "setting_rank": {
+      "lake_mountain": 1,
+      "beach_coastal": 3,
+      "urban_hybrid": 2
+    },
+    "renovation_appetite": "medium",
+    "wow_factors": [
+      "views",
+      "waterfront"
+    ],
+    "wants_turnkey": false,
+    "min_bedrooms": 3,
+    "notes": "",
+    "onboarded_at": "2026-08-21"
+  },
+  {
+    "id": "C-06",
+    "name": "Tom and Rita B.",
+    "budget_range": "> $500K",
+    "budget": 600000,
+    "budget_flexibility": "flexible",
+    "down_payment_pct": 0.25,
+    "cohost_fee_pct": 0.0,
+    "main_focus": "appreciation",
+    "market_preferences": [
+      "Scottsdale",
+      "Florida"
+    ],
+    "avoid_markets": [],
+    "setting_rank": {
+      "lake_mountain": 3,
+      "beach_coastal": 2,
+      "urban_hybrid": 1
+    },
+    "renovation_appetite": "heavy",
+    "wow_factors": [
+      "unique"
+    ],
+    "wants_turnkey": false,
+    "min_bedrooms": 5,
+    "notes": "Wants forced appreciation; fine with a big renovation.",
+    "onboarded_at": "2026-07-30"
+  },
+  {
+    "id": "C-07",
+    "name": "Sam O.",
+    "budget_range": "$200K-$300K",
+    "budget": 250000,
+    "budget_flexibility": "strict",
+    "down_payment_pct": 0.2,
+    "cohost_fee_pct": 0.0,
+    "main_focus": "lifestyle",
+    "market_preferences": [
+      "Saint Augustine",
+      "Clearwater"
+    ],
+    "avoid_markets": [],
+    "setting_rank": {
+      "lake_mountain": 3,
+      "beach_coastal": 1,
+      "urban_hybrid": 2
+    },
+    "renovation_appetite": "light",
+    "wow_factors": [],
+    "wants_turnkey": true,
+    "min_bedrooms": 3,
+    "notes": "Wants to use the house a few weeks a year. Break-even with a co-host is fine.",
+    "onboarded_at": "2026-09-18"
+  },
+  {
+    "id": "C-08",
+    "name": "Grace W.",
+    "budget_range": "$300K-$400K",
+    "budget": 350000,
+    "budget_flexibility": "flexible",
+    "down_payment_pct": 0.1,
+    "cohost_fee_pct": 0.12,
+    "main_focus": "cash_flow",
+    "market_preferences": [
+      "Upstate NY",
+      "Poconos"
+    ],
+    "avoid_markets": [],
+    "setting_rank": {
+      "lake_mountain": 1,
+      "beach_coastal": 3,
+      "urban_hybrid": 2
+    },
+    "renovation_appetite": "medium",
+    "wow_factors": [
+      "views"
+    ],
+    "wants_turnkey": false,
+    "min_bedrooms": 4,
+    "notes": "Lives in Brooklyn. Really wants a ski destination.",
+    "onboarded_at": "2026-09-10"
+  },
+  {
+    "id": "C-09",
+    "name": "Arjun and Mei P.",
+    "budget_range": "> $500K",
+    "budget": 500000,
+    "budget_flexibility": "flexible",
+    "down_payment_pct": 0.1,
+    "cohost_fee_pct": 0.1,
+    "main_focus": "tax_savings",
+    "market_preferences": [
+      "All"
+    ],
+    "avoid_markets": [],
+    "setting_rank": {
+      "lake_mountain": 1,
+      "beach_coastal": 3,
+      "urban_hybrid": 2
+    },
+    "renovation_appetite": "medium",
+    "wow_factors": [],
+    "wants_turnkey": false,
+    "min_bedrooms": 4,
+    "notes": "Avoid markets known for group or party travel. Family trips only, worried about parties.",
+    "onboarded_at": "2026-10-08"
+  },
+  {
+    "id": "C-10",
+    "name": "Luis F.",
+    "budget_range": "$300K-$400K",
+    "budget": 400000,
+    "budget_flexibility": "strict",
+    "down_payment_pct": 0.2,
+    "cohost_fee_pct": 0.12,
+    "main_focus": "cash_flow",
+    "market_preferences": [
+      "San Antonio",
+      "Columbus"
+    ],
+    "avoid_markets": [
+      "Scottsdale"
+    ],
+    "setting_rank": {
+      "lake_mountain": 3,
+      "beach_coastal": 2,
+      "urban_hybrid": 1
+    },
+    "renovation_appetite": "heavy",
+    "wow_factors": [],
+    "wants_turnkey": false,
+    "min_bedrooms": 4,
+    "notes": "Lives in Texas, prefers closer markets but open to others.",
+    "onboarded_at": "2026-08-05"
+  },
+  {
+    "id": "C-11",
+    "name": "Nora V.",
+    "budget_range": "$200K-$300K",
+    "budget": 260000,
+    "budget_flexibility": "flexible",
+    "down_payment_pct": 0.15,
+    "cohost_fee_pct": 0.0,
+    "main_focus": "cash_flow",
+    "market_preferences": [
+      "Shenandoah",
+      "Blue Ridge"
+    ],
+    "avoid_markets": [
+      "Florida"
+    ],
+    "setting_rank": {
+      "lake_mountain": 1,
+      "beach_coastal": 3,
+      "urban_hybrid": 2
+    },
+    "renovation_appetite": "light",
+    "wow_factors": [
+      "views"
+    ],
+    "wants_turnkey": false,
+    "min_bedrooms": 3,
+    "notes": "Likes newer construction.",
+    "onboarded_at": "2026-09-25"
+  },
+  {
+    "id": "C-12",
+    "name": "Ben A.",
+    "budget_range": "$300K-$400K",
+    "budget": 350000,
+    "budget_flexibility": "flexible",
+    "down_payment_pct": 0.1,
+    "cohost_fee_pct": 0.0,
+    "main_focus": "cash_flow",
+    "market_preferences": [],
+    "avoid_markets": [],
+    "setting_rank": {
+      "lake_mountain": 1,
+      "beach_coastal": 2,
+      "urban_hybrid": 3
+    },
+    "renovation_appetite": "medium",
+    "wow_factors": [],
+    "wants_turnkey": false,
+    "min_bedrooms": 4,
+    "notes": "New client, onboarding call done, no deals sent yet.",
+    "onboarded_at": "2026-11-10"
+  },
+  {
+    "id": "C-13",
+    "name": "Kayla and Drew M.",
+    "budget_range": "$400K-$500K",
+    "budget": 450000,
+    "budget_flexibility": "strict",
+    "down_payment_pct": 0.2,
+    "cohost_fee_pct": 0.0,
+    "main_focus": "tax_savings",
+    "market_preferences": [
+      "Broken Bow",
+      "Smokies",
+      "Texas Hill Country"
+    ],
+    "avoid_markets": [],
+    "setting_rank": {
+      "lake_mountain": 1,
+      "beach_coastal": 3,
+      "urban_hybrid": 2
+    },
+    "renovation_appetite": "medium",
+    "wow_factors": [
+      "seclusion",
+      "unique"
+    ],
+    "wants_turnkey": false,
+    "min_bedrooms": 3,
+    "notes": "Doing a 1031 exchange; identification window closes Dec 20.",
+    "onboarded_at": "2026-10-20"
+  },
+  {
+    "id": "C-14",
+    "name": "Ravi N.",
+    "budget_range": "$200K-$300K",
+    "budget": 230000,
+    "budget_flexibility": "strict",
+    "down_payment_pct": 0.1,
+    "cohost_fee_pct": 0.12,
+    "main_focus": "cash_flow",
+    "market_preferences": [
+      "Columbus",
+      "Poconos",
+      "Clearwater"
+    ],
+    "avoid_markets": [],
+    "setting_rank": {
+      "lake_mountain": 2,
+      "beach_coastal": 1,
+      "urban_hybrid": 3
+    },
+    "renovation_appetite": "light",
+    "wow_factors": [],
+    "wants_turnkey": false,
+    "min_bedrooms": 4,
+    "notes": "",
+    "onboarded_at": "2026-09-12"
+  },
+  {
+    "id": "C-15",
+    "name": "Olivia G.",
+    "budget_range": "$300K-$400K",
+    "budget": 380000,
+    "budget_flexibility": "flexible",
+    "down_payment_pct": 0.1,
+    "cohost_fee_pct": 0.0,
+    "main_focus": "cash_flow",
+    "market_preferences": [
+      "Florida",
+      "Panama City Beach"
+    ],
+    "avoid_markets": [
+      "Columbus"
+    ],
+    "setting_rank": {
+      "lake_mountain": 2,
+      "beach_coastal": 1,
+      "urban_hybrid": 3
+    },
+    "renovation_appetite": "heavy",
+    "wow_factors": [
+      "waterfront"
+    ],
+    "wants_turnkey": false,
+    "min_bedrooms": 4,
+    "notes": "Owns one STR in Bradenton already; open to diversifying.",
+    "onboarded_at": "2026-08-28"
+  }
+]

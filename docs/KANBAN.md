@@ -1,0 +1,72 @@
+# Kanban
+
+Deadline: **5 days**. Day 1 = S + M1 · Day 2 = M2 + start M3 · Day 3 = `v0.1` by midday + start M4 · Day 4 = `v0.2` · Day 5 = ship `v1.0`.
+WIP limit: **1** card in progress. Move a card by moving its line. Commits reference the card id: `feat(A-07): ...`.
+
+**Definition of Done:** acceptance criteria met · tests green · lint and types clean · no code I can't explain · committed with the card id.
+**End of each milestone:** a short "Created / Edited" summary of every file and folder touched, one line each.
+
+## In progress
+
+## Ready
+- **S-01** Send questions email to STR Search · AC: sent; assumptions recorded in DESIGN.md
+- **S-02** Repo skeleton (`backend/`, `frontend/`, `supabase/migrations/`, `docs/`) + `.gitignore`, `.env.example` · AC: no secrets tracked
+- **S-03** `docs/DESIGN.md` v1: architecture, decisions (alternatives + why), assumptions · AC: one page
+- **S-04** Migration `0001_provided_seed.sql` = provided seed byte-for-byte; SHA-256 recorded · AC: checksum matches original
+- **S-05** Migration `0002_reference_mappings.sql`: `market_towns` (+ aliases), `deals.market_id NOT NULL`, `deals.property_key`, `market_aliases`, `client_market_refs` view, indexes, RLS on all tables · AC: applies cleanly on Supabase and on local Postgres; all 45 deals mapped; D-116 and D-126 share a property_key
+- **S-06** Hosted Supabase project linked (primary DB); migrations pushed · AC: tables visible; anon REST access returns nothing; credentials only in `.env`, never committed
+- **S-07** `docker-compose.yml`: db (migrations mounted), api, web with healthchecks · AC: `docker compose up` on an empty volume serves `/health` and the web root
+- **S-08** CI day 1: ruff, mypy, unit tests · day 2 adds pytest with a Postgres service, eslint, tsc, next build · AC: green on main
+- **S-14** Spike, first thing on day 1: push `0001` (their seed, which has its own BEGIN/COMMIT) to hosted Supabase with the CLI · AC: tables + rows present. Fallback if the CLI's own transaction clashes: load the seed once with `psql`, keep migrations for our changes, document it
+
+## Backlog
+
+### M1 Domain core (pure, unit-tested)
+- **A-01** `domain/models.py` frozen dataclasses · AC: no framework imports in `domain/`
+- **A-02** `finance.py`: cash needed, annual debt service, cash flows, CoC · AC: golden C-01×D-126 = $235,295 and 11.3/16.9/22.5%; $100K at 6%/30y = $599.55/mo (pins monthly amortization); Hypothesis monotonicity tests
+- **A-03** `rules.py`: OVER_BUDGET, AVOIDED_MARKET, TOO_FEW_BEDROOMS, BEDROOMS_UNKNOWN, DOES_NOT_PENCIL (lifestyle branch), all violations collected, messages with numbers, unrounded comparisons · AC: synthetic boundary tests (exactly 10% over, exactly 3%, cash flow exactly 0) + real pairs C-03×D-132 (2.993% → out), C-04×D-136 ($600 over strict → out), C-02×D-127 and C-07×D-140 (just inside → in)
+- **A-04** `tags.py`: closed-vocabulary maps for 21 highlights, 12 notes, 15 setup items; market traits · AC: every value in the data maps (test fails on unknown text)
+- **A-05** `feedback.py`: latest reaction per deal (by id), property siblings, affinity · AC: C-15/D-101 counts as up; reacting to D-126 marks D-116 already_shared
+- **A-06** `scoring.py`: focus strategies, preference score, reasons → explanation · AC: deterministic order, tie-break by id; each focus tested
+- **A-07** Golden snapshot `tests/golden/eligibility.json` for all 15 clients · AC: matches `prep/eligibility_by_client.txt` (except documented decisions)
+
+### M2 API
+- **A-08** `db.py`, `repository.py`; reference data loaded once in lifespan · AC: 3 queries per recommendations request (asserted in a test)
+- **A-09** `GET /clients`, `GET /clients/{id}` · AC: 404 for unknown id; feedback newest first
+- **A-10** `GET /clients/{id}/recommendations` · AC: every eligible deal in `ranked` (with status), excluded with all rule codes, messages and numbers; `ranked ∪ excluded` = 45, disjoint
+- **A-11** `POST /feedback` · AC: 201; 404 unknown ids; 422 bad reaction; comment trimmed, ≤ 1,000 chars
+- **A-12** Integration test: the feedback loop, on a dedicated test DB · AC: POST 👎 then GET shows the deal as already_shared/down and a same-market deal's score dropped
+
+### M3 Rep screen → tag v0.1 (Part A complete)
+- **A-13** Next.js + Tailwind + shadcn init; `gen:api` from OpenAPI · AC: `tsc` strict passes
+- **A-14** Layout: client sidebar + `/clients/[id]` with parallel server fetches
+- **A-15** Client summary card + feedback history
+- **A-16** Deal card: cash needed, CoC L/M/H, explanation, flags; Recommended (top 5 + show all) / Already shared / Excluded tabs
+- **A-17** Feedback form: Server Action → POST → revalidate; pending and error states; toast
+- **A-18** Fresh-clone test of `docker compose up`; tag `v0.1`
+
+### M4 Part B → tag v0.2
+- **B-01** Migration `0003_client_signals.sql`
+- **B-02** Signals schema (Pydantic, closed vocabulary, market-id enum) + grounding validator · AC: a non-verbatim quote is dropped (unit test)
+- **B-03** `OpenAIExtractor` (Structured Outputs, temperature 0, timeout + retry) + test fake; no key → signals marked stale
+- **B-04** `services/signals.py`: content-hash cache, upsert, usage logging · AC: an unchanged hash makes 0 extractor calls (integration test)
+- **B-05** Signals in scoring: must-haves, avoid traits, soft cap, feedback readings · AC: C-02/D-145 not penalized; C-05 waterfront deals rise; C-09 party markets drop
+- **B-06** Alerts: deadline, conflicts, unresolved terms, no-match-in-preferred, deal data flags
+- **B-07** `GET /clients/{id}/markets` + "Where to buy" tab · AC: C-12 sees ranked markets with rationale
+- **B-08** Evals: `tests/evals/cases.yaml` (12 cases) + `make eval` · AC: pass rate reported
+- **B-09** Generate `0004_signals_snapshot.sql` with the real model · AC: the stack works with no API key
+- **B-10** Signals panel in UI with quotes + sources; while `signals_status` is `updating`, show a badge and refresh (max ~5 tries) · AC: after a commented 👎, re-ranked signals appear without a manual reload
+- **B-11** Near misses: gap ("needs $X more", "2.9% vs 3%") + price solver by bisection · AC: C-13/D-138 shows the price that pencils; unit tests on the solver
+- **B-12** Re-extraction after POST /feedback via `BackgroundTasks`, only when the comment is non-empty
+- **B-13** Stretch, day 5 morning only if ahead: Playwright smoke test of the demo flow, local only (not in CI)
+- Tag `v0.2`
+
+### M5 Ship → tag v1.0
+- **S-09** README ≤ 2 pages: run, how it works + why (incl. schema changes and why), research + sources + what changed my thinking, assumptions, questions for v2, next steps, AI usage + measured cost per client; links to DESIGN.md and AI_LOG.md for depth
+- **S-15** Research notes kept as you go in `prep/RESEARCH.md` (topic, source link, what changed) · AC: feeds the README research section
+- **S-10** `docs/AI_LOG.md` finalized (at least one "AI got it wrong" story)
+- **S-11** Fresh clone on a clean machine: compose up + test command
+- **S-12** Video script, recording (~10 min) · AC: repo is public and video unlisted; both links opened in a private window without signing in
+- **S-13** Rehearse: trace any recommendation from the screen to `finance.py` in under a minute
+
+## Done
