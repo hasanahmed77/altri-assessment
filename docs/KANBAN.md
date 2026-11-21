@@ -37,6 +37,7 @@ WIP limit: **1** card in progress. Move a card by moving its line. Commits refer
 - **S-13** Rehearse: trace any recommendation from the screen to `finance.py` in under a minute
 
 ## Done
+- **A-19** Part A audit against the brief: independent recompute of all 675 client×deal pairs (numbers + rule codes) from the raw JSON matches the API exactly; "All" shown as "open to any market"; mypy now covers `tests/`
 - **A-14** Layout: client sidebar + `/clients/[id]` with parallel server fetches
 - **A-15** Client summary card + feedback history
 - **A-16** Deal card: cash needed, CoC L/M/H, explanation, flags; Recommended (top 5 + show all) / Already shared / Excluded tabs

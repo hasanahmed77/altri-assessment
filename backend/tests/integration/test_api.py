@@ -25,6 +25,8 @@ def test_list_clients_has_every_client_with_a_summary(api: TestClient) -> None:
     priya = next(c for c in clients if c["id"] == "C-01")
     assert priya["feedback_count"] == 7
     assert priya["summary"].startswith("$300,000 (flexible), cash flow focus")
+    marcus = next(c for c in clients if c["id"] == "C-02")
+    assert "open to any market" in marcus["summary"]
 
 
 def test_client_detail_has_feedback_newest_first_and_calls(api: TestClient) -> None:

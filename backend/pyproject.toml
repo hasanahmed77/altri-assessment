@@ -33,4 +33,4 @@ select = ["E", "F", "I", "B", "UP", "SIM", "RUF"]
 
 [tool.mypy]
 strict = true
-packages = ["app"]
+files = ["app", "tests"]

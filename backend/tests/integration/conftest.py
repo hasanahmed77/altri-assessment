@@ -41,7 +41,7 @@ def template_db() -> Iterator[str]:
     _admin_execute(sql.SQL("CREATE DATABASE {}").format(sql.Identifier(TEMPLATE_DB)))
     with psycopg.connect(_url_for(TEMPLATE_DB).replace("+psycopg", ""), autocommit=True) as conn:
         for migration in sorted(MIGRATIONS_DIR.glob("*.sql")):
-            conn.execute(migration.read_text())  # type: ignore[call-overload]
+            conn.execute(migration.read_text())
     yield TEMPLATE_DB
     _admin_execute(sql.SQL("DROP DATABASE IF EXISTS {}").format(sql.Identifier(TEMPLATE_DB)))
 

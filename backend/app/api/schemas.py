@@ -162,7 +162,11 @@ class ClientSummaryOut(BaseModel):
     @classmethod
     def from_profile(cls, p: ClientProfile, feedback_count: int) -> "ClientSummaryOut":
         c = p.client
-        markets = ", ".join(p.preferred_terms) or "no market preference"
+        terms = [t for t in p.preferred_terms if t.strip().lower() != "all"]
+        if terms:
+            markets = ", ".join(terms)
+        else:
+            markets = "open to any market" if p.preferred_terms else "no market preference"
         return cls(
             id=c.id,
             name=c.name,
