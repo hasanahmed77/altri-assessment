@@ -9,10 +9,7 @@ WIP limit: **1** card in progress. Move a card by moving its line. Commits refer
 ## In progress
 
 ## Ready
-- **S-01** Send questions email to STR Search (draft ready in `prep/QUESTIONS_EMAIL.md`; **you send it**) · AC: sent
 - **S-06** Hosted Supabase project linked (primary DB); migrations pushed · AC: tables visible; anon REST access returns nothing; credentials only in `.env`, never committed
-- **S-07** `docker-compose.yml`: db (migrations mounted), api, web with healthchecks · AC: `docker compose up` on an empty volume serves `/health` and the web root
-- **S-08** CI day 1: ruff, mypy, unit tests · day 2 adds pytest with a Postgres service, eslint, tsc, next build · AC: green on main
 - **S-14** Spike, first thing on day 1: push `0001` (their seed, which has its own BEGIN/COMMIT) to hosted Supabase with the CLI · AC: tables + rows present. Fallback if the CLI's own transaction clashes: load the seed once with `psql`, keep migrations for our changes, document it
 
 ## Backlog
@@ -26,7 +23,7 @@ WIP limit: **1** card in progress. Move a card by moving its line. Commits refer
 - **A-12** Integration test: the feedback loop, on a dedicated test DB · AC: POST 👎 then GET shows the deal as already_shared/down and a same-market deal's score dropped
 
 ### M3 Rep screen → tag v0.1 (Part A complete)
-- **A-13** Next.js + Tailwind + shadcn init; `gen:api` from OpenAPI · AC: `tsc` strict passes
+- **A-13** Next.js + Tailwind + shadcn init; `gen:api` from OpenAPI; add `web` to compose · AC: `tsc` strict passes
 - **A-14** Layout: client sidebar + `/clients/[id]` with parallel server fetches
 - **A-15** Client summary card + feedback history
 - **A-16** Deal card: cash needed, CoC L/M/H, explanation, flags; Recommended (top 5 + show all) / Already shared / Excluded tabs
@@ -58,6 +55,8 @@ WIP limit: **1** card in progress. Move a card by moving its line. Commits refer
 - **S-13** Rehearse: trace any recommendation from the screen to `finance.py` in under a minute
 
 ## Done
+- **S-07** `docker-compose.yml` with db (Postgres 17, migrations mounted, no host port) + api, healthchecks · AC met: fresh volume → migrations applied, `/health` ok, `docker compose run --rm api pytest` passes · web service joins with A-13
+- **S-08** CI: backend lint, format, strict types, tests + a migrations job on Postgres 17 · AC: green on GitHub after push; day 2 adds integration tests and frontend checks
 - **S-02** Repo skeleton (`backend/`, `frontend/`, `supabase/migrations/`, `docs/`) + `.gitignore`, `.env.example` · AC: no secrets tracked
 - **S-03** `docs/DESIGN.md` v1: architecture, decisions (alternatives + why), assumptions · AC: one page
 - **S-04** Migration `0001_provided_seed.sql` = provided seed byte-for-byte; SHA-256 recorded · AC: checksum matches original
