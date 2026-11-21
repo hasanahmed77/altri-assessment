@@ -12,13 +12,6 @@ WIP limit: **1** card in progress. Move a card by moving its line. Commits refer
 
 ## Backlog
 
-### M3 Rep screen → tag v0.1 (Part A complete)
-- **A-14** Layout: client sidebar + `/clients/[id]` with parallel server fetches
-- **A-15** Client summary card + feedback history
-- **A-16** Deal card: cash needed, CoC L/M/H, explanation, flags; Recommended (top 5 + show all) / Already shared / Excluded tabs
-- **A-17** Feedback form: Server Action → POST → revalidate; pending and error states; toast
-- **A-18** Fresh-clone test of `docker compose up`; tag `v0.1`
-
 ### M4 Part B → tag v0.2
 - **B-01** Migration `0003_client_signals.sql`
 - **B-02** Signals schema (Pydantic, closed vocabulary, market-id enum) + grounding validator · AC: a non-verbatim quote is dropped (unit test)
@@ -44,6 +37,11 @@ WIP limit: **1** card in progress. Move a card by moving its line. Commits refer
 - **S-13** Rehearse: trace any recommendation from the screen to `finance.py` in under a minute
 
 ## Done
+- **A-14** Layout: client sidebar + `/clients/[id]` with parallel server fetches
+- **A-15** Client summary card + feedback history
+- **A-16** Deal card: cash needed, CoC L/M/H, explanation, flags; Recommended (top 5 + show all) / Already shared / Excluded tabs
+- **A-17** Feedback form: Server Action → POST → revalidate; pending and error states; toast
+- **A-18** Fresh-copy test: only git-published files, no `.env` → `docker compose up` healthy, rep screen 200, local DB used, 52 tests pass · tag `v0.1` on commit
 - **A-07** Golden snapshot `tests/golden/eligibility.json` for all 15 clients · built from the database (covers migrations too) · AC: matches the analysis script; all 15 clients cross-checked on day 1 (11/22/14/8/25/18/9/14/15/14/19/23/32/7/22)
 - **A-08** `db.py`, `repository.py`; reference data loaded once in lifespan · AC: 1 query per recommendations request (asserted in a test); clients are reference data too
 - **A-09** `GET /clients`, `GET /clients/{id}` · AC: 404 for unknown id; feedback newest first

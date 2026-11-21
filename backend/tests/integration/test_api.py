@@ -1,5 +1,6 @@
 from typing import Any
 
+import pytest
 from fastapi.testclient import TestClient
 from sqlalchemy import event
 
@@ -60,7 +61,7 @@ def test_excluded_deals_carry_numbers_and_every_broken_rule(api: TestClient) -> 
 
     # Shenandoah is avoided by name; resolving it relies on the migration's alias table
     assert {v["code"] for v in d132["violations"]} >= {"AVOIDED_MARKET", "DOES_NOT_PENCIL"}
-    assert d132["numbers"]["coc"]["low"] == 0.0299
+    assert d132["numbers"]["coc"]["low"] == pytest.approx(0.02993, abs=1e-5)
 
 
 def test_a_state_name_avoids_every_market_in_it(api: TestClient) -> None:

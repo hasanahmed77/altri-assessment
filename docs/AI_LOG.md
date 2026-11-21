@@ -40,6 +40,18 @@ New entries go at the bottom, using the template at the end of this file.
 - **Fix:** Every town is also registered as an alias for its market. The only unresolved terms left are the three that really have no market.
 - **Lesson:** Run data migrations against real data and inspect what didn't match, not just that the migration succeeded.
 
+### AI-05 A type check that only passed on the assistant's machine
+- **What happened:** The assistant reported the frontend type check as passing. It ran `tsc` after a production build, which had already generated Next.js's route types (`LayoutProps`). On a clean checkout those types don't exist yet, so CI failed.
+- **How it was caught:** The first CI run of the frontend job, which starts from a clean checkout.
+- **Fix:** A `typecheck` script that runs `next typegen` before `tsc`, used by both CI and local runs. Reproduced locally from a clean `.next` first, then confirmed green on CI.
+- **Lesson:** Verify from a clean state; a check that depends on leftover build output proves nothing.
+
+### AI-06 The same number shown two ways on one card
+- **What happened:** The assistant made the API round ratios to 4 places. The browser then rounded again for display, so D-108's card showed "CoC low 15.3%" (0.152482 → 0.1525 → 15.3%) while its explanation, written from the unrounded value, said "15.2%".
+- **How it was caught:** Reading the rendered page in a browser during manual testing, not from any automated check.
+- **Fix:** The API sends ratios with 6 places, so the only visible rounding happens once, in the browser.
+- **Lesson:** Round once, as late as possible. Look at the real screen; tests asserted each number separately and both were "correct".
+
 ## 2. How coding-assistant mistakes are prevented
 | Risk | Defense |
 |---|---|

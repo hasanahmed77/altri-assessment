@@ -9,9 +9,11 @@ from app.domain.recommend import ExcludedDeal
 from app.domain.scoring import RankedDeal
 from app.repository import CallSummary, ClientProfile, FeedbackRecord
 
-# Rules run on unrounded values; rounding happens only here, at the API boundary
+# Rules run on unrounded values; rounding happens only here, at the API boundary.
+# Ratios keep enough places that a client rounding them for display gets the same
+# figure as the explanation text, which is written from the unrounded value.
 MONEY_PLACES = 2
-RATIO_PLACES = 4
+RATIO_PLACES = 6
 
 
 class LowMidHighOut(BaseModel):

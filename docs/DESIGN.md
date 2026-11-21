@@ -119,6 +119,12 @@ Each entry: what was decided, what else was considered, and why. New decisions a
 - **Why:** Generated types make the frontend fail to compile when the API changes shape. A lockfile made by a different npm version (10.9.2 locally vs 10.9.9 in `node:22`) resolved one nested package differently and broke the strict `npm ci` build.
 - **Known advisory:** a moderate `minimatch` advisory sits in the shadcn CLI's code-generation tooling (`ts-morph`), not in code the app runs; npm's only automatic fix downgrades shadcn to 1.0.0, so it is left as is. shadcn's `cn` package was checked: published from `shadcn-ui/cn` by GitHub Actions with build provenance.
 
+### D-21 Rep screen: fresh data streamed into a static shell
+- **Decision:** With Next.js Cache Components, pages are not async: the layout and page shell render immediately and the client's data loads inside `<Suspense>` on every request (nothing is cached). Feedback is a Server Action that posts to the API and calls `refresh()`. The browser never calls FastAPI.
+- **Why:** Recommendations change with every piece of feedback, so caching them would show stale rankings. `refresh()` re-renders with fresh server data in the same round trip. Server-side calls mean no CORS and no public API address.
+- **Trade-off:** Because the shell is already streaming, an unknown client id shows the not-found page with HTTP 200 instead of 404. The API itself returns a proper 404.
+- **Display:** cards are numbered by position within their tab ("#1" is the first deal to send), and the top 5 are shown before "show more", so the rep sees a short list first.
+
 ## Assumptions
 - `clients.budget` is authoritative when it conflicts with `budget_range` (C-03, C-06, C-09); the conflict is shown to the rep.
 - Debt service is the 30-year loan's monthly payment × 12 (standard US amortization). Reading "yearly payment" as one annual payment would flip 9 eligibility decisions, so this is the first question sent to STR Search.
