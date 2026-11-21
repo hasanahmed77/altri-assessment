@@ -9,8 +9,6 @@ WIP limit: **1** card in progress. Move a card by moving its line. Commits refer
 ## In progress
 
 ## Ready
-- **S-06** Hosted Supabase project linked (primary DB); migrations pushed · AC: tables visible; anon REST access returns nothing; credentials only in `.env`, never committed
-- **S-14** Spike, first thing on day 1: push `0001` (their seed, which has its own BEGIN/COMMIT) to hosted Supabase with the CLI · AC: tables + rows present. Fallback if the CLI's own transaction clashes: load the seed once with `psql`, keep migrations for our changes, document it
 
 ## Backlog
 
@@ -55,6 +53,8 @@ WIP limit: **1** card in progress. Move a card by moving its line. Commits refer
 - **S-13** Rehearse: trace any recommendation from the screen to `finance.py` in under a minute
 
 ## Done
+- **S-14** Supabase push spike · result: the seed's own BEGIN/COMMIT works with `supabase db push` (CLI 2.122.1, `--db-url`); no fallback needed
+- **S-06** Hosted Supabase (Postgres 17, session pooler over IPv4) · AC met: 45/15/14/69/20 rows, migration history recorded, RLS on all 7 tables, public REST API returns `[]` for every table and the view; Docker api connects through the pooler
 - **S-07** `docker-compose.yml` with db (Postgres 17, migrations mounted, no host port) + api, healthchecks · AC met: fresh volume → migrations applied, `/health` ok, `docker compose run --rm api pytest` passes · web service joins with A-13
 - **S-08** CI: backend lint, format, strict types, tests + a migrations job on Postgres 17 · AC: green on GitHub after push; day 2 adds integration tests and frontend checks
 - **S-02** Repo skeleton (`backend/`, `frontend/`, `supabase/migrations/`, `docs/`) + `.gitignore`, `.env.example` · AC: no secrets tracked
