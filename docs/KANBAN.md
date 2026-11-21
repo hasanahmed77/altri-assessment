@@ -12,16 +12,7 @@ WIP limit: **1** card in progress. Move a card by moving its line. Commits refer
 
 ## Backlog
 
-### M2 API
-- **A-07** Golden snapshot `tests/golden/eligibility.json` for all 15 clients · built from the database (covers migrations too) · AC: matches the analysis script; all 15 clients cross-checked on day 1 (11/22/14/8/25/18/9/14/15/14/19/23/32/7/22)
-- **A-08** `db.py`, `repository.py`; reference data loaded once in lifespan · AC: 3 queries per recommendations request (asserted in a test)
-- **A-09** `GET /clients`, `GET /clients/{id}` · AC: 404 for unknown id; feedback newest first
-- **A-10** `GET /clients/{id}/recommendations` · AC: every eligible deal in `ranked` (with status), excluded with all rule codes, messages and numbers; `ranked ∪ excluded` = 45, disjoint
-- **A-11** `POST /feedback` · AC: 201; 404 unknown ids; 422 bad reaction; comment trimmed, ≤ 1,000 chars
-- **A-12** Integration test: the feedback loop, on a dedicated test DB · AC: POST 👎 then GET shows the deal as already_shared/down and a same-market deal's score dropped
-
 ### M3 Rep screen → tag v0.1 (Part A complete)
-- **A-13** Next.js + Tailwind + shadcn init; `gen:api` from OpenAPI; add `web` to compose · AC: `tsc` strict passes
 - **A-14** Layout: client sidebar + `/clients/[id]` with parallel server fetches
 - **A-15** Client summary card + feedback history
 - **A-16** Deal card: cash needed, CoC L/M/H, explanation, flags; Recommended (top 5 + show all) / Already shared / Excluded tabs
@@ -53,6 +44,13 @@ WIP limit: **1** card in progress. Move a card by moving its line. Commits refer
 - **S-13** Rehearse: trace any recommendation from the screen to `finance.py` in under a minute
 
 ## Done
+- **A-07** Golden snapshot `tests/golden/eligibility.json` for all 15 clients · built from the database (covers migrations too) · AC: matches the analysis script; all 15 clients cross-checked on day 1 (11/22/14/8/25/18/9/14/15/14/19/23/32/7/22)
+- **A-08** `db.py`, `repository.py`; reference data loaded once in lifespan · AC: 1 query per recommendations request (asserted in a test); clients are reference data too
+- **A-09** `GET /clients`, `GET /clients/{id}` · AC: 404 for unknown id; feedback newest first
+- **A-10** `GET /clients/{id}/recommendations` · AC: every eligible deal in `ranked` (with status), excluded with all rule codes, messages and numbers; `ranked ∪ excluded` = 45, disjoint
+- **A-11** `POST /feedback` · AC: 201; 404 unknown ids; 422 bad reaction; comment trimmed, ≤ 1,000 chars
+- **A-12** Integration test: the feedback loop, on a dedicated test DB · AC: POST 👎 then GET shows the deal as already_shared/down and a same-market deal's score dropped
+- **A-13** Next.js + Tailwind + shadcn init; `gen:api` from OpenAPI; add `web` to compose · AC: `tsc` strict passes
 - **S-14** Supabase push spike · result: the seed's own BEGIN/COMMIT works with `supabase db push` (CLI 2.122.1, `--db-url`); no fallback needed
 - **S-06** Hosted Supabase (Postgres 17, session pooler over IPv4) · AC met: 45/15/14/69/20 rows, migration history recorded, RLS on all 7 tables, public REST API returns `[]` for every table and the view; Docker api connects through the pooler
 - **S-07** `docker-compose.yml` with db (Postgres 17, migrations mounted, no host port) + api, healthchecks · AC met: fresh volume → migrations applied, `/health` ok, `docker compose run --rm api pytest` passes · web service joins with A-13

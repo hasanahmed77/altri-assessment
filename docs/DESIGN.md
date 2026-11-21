@@ -71,8 +71,8 @@ Each entry: what was decided, what else was considered, and why. New decisions a
 - **How it was tuned:** with equal preference weights, a lifestyle client's preferred-market deal lost to a higher-earning deal elsewhere (a unit test written from intent caught it).
 - **Why:** The explanation is generated from the numbers that produced the rank, so it can't contradict it, and templated text costs nothing and can't invent figures.
 
-### D-10 Reference data loaded once; three queries per recommendation request
-- **Decision:** Markets, deals and mappings are loaded at startup. A recommendations request makes three indexed queries for one client: profile, feedback, signals.
+### D-10 Reference data loaded once; one query per recommendation request
+- **Decision:** Markets, deals and clients (with their resolved market preferences) are loaded at startup. A recommendations request makes one indexed query (that client's feedback; Part B adds their signals). `POST /feedback` validates ids in memory, then makes one insert. A test asserts the query count.
 - **Why:** Editing deals, clients and markets is out of scope, so this data never changes at runtime. If it became editable, an ETag or TTL cache would replace this.
 
 ### D-11 LLM calls only when a client's text changes
@@ -108,6 +108,16 @@ Each entry: what was decided, what else was considered, and why. New decisions a
 ### D-16 Endpoint paths exactly as the brief
 - **Decision:** No `/api/v1` prefix; required paths unchanged; additions are `/clients/{id}/markets` and `/health`.
 - **Why:** The brief fixes the paths, and the reviewers may call them directly.
+
+### D-19 Each integration test gets its own database
+- **Decision:** The migrations are applied once to a template database; each test clones it (`CREATE DATABASE … TEMPLATE`, milliseconds) and drops it afterwards. The fixture refuses any host other than localhost or the compose `db`.
+- **Alternatives:** one shared database with cleanup; transactions rolled back after each test.
+- **Why:** Tests run against real Postgres and real migrations, can't affect each other, and can never touch Supabase. Rollback-based isolation breaks as soon as the code under test commits, which `POST /feedback` does.
+
+### D-20 Frontend scaffold and dependencies
+- **Decision:** Next.js 16 (`create-next-app`), shadcn/ui with Radix primitives, API types generated from FastAPI's OpenAPI schema (`npm run gen:api`) and committed. The lockfile is generated with the same npm as the Docker build image.
+- **Why:** Generated types make the frontend fail to compile when the API changes shape. A lockfile made by a different npm version (10.9.2 locally vs 10.9.9 in `node:22`) resolved one nested package differently and broke the strict `npm ci` build.
+- **Known advisory:** a moderate `minimatch` advisory sits in the shadcn CLI's code-generation tooling (`ts-morph`), not in code the app runs; npm's only automatic fix downgrades shadcn to 1.0.0, so it is left as is. shadcn's `cn` package was checked: published from `shadcn-ui/cn` by GitHub Actions with build provenance.
 
 ## Assumptions
 - `clients.budget` is authoritative when it conflicts with `budget_range` (C-03, C-06, C-09); the conflict is shown to the rep.

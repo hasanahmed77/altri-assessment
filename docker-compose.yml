@@ -23,8 +23,12 @@ services:
       OPENAI_API_KEY: ${OPENAI_API_KEY:-}
       OPENAI_MODEL: ${OPENAI_MODEL:-}
       DATA_DIR: /data
+      # Integration tests create throwaway databases on the local db, never on Supabase
+      TEST_DATABASE_URL: postgresql+psycopg://postgres:postgres@db:5432/postgres
+      MIGRATIONS_DIR: /migrations
     volumes:
       - ./data:/data:ro
+      - ./supabase/migrations:/migrations:ro
     ports:
       - "8000:8000"
     depends_on:
@@ -35,6 +39,17 @@ services:
       interval: 3s
       timeout: 3s
       retries: 20
+
+  web:
+    build: ./frontend
+    environment:
+      # The browser never calls the API; Next.js server code does, over the compose network
+      API_URL: http://api:8000
+    ports:
+      - "3000:3000"
+    depends_on:
+      api:
+        condition: service_healthy
 
 volumes:
   db-data:

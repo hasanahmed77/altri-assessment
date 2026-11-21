@@ -1,0 +1,1705 @@
+{
+  "C-01": {
+    "eligible": [
+      "D-101",
+      "D-108",
+      "D-116",
+      "D-117",
+      "D-120",
+      "D-121",
+      "D-122",
+      "D-126",
+      "D-130",
+      "D-137",
+      "D-140"
+    ],
+    "excluded": {
+      "D-102": [
+        "DOES_NOT_PENCIL",
+        "OVER_BUDGET"
+      ],
+      "D-103": [
+        "DOES_NOT_PENCIL",
+        "OVER_BUDGET"
+      ],
+      "D-104": [
+        "TOO_FEW_BEDROOMS"
+      ],
+      "D-105": [
+        "DOES_NOT_PENCIL"
+      ],
+      "D-106": [
+        "DOES_NOT_PENCIL",
+        "OVER_BUDGET"
+      ],
+      "D-107": [
+        "DOES_NOT_PENCIL",
+        "OVER_BUDGET"
+      ],
+      "D-109": [
+        "DOES_NOT_PENCIL"
+      ],
+      "D-110": [
+        "DOES_NOT_PENCIL",
+        "OVER_BUDGET"
+      ],
+      "D-111": [
+        "TOO_FEW_BEDROOMS"
+      ],
+      "D-112": [
+        "TOO_FEW_BEDROOMS"
+      ],
+      "D-113": [
+        "TOO_FEW_BEDROOMS"
+      ],
+      "D-114": [
+        "DOES_NOT_PENCIL",
+        "TOO_FEW_BEDROOMS"
+      ],
+      "D-115": [
+        "DOES_NOT_PENCIL",
+        "OVER_BUDGET"
+      ],
+      "D-118": [
+        "OVER_BUDGET"
+      ],
+      "D-119": [
+        "DOES_NOT_PENCIL"
+      ],
+      "D-123": [
+        "DOES_NOT_PENCIL"
+      ],
+      "D-124": [
+        "DOES_NOT_PENCIL"
+      ],
+      "D-125": [
+        "DOES_NOT_PENCIL"
+      ],
+      "D-127": [
+        "DOES_NOT_PENCIL",
+        "OVER_BUDGET"
+      ],
+      "D-128": [
+        "DOES_NOT_PENCIL"
+      ],
+      "D-129": [
+        "DOES_NOT_PENCIL",
+        "OVER_BUDGET",
+        "TOO_FEW_BEDROOMS"
+      ],
+      "D-131": [
+        "DOES_NOT_PENCIL",
+        "OVER_BUDGET"
+      ],
+      "D-132": [
+        "TOO_FEW_BEDROOMS"
+      ],
+      "D-133": [
+        "DOES_NOT_PENCIL"
+      ],
+      "D-134": [
+        "OVER_BUDGET",
+        "TOO_FEW_BEDROOMS"
+      ],
+      "D-135": [
+        "BEDROOMS_UNKNOWN"
+      ],
+      "D-136": [
+        "DOES_NOT_PENCIL"
+      ],
+      "D-138": [
+        "DOES_NOT_PENCIL",
+        "OVER_BUDGET"
+      ],
+      "D-139": [
+        "OVER_BUDGET"
+      ],
+      "D-141": [
+        "OVER_BUDGET"
+      ],
+      "D-142": [
+        "DOES_NOT_PENCIL"
+      ],
+      "D-143": [
+        "OVER_BUDGET"
+      ],
+      "D-144": [
+        "DOES_NOT_PENCIL"
+      ],
+      "D-145": [
+        "DOES_NOT_PENCIL"
+      ]
+    }
+  },
+  "C-02": {
+    "eligible": [
+      "D-101",
+      "D-105",
+      "D-108",
+      "D-109",
+      "D-115",
+      "D-116",
+      "D-117",
+      "D-120",
+      "D-121",
+      "D-122",
+      "D-125",
+      "D-126",
+      "D-127",
+      "D-128",
+      "D-130",
+      "D-136",
+      "D-137",
+      "D-139",
+      "D-140",
+      "D-141",
+      "D-143",
+      "D-145"
+    ],
+    "excluded": {
+      "D-102": [
+        "DOES_NOT_PENCIL"
+      ],
+      "D-103": [
+        "DOES_NOT_PENCIL"
+      ],
+      "D-104": [
+        "TOO_FEW_BEDROOMS"
+      ],
+      "D-106": [
+        "DOES_NOT_PENCIL"
+      ],
+      "D-107": [
+        "DOES_NOT_PENCIL"
+      ],
+      "D-110": [
+        "DOES_NOT_PENCIL"
+      ],
+      "D-111": [
+        "TOO_FEW_BEDROOMS"
+      ],
+      "D-112": [
+        "TOO_FEW_BEDROOMS"
+      ],
+      "D-113": [
+        "TOO_FEW_BEDROOMS"
+      ],
+      "D-114": [
+        "TOO_FEW_BEDROOMS"
+      ],
+      "D-118": [
+        "OVER_BUDGET"
+      ],
+      "D-119": [
+        "DOES_NOT_PENCIL"
+      ],
+      "D-123": [
+        "DOES_NOT_PENCIL"
+      ],
+      "D-124": [
+        "DOES_NOT_PENCIL"
+      ],
+      "D-129": [
+        "TOO_FEW_BEDROOMS"
+      ],
+      "D-131": [
+        "DOES_NOT_PENCIL"
+      ],
+      "D-132": [
+        "TOO_FEW_BEDROOMS"
+      ],
+      "D-133": [
+        "DOES_NOT_PENCIL"
+      ],
+      "D-134": [
+        "TOO_FEW_BEDROOMS"
+      ],
+      "D-135": [
+        "BEDROOMS_UNKNOWN"
+      ],
+      "D-138": [
+        "DOES_NOT_PENCIL"
+      ],
+      "D-142": [
+        "DOES_NOT_PENCIL"
+      ],
+      "D-144": [
+        "DOES_NOT_PENCIL"
+      ]
+    }
+  },
+  "C-03": {
+    "eligible": [
+      "D-101",
+      "D-108",
+      "D-116",
+      "D-118",
+      "D-120",
+      "D-121",
+      "D-122",
+      "D-126",
+      "D-130",
+      "D-137",
+      "D-139",
+      "D-140",
+      "D-141",
+      "D-143"
+    ],
+    "excluded": {
+      "D-102": [
+        "DOES_NOT_PENCIL"
+      ],
+      "D-103": [
+        "DOES_NOT_PENCIL"
+      ],
+      "D-104": [
+        "TOO_FEW_BEDROOMS"
+      ],
+      "D-105": [
+        "DOES_NOT_PENCIL"
+      ],
+      "D-106": [
+        "DOES_NOT_PENCIL"
+      ],
+      "D-107": [
+        "DOES_NOT_PENCIL"
+      ],
+      "D-109": [
+        "AVOIDED_MARKET",
+        "DOES_NOT_PENCIL"
+      ],
+      "D-110": [
+        "DOES_NOT_PENCIL"
+      ],
+      "D-111": [
+        "TOO_FEW_BEDROOMS"
+      ],
+      "D-112": [
+        "AVOIDED_MARKET",
+        "TOO_FEW_BEDROOMS"
+      ],
+      "D-113": [
+        "AVOIDED_MARKET",
+        "TOO_FEW_BEDROOMS"
+      ],
+      "D-114": [
+        "DOES_NOT_PENCIL",
+        "TOO_FEW_BEDROOMS"
+      ],
+      "D-115": [
+        "DOES_NOT_PENCIL"
+      ],
+      "D-117": [
+        "AVOIDED_MARKET"
+      ],
+      "D-119": [
+        "DOES_NOT_PENCIL"
+      ],
+      "D-123": [
+        "AVOIDED_MARKET",
+        "DOES_NOT_PENCIL"
+      ],
+      "D-124": [
+        "AVOIDED_MARKET",
+        "DOES_NOT_PENCIL"
+      ],
+      "D-125": [
+        "DOES_NOT_PENCIL"
+      ],
+      "D-127": [
+        "DOES_NOT_PENCIL"
+      ],
+      "D-128": [
+        "DOES_NOT_PENCIL"
+      ],
+      "D-129": [
+        "DOES_NOT_PENCIL",
+        "TOO_FEW_BEDROOMS"
+      ],
+      "D-131": [
+        "DOES_NOT_PENCIL"
+      ],
+      "D-132": [
+        "AVOIDED_MARKET",
+        "DOES_NOT_PENCIL",
+        "TOO_FEW_BEDROOMS"
+      ],
+      "D-133": [
+        "DOES_NOT_PENCIL"
+      ],
+      "D-134": [
+        "TOO_FEW_BEDROOMS"
+      ],
+      "D-135": [
+        "BEDROOMS_UNKNOWN"
+      ],
+      "D-136": [
+        "DOES_NOT_PENCIL"
+      ],
+      "D-138": [
+        "DOES_NOT_PENCIL"
+      ],
+      "D-142": [
+        "DOES_NOT_PENCIL"
+      ],
+      "D-144": [
+        "DOES_NOT_PENCIL"
+      ],
+      "D-145": [
+        "DOES_NOT_PENCIL"
+      ]
+    }
+  },
+  "C-04": {
+    "eligible": [
+      "D-108",
+      "D-111",
+      "D-120",
+      "D-122",
+      "D-126",
+      "D-132",
+      "D-137",
+      "D-140"
+    ],
+    "excluded": {
+      "D-101": [
+        "OVER_BUDGET"
+      ],
+      "D-102": [
+        "DOES_NOT_PENCIL",
+        "OVER_BUDGET"
+      ],
+      "D-103": [
+        "DOES_NOT_PENCIL",
+        "OVER_BUDGET"
+      ],
+      "D-104": [
+        "OVER_BUDGET"
+      ],
+      "D-105": [
+        "OVER_BUDGET"
+      ],
+      "D-106": [
+        "DOES_NOT_PENCIL",
+        "OVER_BUDGET"
+      ],
+      "D-107": [
+        "DOES_NOT_PENCIL",
+        "OVER_BUDGET"
+      ],
+      "D-109": [
+        "OVER_BUDGET"
+      ],
+      "D-110": [
+        "DOES_NOT_PENCIL",
+        "OVER_BUDGET"
+      ],
+      "D-112": [
+        "OVER_BUDGET"
+      ],
+      "D-113": [
+        "OVER_BUDGET"
+      ],
+      "D-114": [
+        "OVER_BUDGET"
+      ],
+      "D-115": [
+        "OVER_BUDGET"
+      ],
+      "D-116": [
+        "OVER_BUDGET"
+      ],
+      "D-117": [
+        "OVER_BUDGET"
+      ],
+      "D-118": [
+        "OVER_BUDGET"
+      ],
+      "D-119": [
+        "DOES_NOT_PENCIL",
+        "OVER_BUDGET"
+      ],
+      "D-121": [
+        "OVER_BUDGET"
+      ],
+      "D-123": [
+        "DOES_NOT_PENCIL",
+        "OVER_BUDGET"
+      ],
+      "D-124": [
+        "DOES_NOT_PENCIL",
+        "OVER_BUDGET"
+      ],
+      "D-125": [
+        "OVER_BUDGET"
+      ],
+      "D-127": [
+        "OVER_BUDGET"
+      ],
+      "D-128": [
+        "OVER_BUDGET"
+      ],
+      "D-129": [
+        "OVER_BUDGET"
+      ],
+      "D-130": [
+        "OVER_BUDGET"
+      ],
+      "D-131": [
+        "DOES_NOT_PENCIL",
+        "OVER_BUDGET"
+      ],
+      "D-133": [
+        "DOES_NOT_PENCIL",
+        "OVER_BUDGET"
+      ],
+      "D-134": [
+        "OVER_BUDGET"
+      ],
+      "D-135": [
+        "BEDROOMS_UNKNOWN",
+        "OVER_BUDGET"
+      ],
+      "D-136": [
+        "OVER_BUDGET"
+      ],
+      "D-138": [
+        "DOES_NOT_PENCIL",
+        "OVER_BUDGET"
+      ],
+      "D-139": [
+        "OVER_BUDGET"
+      ],
+      "D-141": [
+        "OVER_BUDGET"
+      ],
+      "D-142": [
+        "DOES_NOT_PENCIL",
+        "OVER_BUDGET"
+      ],
+      "D-143": [
+        "OVER_BUDGET"
+      ],
+      "D-144": [
+        "DOES_NOT_PENCIL",
+        "OVER_BUDGET"
+      ],
+      "D-145": [
+        "OVER_BUDGET"
+      ]
+    }
+  },
+  "C-05": {
+    "eligible": [
+      "D-101",
+      "D-104",
+      "D-105",
+      "D-108",
+      "D-109",
+      "D-111",
+      "D-112",
+      "D-113",
+      "D-114",
+      "D-116",
+      "D-117",
+      "D-120",
+      "D-121",
+      "D-122",
+      "D-125",
+      "D-126",
+      "D-128",
+      "D-129",
+      "D-130",
+      "D-132",
+      "D-134",
+      "D-136",
+      "D-137",
+      "D-140",
+      "D-145"
+    ],
+    "excluded": {
+      "D-102": [
+        "DOES_NOT_PENCIL",
+        "OVER_BUDGET"
+      ],
+      "D-103": [
+        "DOES_NOT_PENCIL",
+        "OVER_BUDGET"
+      ],
+      "D-106": [
+        "DOES_NOT_PENCIL",
+        "OVER_BUDGET"
+      ],
+      "D-107": [
+        "DOES_NOT_PENCIL"
+      ],
+      "D-110": [
+        "DOES_NOT_PENCIL"
+      ],
+      "D-115": [
+        "OVER_BUDGET"
+      ],
+      "D-118": [
+        "OVER_BUDGET"
+      ],
+      "D-119": [
+        "DOES_NOT_PENCIL"
+      ],
+      "D-123": [
+        "DOES_NOT_PENCIL"
+      ],
+      "D-124": [
+        "DOES_NOT_PENCIL"
+      ],
+      "D-127": [
+        "OVER_BUDGET"
+      ],
+      "D-131": [
+        "DOES_NOT_PENCIL"
+      ],
+      "D-133": [
+        "DOES_NOT_PENCIL"
+      ],
+      "D-135": [
+        "BEDROOMS_UNKNOWN"
+      ],
+      "D-138": [
+        "DOES_NOT_PENCIL",
+        "OVER_BUDGET"
+      ],
+      "D-139": [
+        "OVER_BUDGET"
+      ],
+      "D-141": [
+        "OVER_BUDGET"
+      ],
+      "D-142": [
+        "DOES_NOT_PENCIL"
+      ],
+      "D-143": [
+        "OVER_BUDGET"
+      ],
+      "D-144": [
+        "DOES_NOT_PENCIL"
+      ]
+    }
+  },
+  "C-06": {
+    "eligible": [
+      "D-105",
+      "D-106",
+      "D-108",
+      "D-115",
+      "D-116",
+      "D-119",
+      "D-120",
+      "D-121",
+      "D-124",
+      "D-125",
+      "D-126",
+      "D-127",
+      "D-130",
+      "D-136",
+      "D-138",
+      "D-142",
+      "D-143",
+      "D-145"
+    ],
+    "excluded": {
+      "D-101": [
+        "TOO_FEW_BEDROOMS"
+      ],
+      "D-102": [
+        "TOO_FEW_BEDROOMS"
+      ],
+      "D-103": [
+        "DOES_NOT_PENCIL"
+      ],
+      "D-104": [
+        "TOO_FEW_BEDROOMS"
+      ],
+      "D-107": [
+        "DOES_NOT_PENCIL",
+        "TOO_FEW_BEDROOMS"
+      ],
+      "D-109": [
+        "TOO_FEW_BEDROOMS"
+      ],
+      "D-110": [
+        "DOES_NOT_PENCIL"
+      ],
+      "D-111": [
+        "TOO_FEW_BEDROOMS"
+      ],
+      "D-112": [
+        "TOO_FEW_BEDROOMS"
+      ],
+      "D-113": [
+        "TOO_FEW_BEDROOMS"
+      ],
+      "D-114": [
+        "TOO_FEW_BEDROOMS"
+      ],
+      "D-117": [
+        "TOO_FEW_BEDROOMS"
+      ],
+      "D-118": [
+        "TOO_FEW_BEDROOMS"
+      ],
+      "D-122": [
+        "TOO_FEW_BEDROOMS"
+      ],
+      "D-123": [
+        "TOO_FEW_BEDROOMS"
+      ],
+      "D-128": [
+        "TOO_FEW_BEDROOMS"
+      ],
+      "D-129": [
+        "TOO_FEW_BEDROOMS"
+      ],
+      "D-131": [
+        "DOES_NOT_PENCIL"
+      ],
+      "D-132": [
+        "TOO_FEW_BEDROOMS"
+      ],
+      "D-133": [
+        "TOO_FEW_BEDROOMS"
+      ],
+      "D-134": [
+        "TOO_FEW_BEDROOMS"
+      ],
+      "D-135": [
+        "BEDROOMS_UNKNOWN"
+      ],
+      "D-137": [
+        "TOO_FEW_BEDROOMS"
+      ],
+      "D-139": [
+        "TOO_FEW_BEDROOMS"
+      ],
+      "D-140": [
+        "TOO_FEW_BEDROOMS"
+      ],
+      "D-141": [
+        "TOO_FEW_BEDROOMS"
+      ],
+      "D-144": [
+        "DOES_NOT_PENCIL"
+      ]
+    }
+  },
+  "C-07": {
+    "eligible": [
+      "D-108",
+      "D-120",
+      "D-122",
+      "D-124",
+      "D-126",
+      "D-132",
+      "D-136",
+      "D-137",
+      "D-140"
+    ],
+    "excluded": {
+      "D-101": [
+        "OVER_BUDGET"
+      ],
+      "D-102": [
+        "OVER_BUDGET"
+      ],
+      "D-103": [
+        "DOES_NOT_PENCIL",
+        "OVER_BUDGET"
+      ],
+      "D-104": [
+        "OVER_BUDGET"
+      ],
+      "D-105": [
+        "OVER_BUDGET"
+      ],
+      "D-106": [
+        "OVER_BUDGET"
+      ],
+      "D-107": [
+        "OVER_BUDGET"
+      ],
+      "D-109": [
+        "OVER_BUDGET"
+      ],
+      "D-110": [
+        "OVER_BUDGET"
+      ],
+      "D-111": [
+        "OVER_BUDGET"
+      ],
+      "D-112": [
+        "OVER_BUDGET"
+      ],
+      "D-113": [
+        "OVER_BUDGET"
+      ],
+      "D-114": [
+        "OVER_BUDGET"
+      ],
+      "D-115": [
+        "OVER_BUDGET"
+      ],
+      "D-116": [
+        "OVER_BUDGET"
+      ],
+      "D-117": [
+        "OVER_BUDGET"
+      ],
+      "D-118": [
+        "OVER_BUDGET"
+      ],
+      "D-119": [
+        "OVER_BUDGET"
+      ],
+      "D-121": [
+        "OVER_BUDGET"
+      ],
+      "D-123": [
+        "OVER_BUDGET"
+      ],
+      "D-125": [
+        "OVER_BUDGET"
+      ],
+      "D-127": [
+        "OVER_BUDGET"
+      ],
+      "D-128": [
+        "OVER_BUDGET"
+      ],
+      "D-129": [
+        "OVER_BUDGET"
+      ],
+      "D-130": [
+        "OVER_BUDGET"
+      ],
+      "D-131": [
+        "OVER_BUDGET"
+      ],
+      "D-133": [
+        "OVER_BUDGET"
+      ],
+      "D-134": [
+        "OVER_BUDGET"
+      ],
+      "D-135": [
+        "BEDROOMS_UNKNOWN",
+        "OVER_BUDGET"
+      ],
+      "D-138": [
+        "OVER_BUDGET"
+      ],
+      "D-139": [
+        "OVER_BUDGET"
+      ],
+      "D-141": [
+        "OVER_BUDGET"
+      ],
+      "D-142": [
+        "OVER_BUDGET"
+      ],
+      "D-143": [
+        "OVER_BUDGET"
+      ],
+      "D-144": [
+        "OVER_BUDGET"
+      ],
+      "D-145": [
+        "OVER_BUDGET"
+      ]
+    }
+  },
+  "C-08": {
+    "eligible": [
+      "D-101",
+      "D-108",
+      "D-116",
+      "D-117",
+      "D-118",
+      "D-120",
+      "D-121",
+      "D-126",
+      "D-130",
+      "D-137",
+      "D-139",
+      "D-140",
+      "D-141",
+      "D-143"
+    ],
+    "excluded": {
+      "D-102": [
+        "DOES_NOT_PENCIL"
+      ],
+      "D-103": [
+        "DOES_NOT_PENCIL"
+      ],
+      "D-104": [
+        "TOO_FEW_BEDROOMS"
+      ],
+      "D-105": [
+        "DOES_NOT_PENCIL"
+      ],
+      "D-106": [
+        "DOES_NOT_PENCIL"
+      ],
+      "D-107": [
+        "DOES_NOT_PENCIL"
+      ],
+      "D-109": [
+        "DOES_NOT_PENCIL"
+      ],
+      "D-110": [
+        "DOES_NOT_PENCIL"
+      ],
+      "D-111": [
+        "TOO_FEW_BEDROOMS"
+      ],
+      "D-112": [
+        "TOO_FEW_BEDROOMS"
+      ],
+      "D-113": [
+        "TOO_FEW_BEDROOMS"
+      ],
+      "D-114": [
+        "DOES_NOT_PENCIL",
+        "TOO_FEW_BEDROOMS"
+      ],
+      "D-115": [
+        "DOES_NOT_PENCIL"
+      ],
+      "D-119": [
+        "DOES_NOT_PENCIL"
+      ],
+      "D-122": [
+        "DOES_NOT_PENCIL"
+      ],
+      "D-123": [
+        "DOES_NOT_PENCIL"
+      ],
+      "D-124": [
+        "DOES_NOT_PENCIL"
+      ],
+      "D-125": [
+        "DOES_NOT_PENCIL"
+      ],
+      "D-127": [
+        "DOES_NOT_PENCIL"
+      ],
+      "D-128": [
+        "DOES_NOT_PENCIL"
+      ],
+      "D-129": [
+        "DOES_NOT_PENCIL",
+        "TOO_FEW_BEDROOMS"
+      ],
+      "D-131": [
+        "DOES_NOT_PENCIL"
+      ],
+      "D-132": [
+        "DOES_NOT_PENCIL",
+        "TOO_FEW_BEDROOMS"
+      ],
+      "D-133": [
+        "DOES_NOT_PENCIL"
+      ],
+      "D-134": [
+        "TOO_FEW_BEDROOMS"
+      ],
+      "D-135": [
+        "BEDROOMS_UNKNOWN"
+      ],
+      "D-136": [
+        "DOES_NOT_PENCIL"
+      ],
+      "D-138": [
+        "DOES_NOT_PENCIL"
+      ],
+      "D-142": [
+        "DOES_NOT_PENCIL"
+      ],
+      "D-144": [
+        "DOES_NOT_PENCIL"
+      ],
+      "D-145": [
+        "DOES_NOT_PENCIL"
+      ]
+    }
+  },
+  "C-09": {
+    "eligible": [
+      "D-101",
+      "D-108",
+      "D-116",
+      "D-117",
+      "D-118",
+      "D-120",
+      "D-121",
+      "D-122",
+      "D-126",
+      "D-130",
+      "D-137",
+      "D-139",
+      "D-140",
+      "D-141",
+      "D-143"
+    ],
+    "excluded": {
+      "D-102": [
+        "DOES_NOT_PENCIL"
+      ],
+      "D-103": [
+        "DOES_NOT_PENCIL"
+      ],
+      "D-104": [
+        "TOO_FEW_BEDROOMS"
+      ],
+      "D-105": [
+        "DOES_NOT_PENCIL"
+      ],
+      "D-106": [
+        "DOES_NOT_PENCIL"
+      ],
+      "D-107": [
+        "DOES_NOT_PENCIL"
+      ],
+      "D-109": [
+        "DOES_NOT_PENCIL"
+      ],
+      "D-110": [
+        "DOES_NOT_PENCIL"
+      ],
+      "D-111": [
+        "TOO_FEW_BEDROOMS"
+      ],
+      "D-112": [
+        "TOO_FEW_BEDROOMS"
+      ],
+      "D-113": [
+        "TOO_FEW_BEDROOMS"
+      ],
+      "D-114": [
+        "DOES_NOT_PENCIL",
+        "TOO_FEW_BEDROOMS"
+      ],
+      "D-115": [
+        "DOES_NOT_PENCIL"
+      ],
+      "D-119": [
+        "DOES_NOT_PENCIL"
+      ],
+      "D-123": [
+        "DOES_NOT_PENCIL"
+      ],
+      "D-124": [
+        "DOES_NOT_PENCIL"
+      ],
+      "D-125": [
+        "DOES_NOT_PENCIL"
+      ],
+      "D-127": [
+        "DOES_NOT_PENCIL"
+      ],
+      "D-128": [
+        "DOES_NOT_PENCIL"
+      ],
+      "D-129": [
+        "DOES_NOT_PENCIL",
+        "TOO_FEW_BEDROOMS"
+      ],
+      "D-131": [
+        "DOES_NOT_PENCIL"
+      ],
+      "D-132": [
+        "DOES_NOT_PENCIL",
+        "TOO_FEW_BEDROOMS"
+      ],
+      "D-133": [
+        "DOES_NOT_PENCIL"
+      ],
+      "D-134": [
+        "TOO_FEW_BEDROOMS"
+      ],
+      "D-135": [
+        "BEDROOMS_UNKNOWN"
+      ],
+      "D-136": [
+        "DOES_NOT_PENCIL"
+      ],
+      "D-138": [
+        "DOES_NOT_PENCIL"
+      ],
+      "D-142": [
+        "DOES_NOT_PENCIL"
+      ],
+      "D-144": [
+        "DOES_NOT_PENCIL"
+      ],
+      "D-145": [
+        "DOES_NOT_PENCIL"
+      ]
+    }
+  },
+  "C-10": {
+    "eligible": [
+      "D-101",
+      "D-108",
+      "D-116",
+      "D-117",
+      "D-120",
+      "D-121",
+      "D-122",
+      "D-126",
+      "D-130",
+      "D-137",
+      "D-139",
+      "D-140",
+      "D-141",
+      "D-143"
+    ],
+    "excluded": {
+      "D-102": [
+        "DOES_NOT_PENCIL",
+        "OVER_BUDGET"
+      ],
+      "D-103": [
+        "DOES_NOT_PENCIL"
+      ],
+      "D-104": [
+        "TOO_FEW_BEDROOMS"
+      ],
+      "D-105": [
+        "DOES_NOT_PENCIL"
+      ],
+      "D-106": [
+        "DOES_NOT_PENCIL",
+        "OVER_BUDGET"
+      ],
+      "D-107": [
+        "DOES_NOT_PENCIL"
+      ],
+      "D-109": [
+        "DOES_NOT_PENCIL"
+      ],
+      "D-110": [
+        "DOES_NOT_PENCIL"
+      ],
+      "D-111": [
+        "TOO_FEW_BEDROOMS"
+      ],
+      "D-112": [
+        "TOO_FEW_BEDROOMS"
+      ],
+      "D-113": [
+        "TOO_FEW_BEDROOMS"
+      ],
+      "D-114": [
+        "DOES_NOT_PENCIL",
+        "TOO_FEW_BEDROOMS"
+      ],
+      "D-115": [
+        "DOES_NOT_PENCIL",
+        "OVER_BUDGET"
+      ],
+      "D-118": [
+        "AVOIDED_MARKET",
+        "OVER_BUDGET"
+      ],
+      "D-119": [
+        "DOES_NOT_PENCIL"
+      ],
+      "D-123": [
+        "DOES_NOT_PENCIL"
+      ],
+      "D-124": [
+        "DOES_NOT_PENCIL"
+      ],
+      "D-125": [
+        "DOES_NOT_PENCIL"
+      ],
+      "D-127": [
+        "AVOIDED_MARKET",
+        "DOES_NOT_PENCIL",
+        "OVER_BUDGET"
+      ],
+      "D-128": [
+        "DOES_NOT_PENCIL"
+      ],
+      "D-129": [
+        "DOES_NOT_PENCIL",
+        "TOO_FEW_BEDROOMS"
+      ],
+      "D-131": [
+        "DOES_NOT_PENCIL"
+      ],
+      "D-132": [
+        "TOO_FEW_BEDROOMS"
+      ],
+      "D-133": [
+        "DOES_NOT_PENCIL"
+      ],
+      "D-134": [
+        "TOO_FEW_BEDROOMS"
+      ],
+      "D-135": [
+        "BEDROOMS_UNKNOWN"
+      ],
+      "D-136": [
+        "DOES_NOT_PENCIL"
+      ],
+      "D-138": [
+        "DOES_NOT_PENCIL",
+        "OVER_BUDGET"
+      ],
+      "D-142": [
+        "DOES_NOT_PENCIL"
+      ],
+      "D-144": [
+        "DOES_NOT_PENCIL"
+      ],
+      "D-145": [
+        "DOES_NOT_PENCIL"
+      ]
+    }
+  },
+  "C-11": {
+    "eligible": [
+      "D-104",
+      "D-105",
+      "D-108",
+      "D-109",
+      "D-112",
+      "D-113",
+      "D-114",
+      "D-116",
+      "D-117",
+      "D-120",
+      "D-121",
+      "D-122",
+      "D-126",
+      "D-128",
+      "D-132",
+      "D-136",
+      "D-137",
+      "D-140",
+      "D-145"
+    ],
+    "excluded": {
+      "D-101": [
+        "AVOIDED_MARKET"
+      ],
+      "D-102": [
+        "AVOIDED_MARKET",
+        "DOES_NOT_PENCIL",
+        "OVER_BUDGET"
+      ],
+      "D-103": [
+        "AVOIDED_MARKET",
+        "DOES_NOT_PENCIL",
+        "OVER_BUDGET"
+      ],
+      "D-106": [
+        "AVOIDED_MARKET",
+        "DOES_NOT_PENCIL",
+        "OVER_BUDGET"
+      ],
+      "D-107": [
+        "DOES_NOT_PENCIL",
+        "OVER_BUDGET"
+      ],
+      "D-110": [
+        "DOES_NOT_PENCIL",
+        "OVER_BUDGET"
+      ],
+      "D-111": [
+        "AVOIDED_MARKET"
+      ],
+      "D-115": [
+        "AVOIDED_MARKET",
+        "OVER_BUDGET"
+      ],
+      "D-118": [
+        "OVER_BUDGET"
+      ],
+      "D-119": [
+        "DOES_NOT_PENCIL"
+      ],
+      "D-123": [
+        "DOES_NOT_PENCIL"
+      ],
+      "D-124": [
+        "DOES_NOT_PENCIL"
+      ],
+      "D-125": [
+        "OVER_BUDGET"
+      ],
+      "D-127": [
+        "OVER_BUDGET"
+      ],
+      "D-129": [
+        "AVOIDED_MARKET",
+        "OVER_BUDGET"
+      ],
+      "D-130": [
+        "AVOIDED_MARKET"
+      ],
+      "D-131": [
+        "DOES_NOT_PENCIL",
+        "OVER_BUDGET"
+      ],
+      "D-133": [
+        "DOES_NOT_PENCIL"
+      ],
+      "D-134": [
+        "OVER_BUDGET"
+      ],
+      "D-135": [
+        "AVOIDED_MARKET",
+        "BEDROOMS_UNKNOWN"
+      ],
+      "D-138": [
+        "DOES_NOT_PENCIL",
+        "OVER_BUDGET"
+      ],
+      "D-139": [
+        "AVOIDED_MARKET",
+        "OVER_BUDGET"
+      ],
+      "D-141": [
+        "AVOIDED_MARKET",
+        "OVER_BUDGET"
+      ],
+      "D-142": [
+        "AVOIDED_MARKET",
+        "DOES_NOT_PENCIL"
+      ],
+      "D-143": [
+        "OVER_BUDGET"
+      ],
+      "D-144": [
+        "DOES_NOT_PENCIL"
+      ]
+    }
+  },
+  "C-12": {
+    "eligible": [
+      "D-101",
+      "D-105",
+      "D-108",
+      "D-109",
+      "D-115",
+      "D-116",
+      "D-117",
+      "D-118",
+      "D-120",
+      "D-121",
+      "D-122",
+      "D-125",
+      "D-126",
+      "D-127",
+      "D-128",
+      "D-130",
+      "D-136",
+      "D-137",
+      "D-139",
+      "D-140",
+      "D-141",
+      "D-143",
+      "D-145"
+    ],
+    "excluded": {
+      "D-102": [
+        "DOES_NOT_PENCIL"
+      ],
+      "D-103": [
+        "DOES_NOT_PENCIL"
+      ],
+      "D-104": [
+        "TOO_FEW_BEDROOMS"
+      ],
+      "D-106": [
+        "DOES_NOT_PENCIL"
+      ],
+      "D-107": [
+        "DOES_NOT_PENCIL"
+      ],
+      "D-110": [
+        "DOES_NOT_PENCIL"
+      ],
+      "D-111": [
+        "TOO_FEW_BEDROOMS"
+      ],
+      "D-112": [
+        "TOO_FEW_BEDROOMS"
+      ],
+      "D-113": [
+        "TOO_FEW_BEDROOMS"
+      ],
+      "D-114": [
+        "TOO_FEW_BEDROOMS"
+      ],
+      "D-119": [
+        "DOES_NOT_PENCIL"
+      ],
+      "D-123": [
+        "DOES_NOT_PENCIL"
+      ],
+      "D-124": [
+        "DOES_NOT_PENCIL"
+      ],
+      "D-129": [
+        "TOO_FEW_BEDROOMS"
+      ],
+      "D-131": [
+        "DOES_NOT_PENCIL"
+      ],
+      "D-132": [
+        "TOO_FEW_BEDROOMS"
+      ],
+      "D-133": [
+        "DOES_NOT_PENCIL"
+      ],
+      "D-134": [
+        "TOO_FEW_BEDROOMS"
+      ],
+      "D-135": [
+        "BEDROOMS_UNKNOWN"
+      ],
+      "D-138": [
+        "DOES_NOT_PENCIL"
+      ],
+      "D-142": [
+        "DOES_NOT_PENCIL"
+      ],
+      "D-144": [
+        "DOES_NOT_PENCIL"
+      ]
+    }
+  },
+  "C-13": {
+    "eligible": [
+      "D-101",
+      "D-104",
+      "D-105",
+      "D-108",
+      "D-109",
+      "D-111",
+      "D-112",
+      "D-113",
+      "D-114",
+      "D-115",
+      "D-116",
+      "D-117",
+      "D-119",
+      "D-120",
+      "D-121",
+      "D-122",
+      "D-123",
+      "D-124",
+      "D-125",
+      "D-126",
+      "D-128",
+      "D-129",
+      "D-130",
+      "D-132",
+      "D-134",
+      "D-136",
+      "D-137",
+      "D-139",
+      "D-140",
+      "D-141",
+      "D-143",
+      "D-145"
+    ],
+    "excluded": {
+      "D-102": [
+        "DOES_NOT_PENCIL"
+      ],
+      "D-103": [
+        "DOES_NOT_PENCIL"
+      ],
+      "D-106": [
+        "OVER_BUDGET"
+      ],
+      "D-107": [
+        "DOES_NOT_PENCIL"
+      ],
+      "D-110": [
+        "DOES_NOT_PENCIL"
+      ],
+      "D-118": [
+        "OVER_BUDGET"
+      ],
+      "D-127": [
+        "OVER_BUDGET"
+      ],
+      "D-131": [
+        "DOES_NOT_PENCIL"
+      ],
+      "D-133": [
+        "DOES_NOT_PENCIL"
+      ],
+      "D-135": [
+        "BEDROOMS_UNKNOWN"
+      ],
+      "D-138": [
+        "DOES_NOT_PENCIL"
+      ],
+      "D-142": [
+        "DOES_NOT_PENCIL"
+      ],
+      "D-144": [
+        "DOES_NOT_PENCIL"
+      ]
+    }
+  },
+  "C-14": {
+    "eligible": [
+      "D-101",
+      "D-108",
+      "D-120",
+      "D-126",
+      "D-130",
+      "D-137",
+      "D-140"
+    ],
+    "excluded": {
+      "D-102": [
+        "DOES_NOT_PENCIL",
+        "OVER_BUDGET"
+      ],
+      "D-103": [
+        "DOES_NOT_PENCIL",
+        "OVER_BUDGET"
+      ],
+      "D-104": [
+        "TOO_FEW_BEDROOMS"
+      ],
+      "D-105": [
+        "DOES_NOT_PENCIL"
+      ],
+      "D-106": [
+        "DOES_NOT_PENCIL",
+        "OVER_BUDGET"
+      ],
+      "D-107": [
+        "DOES_NOT_PENCIL",
+        "OVER_BUDGET"
+      ],
+      "D-109": [
+        "DOES_NOT_PENCIL"
+      ],
+      "D-110": [
+        "DOES_NOT_PENCIL",
+        "OVER_BUDGET"
+      ],
+      "D-111": [
+        "TOO_FEW_BEDROOMS"
+      ],
+      "D-112": [
+        "OVER_BUDGET",
+        "TOO_FEW_BEDROOMS"
+      ],
+      "D-113": [
+        "OVER_BUDGET",
+        "TOO_FEW_BEDROOMS"
+      ],
+      "D-114": [
+        "DOES_NOT_PENCIL",
+        "TOO_FEW_BEDROOMS"
+      ],
+      "D-115": [
+        "DOES_NOT_PENCIL",
+        "OVER_BUDGET"
+      ],
+      "D-116": [
+        "OVER_BUDGET"
+      ],
+      "D-117": [
+        "OVER_BUDGET"
+      ],
+      "D-118": [
+        "OVER_BUDGET"
+      ],
+      "D-119": [
+        "DOES_NOT_PENCIL"
+      ],
+      "D-121": [
+        "OVER_BUDGET"
+      ],
+      "D-122": [
+        "DOES_NOT_PENCIL"
+      ],
+      "D-123": [
+        "DOES_NOT_PENCIL",
+        "OVER_BUDGET"
+      ],
+      "D-124": [
+        "DOES_NOT_PENCIL"
+      ],
+      "D-125": [
+        "DOES_NOT_PENCIL",
+        "OVER_BUDGET"
+      ],
+      "D-127": [
+        "DOES_NOT_PENCIL",
+        "OVER_BUDGET"
+      ],
+      "D-128": [
+        "DOES_NOT_PENCIL"
+      ],
+      "D-129": [
+        "DOES_NOT_PENCIL",
+        "OVER_BUDGET",
+        "TOO_FEW_BEDROOMS"
+      ],
+      "D-131": [
+        "DOES_NOT_PENCIL",
+        "OVER_BUDGET"
+      ],
+      "D-132": [
+        "DOES_NOT_PENCIL",
+        "TOO_FEW_BEDROOMS"
+      ],
+      "D-133": [
+        "DOES_NOT_PENCIL"
+      ],
+      "D-134": [
+        "OVER_BUDGET",
+        "TOO_FEW_BEDROOMS"
+      ],
+      "D-135": [
+        "BEDROOMS_UNKNOWN"
+      ],
+      "D-136": [
+        "DOES_NOT_PENCIL"
+      ],
+      "D-138": [
+        "DOES_NOT_PENCIL",
+        "OVER_BUDGET"
+      ],
+      "D-139": [
+        "OVER_BUDGET"
+      ],
+      "D-141": [
+        "OVER_BUDGET"
+      ],
+      "D-142": [
+        "DOES_NOT_PENCIL"
+      ],
+      "D-143": [
+        "OVER_BUDGET"
+      ],
+      "D-144": [
+        "DOES_NOT_PENCIL"
+      ],
+      "D-145": [
+        "DOES_NOT_PENCIL"
+      ]
+    }
+  },
+  "C-15": {
+    "eligible": [
+      "D-101",
+      "D-105",
+      "D-108",
+      "D-109",
+      "D-115",
+      "D-116",
+      "D-117",
+      "D-118",
+      "D-120",
+      "D-121",
+      "D-122",
+      "D-126",
+      "D-127",
+      "D-128",
+      "D-130",
+      "D-136",
+      "D-137",
+      "D-139",
+      "D-140",
+      "D-141",
+      "D-143",
+      "D-145"
+    ],
+    "excluded": {
+      "D-102": [
+        "DOES_NOT_PENCIL"
+      ],
+      "D-103": [
+        "DOES_NOT_PENCIL"
+      ],
+      "D-104": [
+        "AVOIDED_MARKET",
+        "TOO_FEW_BEDROOMS"
+      ],
+      "D-106": [
+        "DOES_NOT_PENCIL"
+      ],
+      "D-107": [
+        "DOES_NOT_PENCIL"
+      ],
+      "D-110": [
+        "DOES_NOT_PENCIL"
+      ],
+      "D-111": [
+        "TOO_FEW_BEDROOMS"
+      ],
+      "D-112": [
+        "TOO_FEW_BEDROOMS"
+      ],
+      "D-113": [
+        "TOO_FEW_BEDROOMS"
+      ],
+      "D-114": [
+        "AVOIDED_MARKET",
+        "TOO_FEW_BEDROOMS"
+      ],
+      "D-119": [
+        "DOES_NOT_PENCIL"
+      ],
+      "D-123": [
+        "DOES_NOT_PENCIL"
+      ],
+      "D-124": [
+        "DOES_NOT_PENCIL"
+      ],
+      "D-125": [
+        "AVOIDED_MARKET"
+      ],
+      "D-129": [
+        "TOO_FEW_BEDROOMS"
+      ],
+      "D-131": [
+        "DOES_NOT_PENCIL"
+      ],
+      "D-132": [
+        "TOO_FEW_BEDROOMS"
+      ],
+      "D-133": [
+        "DOES_NOT_PENCIL"
+      ],
+      "D-134": [
+        "TOO_FEW_BEDROOMS"
+      ],
+      "D-135": [
+        "BEDROOMS_UNKNOWN"
+      ],
+      "D-138": [
+        "DOES_NOT_PENCIL"
+      ],
+      "D-142": [
+        "DOES_NOT_PENCIL"
+      ],
+      "D-144": [
+        "DOES_NOT_PENCIL"
+      ]
+    }
+  }
+}
