@@ -12,8 +12,8 @@ jobs:
       run:
         working-directory: backend
     steps:
-      - uses: actions/checkout@v4
-      - uses: astral-sh/setup-uv@v6
+      - uses: actions/checkout@v7
+      - uses: astral-sh/setup-uv@v10
         with:
           version: "0.13.7"
       - run: uv sync --frozen
@@ -42,7 +42,7 @@ jobs:
       PGPASSWORD: postgres
       PGDATABASE: str
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - name: Apply migrations in order
         run: |
           for file in supabase/migrations/*.sql; do
