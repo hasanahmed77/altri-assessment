@@ -34,6 +34,12 @@ New entries go at the bottom, using the template at the end of this file.
 - **Fix:** Cost is now measured from the API's `usage` field and stored per extraction (DESIGN D-11), not estimated.
 - **Lesson:** Count or measure; don't accept round-number guesses.
 
+### AI-04 Market matching missed town names
+- **What happened:** The assistant's first market-alias migration registered market names ("Clearwater Area") and nicknames ("Smokies"), but not town names. C-07 and C-14 list "Clearwater" as a preferred market, so their preference silently resolved to nothing.
+- **How it was caught:** Applying the migrations to a real database and listing every client market term that resolved to no market. "Clearwater" showed up next to the expected unknowns ("Charlotte", "Texas Hill Country").
+- **Fix:** Every town is also registered as an alias for its market. The only unresolved terms left are the three that really have no market.
+- **Lesson:** Run data migrations against real data and inspect what didn't match, not just that the migration succeeded.
+
 ## 2. How coding-assistant mistakes are prevented
 | Risk | Defense |
 |---|---|

@@ -55,7 +55,7 @@ Each entry: what was decided, what else was considered, and why. New decisions a
 - **Why:** Deals link to markets only by a city string ("St. Augustine", "Mc Gaheysville" and "Lake Harmony" don't match the market town lists), and client preferences are free text ("Florida", "Smokies", "Upstate NY"). The avoided-market rule needs exact matches. JSONB details are always read together with their deal and never queried alone, so splitting them would add joins with no benefit. NOT NULL makes setup fail loudly if a city is unmapped.
 
 ### D-06 Same property, multiple underwriting plans
-- **Decision:** `deals.property_key` (generated from the normalized address). Once a client reacts to one plan, the others are moved out of the recommendations.
+- **Decision:** `deals.property_key` (generated from the normalized address). Each house appears once at the top: its best-scoring plan leads and the other plans follow as `alternative_plan`. Once a client reacts to any plan, all plans of that house are `already_shared`.
 - **Why:** D-116 and D-126 are one house with two renovation plans. A client was shown both and asked, "Same house as before?"
 
 ### D-07 Unknown bedroom count is not recommended
@@ -67,7 +67,8 @@ Each entry: what was decided, what else was considered, and why. New decisions a
 - **Why:** Clients change their minds (C-15 on D-101). `created_at` is a date, so two reactions on one day would tie; the serial id is strictly increasing.
 
 ### D-09 Ranking: focus metric + preferences + feedback, explained by the same numbers
-- **Decision:** `score = 0.70 × focus + 0.30 × preferences + feedback affinity`. The focus metric is one pure function per `main_focus` (Strategy). Every term emits a reason; the explanation is the top reasons.
+- **Decision:** `score = w_focus × focus + w_pref × preferences + feedback affinity`, with weights 0.7/0.3 for cash flow, tax savings and appreciation and 0.3/0.7 for lifestyle. The focus metric is one pure function per `main_focus` (Strategy). Preferences are a weighted average of only the preferences the client stated: market 0.35, setting 0.30, wow factors 0.15, renovation fit 0.10, turnkey 0.10 (where the house is matters more than how it's finished). Every term emits a reason; the explanation leads with the focus reason.
+- **How it was tuned:** with equal preference weights, a lifestyle client's preferred-market deal lost to a higher-earning deal elsewhere (a unit test written from intent caught it).
 - **Why:** The explanation is generated from the numbers that produced the rank, so it can't contradict it, and templated text costs nothing and can't invent figures.
 
 ### D-10 Reference data loaded once; three queries per recommendation request
