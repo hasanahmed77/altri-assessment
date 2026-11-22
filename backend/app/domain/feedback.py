@@ -35,13 +35,20 @@ def similarity(a: Deal, b: Deal) -> float:
     return SAME_MARKET_WEIGHT * same_market + SHARED_TAGS_WEIGHT * shared_tags
 
 
-def affinity(deal: Deal, latest: Mapping[str, Feedback], deals_by_id: Mapping[str, Deal]) -> float:
-    """Positive when the deal resembles deals the client liked, negative for ones they passed on."""
+def affinity(
+    deal: Deal,
+    latest: Mapping[str, Feedback],
+    deals_by_id: Mapping[str, Deal],
+    weights: Mapping[int, float] | None = None,
+) -> float:
+    """Positive when the deal resembles deals the client liked, negative for ones they passed on.
+    `weights` overrides how much a reaction counts (by feedback id); by default a thumb is ±1."""
     total = 0.0
     for item in latest.values():
         reacted = deals_by_id[item.deal_id]
         if reacted.property_key == deal.property_key:
             continue
-        sign = 1.0 if item.reaction == "up" else -1.0
+        thumb = 1.0 if item.reaction == "up" else -1.0
+        sign = weights.get(item.id, thumb) if weights is not None else thumb
         total += sign * similarity(deal, reacted)
     return max(-MAX_AFFINITY, min(MAX_AFFINITY, total * AFFINITY_PER_REACTION))

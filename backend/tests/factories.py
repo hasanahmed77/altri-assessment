@@ -17,6 +17,7 @@ from app.domain.models import (
     Reaction,
     SetupItem,
 )
+from app.domain.signals import EMPTY_SIGNALS, Signals
 
 DATA_DIR = Path(os.environ.get("DATA_DIR", Path(__file__).resolve().parents[2] / "data"))
 
@@ -152,3 +153,7 @@ def all_real_highlights_and_notes() -> tuple[set[str], set[str]]:
         {h for d in deals for h in d["highlights"]},
         {d["analyst_notes"] for d in deals},
     )
+
+
+def make_signals(**changes: Any) -> Signals:
+    return EMPTY_SIGNALS.model_copy(update=changes)

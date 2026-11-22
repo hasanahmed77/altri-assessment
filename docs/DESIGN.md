@@ -71,24 +71,24 @@ Each entry: what was decided, what else was considered, and why. New decisions a
 - **How it was tuned:** with equal preference weights, a lifestyle client's preferred-market deal lost to a higher-earning deal elsewhere (a unit test written from intent caught it).
 - **Why:** The explanation is generated from the numbers that produced the rank, so it can't contradict it, and templated text costs nothing and can't invent figures.
 
-### D-10 Reference data loaded once; one query per recommendation request
-- **Decision:** Markets, deals and clients (with their resolved market preferences) are loaded at startup. A recommendations request makes one indexed query (that client's feedback; Part B adds their signals). `POST /feedback` validates ids in memory, then makes one insert. A test asserts the query count.
+### D-10 Reference data loaded once; two queries per recommendation request
+- **Decision:** Markets, deals, clients (with their resolved market preferences) and call summaries are loaded at startup. A recommendations request makes two indexed queries: that client's feedback and their stored signals. `POST /feedback` validates ids in memory, then makes one insert. A test asserts the query count.
 - **Why:** Editing deals, clients and markets is out of scope, so this data never changes at runtime. If it became editable, an ETag or TTL cache would replace this.
 
 ### D-11 LLM calls only when a client's text changes
-- **Decision:** Signals are cached per client with a hash of the prompt version plus all of that client's text. Extraction runs only when the hash changes: never on page loads, never for a thumbs click without a comment. It runs in the background after the feedback is saved, so the write never waits on or fails because of the LLM.
+- **Decision:** Signals are cached per client (`client_signals`) with a hash of the prompt version, the model and all of that client's text (notes, calls, feedback comments). Extraction runs only when the hash changes: never for an unchanged page load, never for a thumbs click without a comment. It runs as a FastAPI background task after the feedback is saved, so the write never waits on or fails because of the LLM. A page load that finds a changed hash schedules the same task, so a missed extraction heals itself; an in-process set keeps it to one extraction per client at a time. Status is derived, not stored: `fresh`, `updating`, `stale` (no key) or `unavailable`. While `updating`, the page refreshes itself every 2 s, at most 5 times.
 - **Why:** Cost and reliability. Real token usage is stored per extraction, so the cost per client in the README is measured, not estimated.
 
 ### D-12 Grounded, closed-vocabulary signals
-- **Decision:** The OpenAI response uses a strict JSON schema. Traits come from the same tag vocabulary as deals; markets come from an enum of the 14 market ids. Every signal must include a quote that appears verbatim in its cited source, or it is dropped.
-- **Why:** This prevents invented preferences or markets, lets the rep verify each signal, and makes signals directly comparable with deal tags.
+- **Decision:** The OpenAI response uses a strict JSON schema (Structured Outputs). Traits come from a closed list of 17 (`domain/signals.py`), each decided on deals by code from deal tags or market data; markets come from an enum of the 14 market ids. Every signal must quote the client's words verbatim (case, spacing and curly quotes normalized), or it is dropped and logged. Code, not the model, settles the citation: a copied header like `[call:2026-09-10] Call on…` resolves to its id, and a real quote cited to the wrong source is re-cited when exactly one source contains it.
+- **Why:** This prevents invented preferences or markets, lets the rep verify each signal, and makes signals directly comparable with deals. The model only reads; code decides what a signal means for a deal.
 
 ### D-13 Deal tags from a lookup table, not an LLM
 - **Decision:** Deal highlights, notes and setup items map to tags through a fixed table in code.
 - **Why:** Deal text is a closed vocabulary (21 highlights, 12 notes, 15 setup items across 45 deals). A lookup table is exact, free and testable; an LLM would add cost and variance for nothing.
 
 ### D-14 Works without an API key
-- **Decision:** Signals extracted by the real model are committed as a migration snapshot. Without `OPENAI_API_KEY`, new comments leave a client's signals marked stale; the deterministic feedback effects still apply.
+- **Decision:** Signals extracted by the real model are committed as a migration snapshot (`…0004_signals_snapshot.sql`, written by `python -m evals.run --snapshot`). Without `OPENAI_API_KEY` they are served as `fresh`; a new comment marks them `stale`, and the deterministic feedback effects still apply.
 - **Alternatives:** a keyword-based fallback extractor.
 - **Why:** Reviewers can run everything, including Part B, with one command and no secrets. A keyword fallback would re-extract the client's whole history and overwrite good signals with worse ones (it reads "I'd love to fix a 1970s kitchen" as positive), and it is code to maintain for little value.
 
@@ -124,6 +124,30 @@ Each entry: what was decided, what else was considered, and why. New decisions a
 - **Why:** Recommendations change with every piece of feedback, so caching them would show stale rankings. `refresh()` re-renders with fresh server data in the same round trip. Server-side calls mean no CORS and no public API address.
 - **Trade-off:** Because the shell is already streaming, an unknown client id shows the not-found page with HTTP 200 instead of 404. The API itself returns a proper 404.
 - **Display:** cards are numbered by position within their tab ("#1" is the first deal to send), and the top 5 are shown before "show more", so the rep sees a short list first.
+
+### D-22 Signals nudge the ranking; they never exclude
+- **Decision:** Fixed, documented weights in `domain/signal_fit.py`: must-have met +0.10, missing −0.15, avoided trait −0.40, market the client spoke against −0.40, over a spoken cash limit −0.30. A spoken limit counts only if it is below the profile cap and isn't the profile budget said again (LLM-06). A market the client mentioned counts like a profile market. Each adjustment is a reason on the card with the client's quote and its source.
+- **Why:** Hard rules come from the structured profile, which the client signed off; a model's reading of a comment is not strong enough to hide a deal. A −0.40 sinks a deal without removing it, and the rep sees why.
+
+### D-23 The model classifies; code decides what it means
+- **Decision:** Each feedback comment gets a sentiment and a reason from a closed list. A reason of `timing` or `undecided` makes that reaction count zero, whatever sentiment came with it: the house isn't held against similar deals and a passed deal isn't penalized.
+- **Why:** In the first eval run the model labelled "Just bad timing for us this month" as reason `timing` but sentiment `negative`, against the prompt (LLM-02). The same pattern held for cash limits (LLM-06). Classification is what models are good at; the business rule belongs in code, where it is tested.
+
+### D-24 Where to buy is arithmetic, not an LLM
+- **Decision:** `GET /clients/{id}/markets` ranks all 14 markets: setting rank 0.35, profile or mentioned market 0.25, eligible deal count (capped at 5) 0.20, median CoC on low revenue 0.20, plus market-level signals (a party crowd, a short drive from NYC, a lake/mountain setting). Markets with nothing to buy and avoided markets go last. The tab opens first when the client hasn't picked a market or their markets have nothing eligible.
+- **Why:** It must be reproducible and explainable, and it is counting.
+
+### D-25 Near misses: a price, not a rule change
+- **Decision:** A deal excluded only by money rules (over budget, doesn't pencil) gets the highest round price ($1,000 steps) at which it passes every rule, found by bisection, if that is within 5% of asking. Shown on the Ruled out tab, first, as "Close call", with the analyst's note when the seller is negotiable.
+- **Why:** A lower price moves cash needed and debt service together, so there is no closed form; bisection is exact enough in 40 steps. 5% keeps it to real negotiation leads (29 across all clients; 82 at 10%). The rules are untouched.
+
+### D-26 Alerts before deals
+- **Decision:** Deterministic checks, most pressing first: deadline (urgent within 30 days), a spoken cash limit below the profile cap, profile budget outside the stated range, a co-host mentioned with a 0% fee, unmatched market terms, nothing eligible in the client's markets, a must-have no eligible deal offers, and no market chosen.
+- **Why:** These are the things a rep must fix or ask about before sending anything, and each is a conflict between two pieces of data, which code can detect exactly.
+
+### D-27 Model and evals
+- **Decision:** `gpt-4.1-mini` by default (`OPENAI_MODEL`), temperature 0, 1,500 output tokens max, 30 s timeout and one retry. `python -m evals.run` checks 15 labelled cases from the real data against the real model; it is not in CI.
+- **Why:** The task is short extraction into a fixed schema, so a small non-reasoning model is enough and supports temperature 0. Measured: about 2,000 input and 280 output tokens per client, $0.0013 per client, 16/16 cases on two consecutive runs. The cases were also used to fix the prompt, so they are a regression suite, not a held-out score.
 
 ## Assumptions
 - `clients.budget` is authoritative when it conflicts with `budget_range` (C-03, C-06, C-09); the conflict is shown to the rep.

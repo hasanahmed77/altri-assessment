@@ -1,21 +1,40 @@
 import { ExcludedDealCard, RankedDealCard } from "@/components/deal-cards";
+import { MarketList } from "@/components/market-list";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import type { RankedDeal, Recommendations } from "@/lib/api";
+import type { MarketFit, RankedDeal, Recommendations } from "@/lib/api";
 
 const SHOWN_FIRST = 5;
+// A client who hasn't picked a market, or whose markets have nothing to buy, needs a
+// conversation about where before a list of deals
+const WHERE_FIRST = new Set(["UNDECIDED_MARKET", "NO_DEALS_IN_PREFERRED"]);
 
-export function DealTabs({ recommendations }: { recommendations: Recommendations }) {
-  const { client_id: clientId, ranked, excluded } = recommendations;
+export function DealTabs({
+  recommendations,
+  markets,
+}: {
+  recommendations: Recommendations;
+  markets: MarketFit[];
+}) {
+  const { client_id: clientId, ranked, excluded, alerts } = recommendations;
   const toSend = ranked.filter((r) => r.status !== "already_shared");
   const shared = ranked.filter((r) => r.status === "already_shared");
+  const closeCallsFirst = [...excluded].sort(
+    (a, b) => Number(b.near_miss !== null) - Number(a.near_miss !== null),
+  );
+  const whereFirst = alerts.some((a) => WHERE_FIRST.has(a.code));
 
   return (
-    <Tabs defaultValue="recommended">
-      <TabsList>
+    <Tabs defaultValue={whereFirst ? "markets" : "recommended"}>
+      <TabsList className="flex-wrap">
         <TabsTrigger value="recommended">Recommended ({toSend.length})</TabsTrigger>
+        <TabsTrigger value="markets">Where to buy</TabsTrigger>
         <TabsTrigger value="shared">Already shared ({shared.length})</TabsTrigger>
         <TabsTrigger value="excluded">Ruled out ({excluded.length})</TabsTrigger>
       </TabsList>
+
+      <TabsContent value="markets">
+        <MarketList markets={markets} />
+      </TabsContent>
 
       <TabsContent value="recommended" className="flex flex-col gap-4">
         <DealList items={toSend.slice(0, SHOWN_FIRST)} clientId={clientId} />
@@ -43,9 +62,10 @@ export function DealTabs({ recommendations }: { recommendations: Recommendations
 
       <TabsContent value="excluded" className="flex flex-col gap-4">
         <p className="text-muted-foreground text-sm">
-          These break at least one hard rule, so they are never recommended.
+          These break at least one hard rule, so they are never recommended. Close calls come first:
+          a small price cut would make them pass.
         </p>
-        {excluded.map((item) => (
+        {closeCallsFirst.map((item) => (
           <ExcludedDealCard key={item.deal.id} item={item} />
         ))}
       </TabsContent>

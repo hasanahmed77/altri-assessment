@@ -5,6 +5,7 @@ from fastapi import Depends, HTTPException, Request
 from sqlalchemy import Connection, Engine
 
 from app.repository import ClientProfile, Reference
+from app.services.signals import SignalService
 
 
 def get_reference(request: Request) -> Reference:
@@ -18,15 +19,14 @@ def get_connection(request: Request) -> Iterator[Connection]:
         yield conn
 
 
-def get_transaction(request: Request) -> Iterator[Connection]:
-    engine: Engine = request.app.state.engine
-    with engine.begin() as conn:
-        yield conn
+def get_signal_service(request: Request) -> SignalService:
+    service: SignalService = request.app.state.signals
+    return service
 
 
 ReferenceDep = Annotated[Reference, Depends(get_reference)]
+SignalServiceDep = Annotated[SignalService, Depends(get_signal_service)]
 ConnectionDep = Annotated[Connection, Depends(get_connection)]
-TransactionDep = Annotated[Connection, Depends(get_transaction)]
 
 
 def find_client(reference: Reference, client_id: str) -> ClientProfile:

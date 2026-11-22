@@ -13,20 +13,8 @@ WIP limit: **1** card in progress. Move a card by moving its line. Commits refer
 ## Backlog
 
 ### M4 Part B → tag v0.2
-- **B-01** Migration `0003_client_signals.sql`
-- **B-02** Signals schema (Pydantic, closed vocabulary, market-id enum) + grounding validator · AC: a non-verbatim quote is dropped (unit test)
-- **B-03** `OpenAIExtractor` (Structured Outputs, temperature 0, timeout + retry) + test fake; no key → signals marked stale
-- **B-04** `services/signals.py`: content-hash cache, upsert, usage logging · AC: an unchanged hash makes 0 extractor calls (integration test)
-- **B-05** Signals in scoring: must-haves, avoid traits, soft cap, feedback readings · AC: C-02/D-145 not penalized; C-05 waterfront deals rise; C-09 party markets drop
-- **B-06** Alerts: deadline, conflicts, unresolved terms, no-match-in-preferred, deal data flags
-- **B-07** `GET /clients/{id}/markets` + "Where to buy" tab · AC: C-12 sees ranked markets with rationale
-- **B-08** Evals: `tests/evals/cases.yaml` (12 cases) + `make eval` · AC: pass rate reported
-- **B-09** Generate `0004_signals_snapshot.sql` with the real model · AC: the stack works with no API key
-- **B-10** Signals panel in UI with quotes + sources; while `signals_status` is `updating`, show a badge and refresh (max ~5 tries) · AC: after a commented 👎, re-ranked signals appear without a manual reload
-- **B-11** Near misses: gap ("needs $X more", "2.9% vs 3%") + price solver by bisection · AC: C-13/D-138 shows the price that pencils; unit tests on the solver
-- **B-12** Re-extraction after POST /feedback via `BackgroundTasks`, only when the comment is non-empty
 - **B-13** Stretch, day 5 morning only if ahead: Playwright smoke test of the demo flow, local only (not in CI)
-- Tag `v0.2`
+- Push migrations 0003 + 0004 to Supabase, then tag `v0.2`
 
 ### M5 Ship → tag v1.0
 - **S-09** README ≤ 2 pages: run, how it works + why (incl. schema changes and why), research + sources + what changed my thinking, assumptions, questions for v2, next steps, AI usage + measured cost per client; links to DESIGN.md and AI_LOG.md for depth
@@ -37,6 +25,18 @@ WIP limit: **1** card in progress. Move a card by moving its line. Commits refer
 - **S-13** Rehearse: trace any recommendation from the screen to `finance.py` in under a minute
 
 ## Done
+- **B-12** Re-extraction in the background after a comment (and after a page load that finds a changed hash), one per client at a time · AC met: integration test, thumbs without a comment make no call
+- **B-11** Near misses: bisection price solver, ≤ 5% under asking, $1,000 steps; "Close call" first on Ruled out · AC met: C-13/D-138 passes at $960,000 (0.7% under); 4 unit tests
+- **B-10** Signals panel with quotes and sources, status line, page refreshes every 2 s (max 5) while `updating`
+- **B-09** Snapshot `0004_signals_snapshot.sql` written by the eval run with the real model · AC met: no key → signals `fresh`, a new comment → `stale` (integration test)
+- **B-08** Evals: 16 cases in `backend/evals/cases.py`, `python -m evals.run` · AC met: 16/16 on two runs, $0.0013 per client measured
+- **B-07** `GET /clients/{id}/markets` + "Where to buy" tab, opened first when the client is undecided or their markets have nothing eligible · AC met: C-12 sees ranked markets with reasons
+- **B-06** Alerts: deadline, spoken cash limit, budget vs range, co-host with 0% fee, unmatched terms, nothing in preferred markets, unmet must-have, undecided
+- **B-05** Signals in scoring (must-haves, avoided traits and markets, mentioned markets, soft cap, feedback readings) · AC met: C-02/D-145 not penalized; C-03 gets Bradenton first; C-09 party markets drop
+- **B-04** `services/signals.py`: content-hash cache, upsert, usage stored · AC met: unchanged hash makes 0 extractor calls (integration test)
+- **B-03** `OpenAIExtractor` (Structured Outputs, temperature 0, timeout + 1 retry) + fake for tests; tests force a blank key
+- **B-02** Signals schema (closed traits, market-id enum) + grounding that re-cites a misattributed quote · AC met: a non-verbatim quote is dropped (unit + integration tests)
+- **B-01** Migration `0003_client_signals.sql`
 - **A-19** Part A audit against the brief: independent recompute of all 675 client×deal pairs (numbers + rule codes) from the raw JSON matches the API exactly; "All" shown as "open to any market"; mypy now covers `tests/`
 - **A-14** Layout: client sidebar + `/clients/[id]` with parallel server fetches
 - **A-15** Client summary card + feedback history

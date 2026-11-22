@@ -63,6 +63,8 @@ jobs:
           done
       - name: Every deal maps to a market
         run: test "$(psql -tAc 'select count(*) from deals where market_id is null')" = "0"
+      - name: The signals snapshot covers every client
+        run: test "$(psql -tAc 'select count(*) from clients c left join client_signals s on s.client_id = c.id where s.client_id is null')" = "0"
 
   frontend:
     runs-on: ubuntu-latest

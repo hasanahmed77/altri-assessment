@@ -3,8 +3,10 @@ from dataclasses import dataclass
 
 from app.domain.finance import DealNumbers, deal_numbers
 from app.domain.models import Client, Deal, Feedback, Market
+from app.domain.near_miss import NearMiss, near_miss
 from app.domain.rules import Violation, violations
 from app.domain.scoring import Candidate, RankedDeal, rank
+from app.domain.signals import EMPTY_SIGNALS, Signals
 
 
 @dataclass(frozen=True)
@@ -13,6 +15,7 @@ class ExcludedDeal:
     market: Market
     numbers: DealNumbers
     violations: tuple[Violation, ...]
+    near_miss: NearMiss | None
 
 
 @dataclass(frozen=True)
@@ -26,6 +29,7 @@ def recommend(
     deals: Sequence[Deal],
     markets: Mapping[str, Market],
     feedback: Iterable[Feedback],
+    signals: Signals = EMPTY_SIGNALS,
 ) -> Recommendations:
     candidates: list[Candidate] = []
     excluded: list[ExcludedDeal] = []
@@ -35,11 +39,12 @@ def recommend(
         numbers = deal_numbers(deal, client)
         broken = violations(deal, client, market, numbers)
         if broken:
-            excluded.append(ExcludedDeal(deal, market, numbers, tuple(broken)))
+            miss = near_miss(deal, client, market, broken)
+            excluded.append(ExcludedDeal(deal, market, numbers, tuple(broken), miss))
         else:
             candidates.append(Candidate(deal, market, numbers))
 
-    ranked = rank(candidates, client, feedback, {d.id: d for d in deals})
+    ranked = rank(candidates, client, feedback, {d.id: d for d in deals}, signals)
     return Recommendations(
         ranked=tuple(ranked),
         excluded=tuple(sorted(excluded, key=lambda e: e.deal.id)),

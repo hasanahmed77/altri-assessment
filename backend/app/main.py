@@ -8,18 +8,33 @@ from app.api import clients, feedback
 from app.api.deps import ConnectionDep
 from app.config import Settings, get_settings
 from app.db import make_engine
+from app.llm.extractor import OpenAIExtractor, SignalExtractor
 from app.repository import load_reference
+from app.services.signals import SignalService
 
 
-def create_app(settings: Settings | None = None) -> FastAPI:
+def create_app(
+    settings: Settings | None = None, extractor: SignalExtractor | None = None
+) -> FastAPI:
+    """`extractor` replaces the OpenAI one (tests pass a fake). Without either, stored signals
+    are still served and new comments simply leave them stale."""
     settings = settings or get_settings()
 
     @asynccontextmanager
     async def lifespan(app: FastAPI) -> AsyncIterator[None]:
         engine = make_engine(settings.database_url)
         with engine.connect() as conn:
-            app.state.reference = load_reference(conn)
+            reference = load_reference(conn)
+        chosen = extractor
+        if chosen is None and settings.openai_api_key:
+            chosen = OpenAIExtractor(
+                settings.openai_api_key, settings.openai_model, reference.markets
+            )
+        app.state.reference = reference
         app.state.engine = engine
+        app.state.signals = SignalService(
+            engine, reference, chosen, chosen.model if chosen else settings.openai_model
+        )
         yield
         engine.dispose()
 

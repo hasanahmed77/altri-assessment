@@ -52,7 +52,50 @@ New entries go at the bottom, using the template at the end of this file.
 - **Fix:** The API sends ratios with 6 places, so the only visible rounding happens once, in the browser.
 - **Lesson:** Round once, as late as possible. Look at the real screen; tests asserted each number separately and both were "correct".
 
-## 2. How coding-assistant mistakes are prevented
+### AI-07 Formatting churn from an unconfigured formatter
+- **What happened:** The assistant ran Prettier with its defaults over the frontend. The project has no Prettier config, so seven files the change never touched were rewrapped to 80 columns.
+- **How it was caught:** Reading `git diff --stat` before going on: files outside the change showed up.
+- **Fix:** Re-ran Prettier at width 100 (the style the code was written in) on the changed files only and put the remaining hunks back by hand, so the diff holds only real changes.
+- **Lesson:** Don't run a tool the project doesn't use; check the diff's file list after any bulk edit.
+
+### AI-08 A near-miss price past its own limit
+- **What happened:** The price solver rounded its answer down to the nearest $1,000 after checking the discount limit, so one deal (C-10 / D-115) came out 10.1% under asking with a 10% limit.
+- **How it was caught:** Reading the solver's output for all 15 clients before wiring it into the API.
+- **Fix:** The limit is checked after rounding; a unit test asserts `0 < discount <= MAX_DISCOUNT`.
+- **Lesson:** Check a constraint on the value you return, not on an intermediate one.
+
+## 2. Mistakes caught (the product's LLM)
+Found by the evals (`python -m evals.run`) and by reading the extracted signals. Each one changed the design, not just the prompt.
+
+### LLM-01 Valid quotes cited with the wrong source format
+- **What happened:** The model cited sources as `[call:2026-09-10] Call on 2026-09-10` instead of `call:2026-09-10`, so grounding dropped real quotes. C-08's ski wish and C-09's party avoidance disappeared: 11/14 cases passed on the first run.
+- **Fix:** Sources are sent as `<source id="…" about="…">` tags, and code resolves a copied header to its id. The quote is still checked word for word.
+
+### LLM-02 A pass for timing scored as negative
+- **What happened:** For C-02's "Great house, honestly. Just bad timing for us this month." the model returned reason `timing` but sentiment `negative`, despite the prompt saying a timing pass is neutral. That would have pushed down every Smokies deal for a client who said they're "still very interested in the area".
+- **Fix:** Code decides the effect: a `timing` or `undecided` reason counts zero (D-23). The eval now checks the reason, the part the model is responsible for.
+
+### LLM-03 A real quote cited to the wrong source
+- **What happened:** C-13's 1031 deadline was quoted correctly from the Oct 20 call but cited as the onboarding notes, so grounding dropped it and the rep lost the most urgent alert.
+- **Fix:** Code re-cites a quote to the one source that contains it; a quote found in none, or in several, is dropped.
+
+### LLM-04 "Not interested in mountain cabins" read as an interior style
+- **What happened:** The model turned it into "avoid cabin feel" (log-cabin interiors), so C-03 still got a Poconos deal first. The eval passed, because the assistant had written it to accept either trait.
+- **How it was caught:** Comparing each client's top three before and after signals, not from the pass rate.
+- **Fix:** The trait descriptions now separate the kind of place from the interior style, and the eval requires the lake/mountain setting. C-03 now gets Bradenton first.
+- **Lesson:** A lenient eval hides the error it exists to catch. Check outcomes, not just labels.
+
+### LLM-05 Preferences inferred from metadata, blocked by grounding
+- **What happened:** On every run the model tries to add "avoids Saint Augustine" or "prefers the Poconos" by quoting the header of a thumbs-down ("Thumbs down on D-106 in St. Augustine…"), not anything the client wrote.
+- **Fix:** None needed: those quotes aren't in the client's text, so grounding drops them and the run log lists each one. This is the defense working as designed.
+
+### LLM-06 A budget read as a cash limit
+- **What happened:** "Budget around $275K, a little flexible" (C-05) and "Budget about $350K" (C-12) came back as spoken cash limits, so deals the profile allows were marked down and the rep got a false alert. Telling the model in the prompt that a budget is not a limit did not change its answer.
+- **How it was caught:** Reading C-12's alerts on the rep screen.
+- **Fix:** Code decides when a spoken limit counts: below the profile cap and not the profile budget said again. C-01's "keep total cash under about $320K" still counts. A new eval case checks the effect.
+- **Lesson:** When a prompt fix doesn't stick, move the decision into code, where it is tested.
+
+## 3. How coding-assistant mistakes are prevented
 | Risk | Defense |
 |---|---|
 | Plausible but wrong math | Golden values are computed by hand from the brief's formulas (e.g. C-01 × D-126 cash needed = $235,295; $100K at 6% for 30 years = $599.55/month), not by the code under test. |
@@ -62,13 +105,14 @@ New entries go at the bottom, using the template at the end of this file.
 | Code nobody can explain | Every line is read and must be explainable before it is committed. No padding comments; comments only say *why*. |
 | Large unreviewable changes | Small commits, one Kanban card each. |
 
-## 3. Failure modes of the LLM in the product, and defenses
+## 4. Failure modes of the LLM in the product, and defenses
 | Failure mode | Defense |
 |---|---|
-| Invented quote or preference | Every signal must include a quote that appears verbatim in its cited source; otherwise it is dropped and logged. |
+| Invented quote or preference | Every signal must quote the client's own words verbatim; otherwise it is dropped and logged (LLM-05). Code settles which source a quote came from (LLM-01, LLM-03). |
 | Invented market or trait | Strict JSON schema: market ids from an enum of the 14 real ids; traits from the same closed vocabulary as deal tags. |
 | Malformed output | OpenAI Structured Outputs with a strict schema, then Pydantic validation; on failure the previous signals are kept. |
-| Misread tone (sarcasm, "bad timing", "Hmm. Maybe?") | Eval cases taken from the real data; the pass rate is reported in the README. |
+| Misread tone (sarcasm, "bad timing", "Hmm. Maybe?") | 16 eval cases from the real data (16/16 on two runs). The model only classifies; code decides the effect (LLM-02, LLM-06). |
+| A wrong reading changes what the client sees | Signals only re-rank; hard rules come from the profile. Every adjustment shows its quote on the card, so the rep can overrule it. |
 | Instructions hidden in a client comment | Comments are passed as data; the output can only be the schema; the LLM has no tools and can't change eligibility, which is decided in code. |
 | Run-to-run variation | Temperature 0, and results are cached by content hash, so the same input is not re-asked. |
 | API outage or timeout | Timeout plus one retry, then keep the last good signals; feedback is saved before extraction and never depends on it. |

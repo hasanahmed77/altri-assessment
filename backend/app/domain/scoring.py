@@ -5,7 +5,9 @@ from typing import Literal
 from app.domain.feedback import affinity, feedback_by_property, latest_feedback
 from app.domain.finance import DealNumbers
 from app.domain.models import Client, Deal, Feedback, Focus, Market, Reaction
-from app.domain.tags import WOW_FACTOR_TAGS, deal_tags
+from app.domain.signal_fit import reaction_weights, signal_adjustments, signal_preferred_markets
+from app.domain.signals import EMPTY_SIGNALS, Evidence, FeedbackReading, Signals
+from app.domain.tags import WOW_FACTOR_TAGS, deal_tags, renovation_level
 
 # (focus weight, preference weight). Lifestyle clients buy for the experience and the hard
 # rule already guarantees they break even, so their preferences dominate.
@@ -33,8 +35,6 @@ SETTING_LABELS = {
     "urban_hybrid": "urban",
 }
 RENOVATION_LEVELS = ("light", "medium", "heavy")
-LIGHT_SETUP_MAX = 125_000
-MEDIUM_SETUP_MAX = 160_000
 
 Status = Literal["new", "alternative_plan", "already_shared"]
 
@@ -51,6 +51,14 @@ class Reason:
     code: str
     text: str
     weight: float
+    quote: str | None = None
+    source: str | None = None
+
+    @classmethod
+    def quoted(
+        cls, code: str, text: str, weight: float, evidence: Evidence | FeedbackReading
+    ) -> "Reason":
+        return cls(code, text, weight, evidence.quote, evidence.source)
 
 
 @dataclass(frozen=True)
@@ -93,27 +101,40 @@ def rank(
     client: Client,
     feedback: Iterable[Feedback],
     deals_by_id: Mapping[str, Deal],
+    signals: Signals = EMPTY_SIGNALS,
 ) -> list[RankedDeal]:
     latest = latest_feedback(feedback)
     shared = feedback_by_property(latest, deals_by_id)
+    weights = reaction_weights(latest, signals)
+    readings = {r.feedback_id: r for r in signals.feedback_readings}
+    mentioned_markets = signal_preferred_markets(signals)
     focus_weight, preference_weight = FOCUS_WEIGHTS[client.main_focus]
     metric = FOCUS_METRICS[client.main_focus]
     focus_scores = normalize([metric(c) for c in candidates])
 
     ranked: list[RankedDeal] = []
     for candidate, focus_score in zip(candidates, focus_scores, strict=True):
-        preference, preference_reasons = preference_score(candidate, client)
+        preference, preference_reasons = preference_score(candidate, client, mentioned_markets)
         score = focus_weight * focus_score + preference_weight * preference
         reasons = [
             Reason("FOCUS", focus_reason(candidate, client.main_focus), focus_weight * focus_score),
-            *(Reason(r.code, r.text, r.weight * preference_weight) for r in preference_reasons),
+            *(replace(r, weight=r.weight * preference_weight) for r in preference_reasons),
         ]
+        for adjustment in signal_adjustments(
+            candidate.deal, candidate.market, candidate.numbers.cash_needed, client, signals
+        ):
+            score += adjustment.weight
+            reasons.append(
+                Reason.quoted(
+                    adjustment.code, adjustment.text, adjustment.weight, adjustment.evidence
+                )
+            )
 
         previous = shared.get(candidate.deal.property_key)
         if previous is None:
             status: Status = "new"
             reaction = None
-            fit = affinity(candidate.deal, latest, deals_by_id)
+            fit = affinity(candidate.deal, latest, deals_by_id, weights)
             score += fit
             if abs(fit) >= NOTABLE_AFFINITY:
                 text = (
@@ -125,9 +146,17 @@ def rank(
         else:
             status = "already_shared"
             reaction = previous.reaction
-            if reaction == "down":
+            if weights[previous.id] < 0:
                 score -= PASSED_PENALTY
             reasons.append(Reason("ALREADY_SHARED", _shared_text(candidate.deal, previous), 0.0))
+            reading = readings.get(previous.id)
+            if reaction == "down" and reading is not None and weights[previous.id] >= 0:
+                text = (
+                    "Passed only because of timing; worth sharing again later"
+                    if reading.reason == "timing"
+                    else "The client sounded unsure when passing, so it isn't held against it"
+                )
+                reasons.append(Reason.quoted("SOFT_PASS", text, 0.0, reading))
 
         ranked.append(RankedDeal(candidate, score, status, reaction, _ordered(reasons)))
 
@@ -174,16 +203,25 @@ def normalize(values: Sequence[float]) -> list[float]:
     return [(v - low) / (high - low) for v in values]
 
 
-def preference_score(c: Candidate, client: Client) -> tuple[float, list[Reason]]:
-    """Weighted fit with the client's structured preferences, with the reasons behind it.
-    Preferences the client didn't state are left out rather than scored as neutral."""
+def preference_score(
+    c: Candidate, client: Client, mentioned_markets: Mapping[str, Evidence] | None = None
+) -> tuple[float, list[Reason]]:
+    """Weighted fit with the client's preferences, with the reasons behind it. Markets the
+    client mentioned count like profile ones. Preferences the client didn't state are left out
+    rather than scored as neutral."""
     parts: list[_Part] = []
     tags = deal_tags(c.deal)
+    mentioned = mentioned_markets or {}
 
-    if client.preferred_market_ids:
-        preferred = c.deal.market_id in client.preferred_market_ids
-        reason = Reason("PREFERRED_MARKET", f"In {c.market.name}, a preferred market", 1.0)
-        parts.append(_Part("market", 1.0 if preferred else 0.0, reason if preferred else None))
+    if client.preferred_market_ids or mentioned:
+        market_id = c.deal.market_id
+        reason: Reason | None = None
+        if market_id in client.preferred_market_ids:
+            reason = Reason("PREFERRED_MARKET", f"In {c.market.name}, a preferred market", 1.0)
+        elif market_id in mentioned:
+            text = f"In {c.market.name}, a market the client mentioned"
+            reason = Reason.quoted("MENTIONED_MARKET", text, 1.0, mentioned[market_id])
+        parts.append(_Part("market", 1.0 if reason else 0.0, reason))
 
     setting_rank = client.setting_rank.get(c.market.setting, 0)
     label = SETTING_LABELS.get(c.market.setting, c.market.setting).capitalize()
@@ -234,16 +272,7 @@ class _Part:
         """A positive reason weighs what it added to the score; a caveat weighs what it cost."""
         assert self.reason is not None
         share = self.value if self.reason.weight > 0 else self.value - 1
-        weight = PREFERENCE_WEIGHTS[self.name] * share / total_weight
-        return Reason(self.reason.code, self.reason.text, weight)
-
-
-def renovation_level(deal: Deal) -> str:
-    if deal.setup_cost <= LIGHT_SETUP_MAX:
-        return "light"
-    if deal.setup_cost <= MEDIUM_SETUP_MAX:
-        return "medium"
-    return "heavy"
+        return replace(self.reason, weight=PREFERENCE_WEIGHTS[self.name] * share / total_weight)
 
 
 def focus_reason(c: Candidate, focus: Focus) -> str:

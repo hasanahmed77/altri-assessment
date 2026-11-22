@@ -10,6 +10,11 @@ export type Deal = Schemas["DealOut"];
 export type DealNumbers = Schemas["NumbersOut"];
 export type FeedbackIn = Schemas["FeedbackIn"];
 export type Feedback = Schemas["FeedbackOut"];
+export type Reason = Schemas["ReasonOut"];
+export type Alert = Schemas["AlertOut"];
+export type Signal = Schemas["SignalOut"];
+export type SignalsStatus = Recommendations["signals_status"];
+export type MarketFit = Schemas["MarketFitOut"];
 
 // Only server code (Server Components and Server Actions) imports this module,
 // so the API address never reaches the browser
@@ -42,6 +47,7 @@ export const api = {
   client: (id: string) => request<ClientDetail>(`/clients/${encodeURIComponent(id)}`),
   recommendations: (id: string) =>
     request<Recommendations>(`/clients/${encodeURIComponent(id)}/recommendations`),
+  markets: (id: string) => request<MarketFit[]>(`/clients/${encodeURIComponent(id)}/markets`),
   createFeedback: (body: FeedbackIn) =>
     request<Feedback>("/feedback", { method: "POST", body: JSON.stringify(body) }),
 };

@@ -78,3 +78,15 @@ def deal_tags(deal: Deal) -> frozenset[Tag]:
         tags |= HIGHLIGHT_TAGS[highlight]
     tags |= NOTE_TAGS[deal.analyst_notes]
     return frozenset(tags)
+
+
+LIGHT_SETUP_MAX = 125_000
+MEDIUM_SETUP_MAX = 160_000
+
+
+def renovation_level(deal: Deal) -> str:
+    if deal.setup_cost <= LIGHT_SETUP_MAX:
+        return "light"
+    if deal.setup_cost <= MEDIUM_SETUP_MAX:
+        return "medium"
+    return "heavy"

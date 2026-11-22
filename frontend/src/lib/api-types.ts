@@ -55,6 +55,23 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/clients/{client_id}/markets": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Get Markets */
+        get: operations["get_markets_clients__client_id__markets_get"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/feedback": {
         parameters: {
             query?: never;
@@ -93,6 +110,22 @@ export interface paths {
 export type webhooks = Record<string, never>;
 export interface components {
     schemas: {
+        /** AlertOut */
+        AlertOut: {
+            /** Code */
+            code: string;
+            /**
+             * Severity
+             * @enum {string}
+             */
+            severity: "urgent" | "warning" | "info";
+            /** Text */
+            text: string;
+            /** Quote */
+            quote: string | null;
+            /** Source */
+            source: string | null;
+        };
         /** CallSummaryOut */
         CallSummaryOut: {
             /**
@@ -207,6 +240,7 @@ export interface components {
             numbers: components["schemas"]["NumbersOut"];
             /** Violations */
             violations: components["schemas"]["ViolationOut"][];
+            near_miss: components["schemas"]["NearMissOut"] | null;
         };
         /** FeedbackIn */
         FeedbackIn: {
@@ -260,6 +294,28 @@ export interface components {
             /** High */
             high: number;
         };
+        /** MarketFitOut */
+        MarketFitOut: {
+            /** Rank */
+            rank: number;
+            market: components["schemas"]["MarketOut"];
+            /** Typical Traveler */
+            typical_traveler: string;
+            /** Annual Appreciation */
+            annual_appreciation: number;
+            /** Eligible Deals */
+            eligible_deals: number;
+            /** Best Deal Id */
+            best_deal_id: string | null;
+            /** Median Coc Low */
+            median_coc_low: number | null;
+            /** Score */
+            score: number;
+            /** Avoided */
+            avoided: boolean;
+            /** Reasons */
+            reasons: components["schemas"]["ReasonOut"][];
+        };
         /** MarketOut */
         MarketOut: {
             /** Id */
@@ -270,6 +326,15 @@ export interface components {
             state: string;
             /** Setting */
             setting: string;
+        };
+        /** NearMissOut */
+        NearMissOut: {
+            /** Max Price */
+            max_price: number;
+            /** Discount */
+            discount: number;
+            /** Text */
+            text: string;
         };
         /** NumbersOut */
         NumbersOut: {
@@ -306,15 +371,39 @@ export interface components {
             text: string;
             /** Weight */
             weight: number;
+            /** Quote */
+            quote?: string | null;
+            /** Source */
+            source?: string | null;
         };
         /** RecommendationsOut */
         RecommendationsOut: {
             /** Client Id */
             client_id: string;
+            /**
+             * Signals Status
+             * @enum {string}
+             */
+            signals_status: "fresh" | "updating" | "stale" | "unavailable";
+            /** Signals */
+            signals: components["schemas"]["SignalOut"][];
+            /** Alerts */
+            alerts: components["schemas"]["AlertOut"][];
             /** Ranked */
             ranked: components["schemas"]["RankedDealOut"][];
             /** Excluded */
             excluded: components["schemas"]["ExcludedDealOut"][];
+        };
+        /** SignalOut */
+        SignalOut: {
+            /** Kind */
+            kind: string;
+            /** Text */
+            text: string;
+            /** Quote */
+            quote: string;
+            /** Source */
+            source: string;
         };
         /** ValidationError */
         ValidationError: {
@@ -414,6 +503,37 @@ export interface operations {
                 };
                 content: {
                     "application/json": components["schemas"]["RecommendationsOut"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    get_markets_clients__client_id__markets_get: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                client_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["MarketFitOut"][];
                 };
             };
             /** @description Validation Error */

@@ -1,6 +1,8 @@
 import { notFound } from "next/navigation";
 import { Suspense } from "react";
 
+import { ClientAlerts } from "@/components/client-alerts";
+import { ClientSignals } from "@/components/client-signals";
 import { ClientSummary } from "@/components/client-summary";
 import { DealTabs } from "@/components/deal-tabs";
 import { Skeleton } from "@/components/ui/skeleton";
@@ -18,17 +20,21 @@ export default function ClientPage({ params }: PageProps<"/clients/[id]">) {
 
 async function ClientView({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
-  const [client, recommendations] = await Promise.all([api.client(id), api.recommendations(id)]).catch(
-    (error: unknown) => {
-      if (error instanceof ApiError && error.status === 404) notFound();
-      throw error;
-    },
-  );
+  const [client, recommendations, markets] = await Promise.all([
+    api.client(id),
+    api.recommendations(id),
+    api.markets(id),
+  ]).catch((error: unknown) => {
+    if (error instanceof ApiError && error.status === 404) notFound();
+    throw error;
+  });
 
   return (
     <div className="mx-auto flex max-w-5xl flex-col gap-6">
+      <ClientAlerts alerts={recommendations.alerts} />
       <ClientSummary client={client} />
-      <DealTabs recommendations={recommendations} />
+      <ClientSignals signals={recommendations.signals} status={recommendations.signals_status} />
+      <DealTabs recommendations={recommendations} markets={markets} />
     </div>
   );
 }

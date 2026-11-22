@@ -1,6 +1,7 @@
+import json
 from collections.abc import Mapping
 from dataclasses import dataclass
-from datetime import date
+from datetime import date, datetime
 from typing import Any
 
 from sqlalchemy import Connection, RowMapping, text
@@ -16,6 +17,7 @@ from app.domain.models import (
     Reaction,
     SetupItem,
 )
+from app.domain.signals import Signals
 
 
 @dataclass(frozen=True)
@@ -50,6 +52,18 @@ class Reference:
     deals: tuple[Deal, ...]
     deals_by_id: Mapping[str, Deal]
     clients: Mapping[str, ClientProfile]
+    calls: Mapping[str, tuple[CallSummary, ...]]
+
+
+@dataclass(frozen=True)
+class StoredSignals:
+    signals: Signals
+    dropped: tuple[str, ...]
+    source_hash: str
+    model: str
+    input_tokens: int
+    output_tokens: int
+    extracted_at: datetime
 
 
 def load_reference(conn: Connection) -> Reference:
@@ -59,6 +73,7 @@ def load_reference(conn: Connection) -> Reference:
         deals=deals,
         deals_by_id={d.id: d for d in deals},
         clients=_load_clients(conn),
+        calls=_load_calls(conn),
     )
 
 
@@ -78,15 +93,60 @@ def feedback_counts(conn: Connection) -> dict[str, int]:
     return {client_id: n for client_id, n in rows}
 
 
-def client_calls(conn: Connection, client_id: str) -> list[CallSummary]:
-    rows = conn.execute(
-        text(
-            "SELECT call_date, summary FROM call_summaries "
-            "WHERE client_id = :client_id ORDER BY call_date DESC, id DESC"
-        ),
-        {"client_id": client_id},
+def client_signals(conn: Connection, client_id: str) -> StoredSignals | None:
+    row = (
+        conn.execute(
+            text(
+                "SELECT signals, dropped, source_hash, model, input_tokens, output_tokens, "
+                "extracted_at FROM client_signals WHERE client_id = :client_id"
+            ),
+            {"client_id": client_id},
+        )
+        .mappings()
+        .one_or_none()
     )
-    return [CallSummary(call_date, summary) for call_date, summary in rows]
+    if row is None:
+        return None
+    return StoredSignals(
+        signals=Signals.model_validate(row["signals"]),
+        dropped=tuple(row["dropped"]),
+        source_hash=row["source_hash"],
+        model=row["model"],
+        input_tokens=row["input_tokens"],
+        output_tokens=row["output_tokens"],
+        extracted_at=row["extracted_at"],
+    )
+
+
+def save_signals(
+    conn: Connection,
+    client_id: str,
+    stored: StoredSignals,
+    prompt_version: str,
+) -> None:
+    conn.execute(
+        text(
+            "INSERT INTO client_signals (client_id, signals, dropped, source_hash, model, "
+            "prompt_version, input_tokens, output_tokens) "
+            "VALUES (:client_id, CAST(:signals AS jsonb), CAST(:dropped AS jsonb), :source_hash, "
+            ":model, :prompt_version, :input_tokens, :output_tokens) "
+            "ON CONFLICT (client_id) DO UPDATE SET signals = EXCLUDED.signals, "
+            "dropped = EXCLUDED.dropped, source_hash = EXCLUDED.source_hash, "
+            "model = EXCLUDED.model, prompt_version = EXCLUDED.prompt_version, "
+            "input_tokens = EXCLUDED.input_tokens, output_tokens = EXCLUDED.output_tokens, "
+            "extracted_at = now()"
+        ),
+        {
+            "client_id": client_id,
+            "signals": stored.signals.model_dump_json(),
+            "dropped": json.dumps(stored.dropped),
+            "source_hash": stored.source_hash,
+            "model": stored.model,
+            "prompt_version": prompt_version,
+            "input_tokens": stored.input_tokens,
+            "output_tokens": stored.output_tokens,
+        },
+    )
 
 
 def insert_feedback(
@@ -105,6 +165,19 @@ def insert_feedback(
         .one()
     )
     return _feedback_record(row)
+
+
+def _load_calls(conn: Connection) -> dict[str, tuple[CallSummary, ...]]:
+    rows = conn.execute(
+        text(
+            "SELECT client_id, call_date, summary FROM call_summaries "
+            "ORDER BY call_date DESC, id DESC"
+        )
+    )
+    calls: dict[str, list[CallSummary]] = {}
+    for client_id, call_date, summary in rows:
+        calls.setdefault(client_id, []).append(CallSummary(call_date, summary))
+    return {client_id: tuple(items) for client_id, items in calls.items()}
 
 
 def _load_markets(conn: Connection) -> dict[str, Market]:

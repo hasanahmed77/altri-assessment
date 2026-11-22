@@ -9,6 +9,7 @@ dependencies = [
     "pydantic-settings>=2.6",
     "sqlalchemy>=2.0.36",
     "psycopg[binary]>=3.2",
+    "openai>=3.57",
 ]
 
 [dependency-groups]
@@ -33,4 +34,4 @@ select = ["E", "F", "I", "B", "UP", "SIM", "RUF"]
 
 [tool.mypy]
 strict = true
-files = ["app", "tests"]
+files = ["app", "tests", "evals"]

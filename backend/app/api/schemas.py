@@ -1,13 +1,21 @@
+from collections.abc import Mapping
 from datetime import date
 from typing import Annotated, Literal
 
 from pydantic import BaseModel, StringConstraints
 
+from app.domain.alerts import Alert
 from app.domain.finance import DealNumbers
+from app.domain.market_fit import MarketFit
 from app.domain.models import Deal, LowMidHigh, Market
+from app.domain.near_miss import NearMiss
 from app.domain.recommend import ExcludedDeal
-from app.domain.scoring import RankedDeal
+from app.domain.scoring import RankedDeal, Reason
+from app.domain.signals import TRAIT_LABELS, Signals
 from app.repository import CallSummary, ClientProfile, FeedbackRecord
+from app.services.signals import SignalsStatus
+
+Labels = Mapping[str, str]
 
 # Rules run on unrounded values; rounding happens only here, at the API boundary.
 # Ratios keep enough places that a client rounding them for display gets the same
@@ -95,6 +103,18 @@ class ReasonOut(BaseModel):
     code: str
     text: str
     weight: float
+    quote: str | None = None
+    source: str | None = None
+
+    @classmethod
+    def from_domain(cls, r: Reason, labels: Labels) -> "ReasonOut":
+        return cls(
+            code=r.code,
+            text=r.text,
+            weight=round(r.weight, RATIO_PLACES),
+            quote=r.quote,
+            source=labels.get(r.source, r.source) if r.source else None,
+        )
 
 
 class RankedDealOut(BaseModel):
@@ -107,7 +127,7 @@ class RankedDealOut(BaseModel):
     explanation: list[ReasonOut]
 
     @classmethod
-    def from_domain(cls, rank: int, r: RankedDeal) -> "RankedDealOut":
+    def from_domain(cls, rank: int, r: RankedDeal, labels: Labels) -> "RankedDealOut":
         c = r.candidate
         return cls(
             rank=rank,
@@ -116,10 +136,7 @@ class RankedDealOut(BaseModel):
             score=round(r.score, RATIO_PLACES),
             status=r.status,
             reaction=r.reaction,
-            explanation=[
-                ReasonOut(code=x.code, text=x.text, weight=round(x.weight, RATIO_PLACES))
-                for x in r.reasons
-            ],
+            explanation=[ReasonOut.from_domain(x, labels) for x in r.reasons],
         )
 
 
@@ -128,10 +145,21 @@ class ViolationOut(BaseModel):
     message: str
 
 
+class NearMissOut(BaseModel):
+    max_price: float
+    discount: float
+    text: str
+
+    @classmethod
+    def from_domain(cls, n: NearMiss) -> "NearMissOut":
+        return cls(max_price=n.max_price, discount=round(n.discount, RATIO_PLACES), text=n.text)
+
+
 class ExcludedDealOut(BaseModel):
     deal: DealOut
     numbers: NumbersOut
     violations: list[ViolationOut]
+    near_miss: NearMissOut | None
 
     @classmethod
     def from_domain(cls, e: ExcludedDeal) -> "ExcludedDealOut":
@@ -139,13 +167,99 @@ class ExcludedDealOut(BaseModel):
             deal=DealOut.from_domain(e.deal, e.market),
             numbers=NumbersOut.from_domain(e.numbers),
             violations=[ViolationOut(code=v.code, message=v.message) for v in e.violations],
+            near_miss=NearMissOut.from_domain(e.near_miss) if e.near_miss else None,
         )
+
+
+class AlertOut(BaseModel):
+    code: str
+    severity: Literal["urgent", "warning", "info"]
+    text: str
+    quote: str | None
+    source: str | None
+
+    @classmethod
+    def from_domain(cls, a: Alert, labels: Labels) -> "AlertOut":
+        source = labels.get(a.source, a.source) if a.source else None
+        return cls(code=a.code, severity=a.severity, text=a.text, quote=a.quote, source=source)
+
+
+class SignalOut(BaseModel):
+    kind: str
+    text: str
+    quote: str
+    source: str
+
+
+def signal_items(
+    signals: Signals, labels: Labels, markets: Mapping[str, Market]
+) -> list[SignalOut]:
+    """The signals as a flat list the rep can read, each with the words it came from."""
+
+    def item(kind: str, text: str, quote: str, source: str) -> SignalOut:
+        return SignalOut(kind=kind, text=text, quote=quote, source=labels.get(source, source))
+
+    items: list[SignalOut] = []
+    if signals.deadline:
+        d = signals.deadline
+        items.append(item("Deadline", d.date, d.quote, d.source))
+    if signals.soft_budget_cap:
+        c = signals.soft_budget_cap
+        items.append(item("Cash limit", f"${c.amount:,}", c.quote, c.source))
+    for t in signals.must_haves:
+        items.append(item("Wants", TRAIT_LABELS[t.trait], t.quote, t.source))
+    for t in signals.avoid_traits:
+        items.append(item("Avoids", TRAIT_LABELS[t.trait], t.quote, t.source))
+    for m in signals.preferred_markets:
+        items.append(item("Market", markets[m.market_id].name, m.quote, m.source))
+    for m in signals.avoided_markets:
+        items.append(item("Against market", markets[m.market_id].name, m.quote, m.source))
+    if signals.uses_cohost:
+        u = signals.uses_cohost
+        items.append(item("Co-host", "Plans to use one", u.quote, u.source))
+    for r in signals.feedback_readings:
+        items.append(item("Comment read as", f"{r.sentiment} ({r.reason})", r.quote, r.source))
+    return items
 
 
 class RecommendationsOut(BaseModel):
     client_id: str
+    signals_status: SignalsStatus
+    signals: list[SignalOut]
+    alerts: list[AlertOut]
     ranked: list[RankedDealOut]
     excluded: list[ExcludedDealOut]
+
+
+class MarketFitOut(BaseModel):
+    rank: int
+    market: MarketOut
+    typical_traveler: str
+    annual_appreciation: float
+    eligible_deals: int
+    best_deal_id: str | None
+    median_coc_low: float | None
+    score: float
+    avoided: bool
+    reasons: list[ReasonOut]
+
+    @classmethod
+    def from_domain(cls, rank: int, f: MarketFit, labels: Labels) -> "MarketFitOut":
+        m = f.market
+        return cls(
+            rank=rank,
+            market=MarketOut(id=m.id, name=m.name, state=m.state, setting=m.setting),
+            typical_traveler=m.typical_traveler,
+            annual_appreciation=m.annual_appreciation,
+            eligible_deals=f.eligible,
+            best_deal_id=f.best_deal_id,
+            median_coc_low=(
+                round(f.median_coc_low, RATIO_PLACES) if f.median_coc_low is not None else None
+            ),
+            score=round(f.score, RATIO_PLACES),
+            avoided=f.avoided,
+            reasons=[ReasonOut.from_domain(r, labels) for r in f.reasons],
+        )
 
 
 class ClientSummaryOut(BaseModel):

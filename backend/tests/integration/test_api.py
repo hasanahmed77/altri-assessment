@@ -118,11 +118,12 @@ def test_feedback_changes_the_next_recommendations(api: TestClient) -> None:
     assert after[neighbour["deal"]["id"]]["score"] < neighbour["score"]
 
 
-def test_recommendations_make_a_single_database_query(api: TestClient) -> None:
+def test_recommendations_read_only_feedback_and_signals(api: TestClient) -> None:
+    recommendations(api, "C-01")
     statements: list[str] = []
     engine = api.app.state.engine  # type: ignore[attr-defined]
     event.listen(engine, "before_cursor_execute", lambda *args: statements.append(args[2]))
 
     recommendations(api, "C-01")
 
-    assert len(statements) == 1
+    assert len(statements) == 2

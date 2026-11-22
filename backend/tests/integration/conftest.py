@@ -11,6 +11,7 @@ from psycopg import sql
 
 from app.config import Settings
 from app.main import create_app
+from tests.fakes import FakeExtractor
 
 ADMIN_URL = os.environ.get("TEST_DATABASE_URL", "")
 MIGRATIONS_DIR = Path(
@@ -60,7 +61,13 @@ def database_url(template_db: str) -> Iterator[str]:
 
 
 @pytest.fixture
-def api(database_url: str) -> Iterator[TestClient]:
-    app = create_app(Settings(database_url=database_url))
+def extractor() -> FakeExtractor:
+    return FakeExtractor()
+
+
+@pytest.fixture
+def api(database_url: str, extractor: FakeExtractor) -> Iterator[TestClient]:
+    # A blank key keeps a developer's real one out of the tests, even if .env has it
+    app = create_app(Settings(database_url=database_url, openai_api_key=""), extractor)
     with TestClient(app) as client:
         yield client
