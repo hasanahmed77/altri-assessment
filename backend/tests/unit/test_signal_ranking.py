@@ -1,13 +1,15 @@
 from app.domain.finance import deal_numbers
 from app.domain.models import Client, Deal, Feedback, LowMidHigh
 from app.domain.scoring import Candidate, RankedDeal, rank
+from app.domain.signal_fit import usable_traits
 from app.domain.signals import (
     AmountSignal,
+    AvoidSignal,
     FeedbackReading,
     MarketSignal,
     Signals,
     Trait,
-    TraitSignal,
+    WishSignal,
 )
 from tests.factories import MARKET, make_client, make_deal, make_feedback, make_signals
 
@@ -26,8 +28,12 @@ def ranking(
     return {r.candidate.deal.id: r for r in ranked}
 
 
-def trait(t: Trait) -> TraitSignal:
-    return TraitSignal(trait=t, quote="q", source="notes")
+def wish(t: Trait) -> WishSignal:
+    return WishSignal(trait=t, quote="q", source="notes")
+
+
+def avoid(t: Trait) -> AvoidSignal:
+    return AvoidSignal(trait=t, quote="q", source="notes")
 
 
 def test_a_must_have_lifts_deals_that_have_it_and_explains_with_the_quote() -> None:
@@ -47,7 +53,7 @@ def test_a_must_have_lifts_deals_that_have_it_and_explains_with_the_quote() -> N
     deals = [weak, plain, on_water]
 
     without = ranking(deals, make_signals())
-    with_signal = ranking(deals, make_signals(must_haves=[trait(Trait.WATER)]))
+    with_signal = ranking(deals, make_signals(must_haves=[wish(Trait.WATER)]))
 
     assert without["D-1"].score > without["D-2"].score
     assert with_signal["D-2"].score > with_signal["D-1"].score
@@ -60,7 +66,12 @@ def test_an_avoided_trait_sinks_a_deal_without_excluding_it() -> None:
         make_deal(id="D-1", property_key="1", revenue=STRONG),
         make_deal(id="D-2", property_key="2"),
     ]
-    ranked = ranking(deals, make_signals(avoid_traits=[trait(Trait.LAKE_MOUNTAIN)]))
+    beach_first = make_client(
+        setting_rank={"beach_coastal": 1, "urban_hybrid": 2, "lake_mountain": 3}
+    )
+    ranked = ranking(
+        deals, make_signals(avoid_traits=[avoid(Trait.LAKE_MOUNTAIN)]), client=beach_first
+    )
     assert set(ranked) == {"D-1", "D-2"}
     assert all(any(r.code == "AVOID_TRAIT" for r in d.reasons) for d in ranked.values())
 
@@ -104,3 +115,17 @@ def test_a_pass_only_for_timing_is_not_held_against_the_house_or_its_neighbours(
     assert read["D-1"].score > plain["D-1"].score
     assert read["D-2"].score > plain["D-2"].score
     assert any(r.code == "SOFT_PASS" for r in read["D-1"].reasons)
+
+
+def test_readings_that_contradict_the_profile_or_each_other_are_held_back() -> None:
+    client = make_client(renovation_appetite="heavy")
+    signals = make_signals(
+        must_haves=[wish(Trait.VIEWS), wish(Trait.ROOM_TO_ADD)],
+        avoid_traits=[avoid(Trait.HEAVY_RENOVATION), avoid(Trait.ROOM_TO_ADD)],
+    )
+
+    usable = usable_traits(client, signals)
+
+    assert [w.trait for w in usable.wishes] == [Trait.VIEWS]
+    assert usable.avoids == []
+    assert len(usable.conflicts) == 3

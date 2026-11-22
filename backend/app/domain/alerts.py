@@ -8,7 +8,7 @@ from app.domain.market_fit import MarketFit
 from app.domain.models import Client, Market
 from app.domain.recommend import Recommendations
 from app.domain.rules import max_cash
-from app.domain.signal_fit import cash_limit, signal_preferred_markets
+from app.domain.signal_fit import cash_limit, signal_preferred_markets, usable_traits
 from app.domain.signals import (
     MARKET_TRAITS,
     TRAIT_LABELS,
@@ -77,7 +77,12 @@ def alerts(
         found.append(Alert.quoted("COHOST_FEE_MISSING", "warning", text, signals.uses_cohost))
 
     to_send = [r.candidate for r in recommendations.ranked if r.status != "already_shared"]
-    for wish in {s.trait: s for s in signals.must_haves}.values():
+    usable = usable_traits(client, signals)
+    for signal, problem in usable.conflicts:
+        text = f"{problem}; confirm with the client before relying on it"
+        found.append(Alert.quoted("SIGNAL_CONFLICT", "warning", text, signal))
+
+    for wish in usable.wishes:
         if wish.trait in MARKET_TRAITS:
             continue
         if not any(has_trait(wish.trait, c.deal, c.market) for c in to_send):

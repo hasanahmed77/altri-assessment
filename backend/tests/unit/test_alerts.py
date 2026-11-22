@@ -4,7 +4,7 @@ from app.domain.alerts import alerts, parse_budget_range
 from app.domain.market_fit import market_fit
 from app.domain.models import Client
 from app.domain.recommend import recommend
-from app.domain.signals import AmountSignal, DateSignal, Evidence, Signals, Trait, TraitSignal
+from app.domain.signals import AmountSignal, DateSignal, Evidence, Signals, Trait, WishSignal
 from tests.factories import MARKET, make_client, make_deal, make_signals
 
 TODAY = date(2026, 11, 22)
@@ -54,9 +54,7 @@ def test_no_eligible_deal_in_a_preferred_market_is_flagged() -> None:
 
 
 def test_a_must_have_no_eligible_deal_offers_is_flagged() -> None:
-    ski = TraitSignal(
-        trait=Trait.SKI_ACCESS, quote="Really wants a ski destination", source="notes"
-    )
+    ski = WishSignal(trait=Trait.SKI_ACCESS, quote="Really wants a ski destination", source="notes")
     assert "ski access" in codes(make_client(), make_signals(must_haves=[ski]))["MUST_HAVE_UNMET"]
 
 

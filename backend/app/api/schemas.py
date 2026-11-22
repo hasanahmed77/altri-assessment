@@ -208,8 +208,8 @@ def signal_items(
         items.append(item("Cash limit", f"${c.amount:,}", c.quote, c.source))
     for t in signals.must_haves:
         items.append(item("Wants", TRAIT_LABELS[t.trait], t.quote, t.source))
-    for t in signals.avoid_traits:
-        items.append(item("Avoids", TRAIT_LABELS[t.trait], t.quote, t.source))
+    for a in signals.avoid_traits:
+        items.append(item("Avoids", TRAIT_LABELS[a.trait], a.quote, a.source))
     for m in signals.preferred_markets:
         items.append(item("Market", markets[m.market_id].name, m.quote, m.source))
     for m in signals.avoided_markets:

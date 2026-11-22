@@ -4,6 +4,7 @@ from dataclasses import dataclass
 from datetime import date, datetime
 from typing import Any
 
+from pydantic import ValidationError
 from sqlalchemy import Connection, RowMapping, text
 
 from app.domain.models import (
@@ -107,8 +108,13 @@ def client_signals(conn: Connection, client_id: str) -> StoredSignals | None:
     )
     if row is None:
         return None
+    try:
+        signals = Signals.model_validate(row["signals"])
+    except ValidationError:
+        # Stored by an older, looser schema: treat as missing so it is extracted again
+        return None
     return StoredSignals(
-        signals=Signals.model_validate(row["signals"]),
+        signals=signals,
         dropped=tuple(row["dropped"]),
         source_hash=row["source_hash"],
         model=row["model"],

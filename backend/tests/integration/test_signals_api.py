@@ -4,12 +4,12 @@ from fastapi.testclient import TestClient
 from sqlalchemy import create_engine, text
 
 from app.config import Settings
-from app.domain.signals import FeedbackReading, Trait, TraitSignal
+from app.domain.signals import FeedbackReading, Trait, WishSignal
 from app.main import create_app
 from tests.factories import make_signals
 from tests.fakes import FakeExtractor
 
-WATER = TraitSignal(trait=Trait.WATER, quote="Being on the water is a must", source="feedback:35")
+WATER = WishSignal(trait=Trait.WATER, quote="Being on the water is a must", source="feedback:35")
 
 
 def recommendations(api: TestClient, client_id: str) -> dict[str, Any]:

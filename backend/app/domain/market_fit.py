@@ -4,7 +4,7 @@ from statistics import median
 
 from app.domain.models import Client, Market
 from app.domain.scoring import SETTING_LABELS, SETTING_RANK_SCORES, RankedDeal, Reason, normalize
-from app.domain.signal_fit import signal_preferred_markets
+from app.domain.signal_fit import signal_preferred_markets, usable_traits
 from app.domain.signals import TRAIT_LABELS, Signals, market_has_trait
 
 # Where to buy is counting and arithmetic, so it is reproducible and cheap. A market is only
@@ -89,16 +89,17 @@ def _fit(
     if coc is not None:
         score += RETURNS_WEIGHT * scaled[coc]
 
-    for signal in signals.must_haves:
+    usable = usable_traits(client, signals)
+    for signal in usable.wishes:
         if market_has_trait(signal.trait, market):
             score += MARKET_TRAIT_MET
             text = f"Offers {TRAIT_LABELS[signal.trait]}, which the client wants"
             reasons.append(Reason.quoted("MUST_HAVE_MET", text, MARKET_TRAIT_MET, signal))
-    for signal in signals.avoid_traits:
-        if market_has_trait(signal.trait, market):
+    for unwanted in usable.avoids:
+        if market_has_trait(unwanted.trait, market):
             score += MARKET_TRAIT_AVOIDED
-            text = f"Has {TRAIT_LABELS[signal.trait]}, which the client avoids"
-            reasons.append(Reason.quoted("AVOID_TRAIT", text, MARKET_TRAIT_AVOIDED, signal))
+            text = f"Has {TRAIT_LABELS[unwanted.trait]}, which the client avoids"
+            reasons.append(Reason.quoted("AVOID_TRAIT", text, MARKET_TRAIT_AVOIDED, unwanted))
 
     against = next((s for s in signals.avoided_markets if s.market_id == market.id), None)
     if against is not None:

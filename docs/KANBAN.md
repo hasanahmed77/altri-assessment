@@ -12,24 +12,22 @@ WIP limit: **1** card in progress. Move a card by moving its line. Commits refer
 
 ## Backlog
 
-### M4 Part B → tag v0.2
-- **B-13** Stretch, day 5 morning only if ahead: Playwright smoke test of the demo flow, local only (not in CI)
-- Push migrations 0003 + 0004 to Supabase, then tag `v0.2`
-
 ### M5 Ship → tag v1.0
-- **S-09** README ≤ 2 pages: run, how it works + why (incl. schema changes and why), research + sources + what changed my thinking, assumptions, questions for v2, next steps, AI usage + measured cost per client; links to DESIGN.md and AI_LOG.md for depth
-- **S-15** Research notes kept as you go in `prep/RESEARCH.md` (topic, source link, what changed) · AC: feeds the README research section
-- **S-10** `docs/AI_LOG.md` finalized (at least one "AI got it wrong" story)
-- **S-11** Fresh clone on a clean machine: compose up + test command
-- **S-12** Video script, recording (~10 min) · AC: repo is public and video unlisted; both links opened in a private window without signing in
+- **S-12** Record the video (~10 min, script ready) · AC: repo is public and video unlisted; both links opened in a private window without signing in; video link added to the README
 - **S-13** Rehearse: trace any recommendation from the screen to `finance.py` in under a minute
+- Tag `v1.0` once the video link is in
 
 ## Done
+- **S-11** Fresh copy (only files git publishes, no `.env`): `docker compose up` healthy, signals `fresh` without a key, web 200, 90 tests pass
+- **S-10** `docs/AI_LOG.md`: AI-01..08 and LLM-01..09, each with how it was caught
+- **S-09** README, 2 pages at 11 pt; research with sources folded in (replaces S-15's separate notes)
+- **B-13** Dropped: a Playwright smoke test would repeat the API integration tests; the demo flow was checked by hand in the browser
 - **B-12** Re-extraction in the background after a comment (and after a page load that finds a changed hash), one per client at a time · AC met: integration test, thumbs without a comment make no call
 - **B-11** Near misses: bisection price solver, ≤ 5% under asking, $1,000 steps; "Close call" first on Ruled out · AC met: C-13/D-138 passes at $960,000 (0.7% under); 4 unit tests
 - **B-10** Signals panel with quotes and sources, status line, page refreshes every 2 s (max 5) while `updating`
 - **B-09** Snapshot `0004_signals_snapshot.sql` written by the eval run with the real model · AC met: no key → signals `fresh`, a new comment → `stale` (integration test)
-- **B-08** Evals: 16 cases in `backend/evals/cases.py`, `python -m evals.run` · AC met: 16/16 on two runs, $0.0013 per client measured
+- **B-08** Evals: 18 cases in `backend/evals/cases.py`, `python -m evals.run` · AC met: 18/18 on two runs, $0.003 per client measured on gpt-5.4-mini
+- **B-14** Switched from gpt-4.1-mini (deprecated) to gpt-5.4-mini; snapshot `0005` as an upsert migration; polarity in the schema, deal and profile consistency checks
 - **B-07** `GET /clients/{id}/markets` + "Where to buy" tab, opened first when the client is undecided or their markets have nothing eligible · AC met: C-12 sees ranked markets with reasons
 - **B-06** Alerts: deadline, spoken cash limit, budget vs range, co-host with 0% fee, unmatched terms, nothing in preferred markets, unmet must-have, undecided
 - **B-05** Signals in scoring (must-haves, avoided traits and markets, mentioned markets, soft cap, feedback readings) · AC met: C-02/D-145 not penalized; C-03 gets Bradenton first; C-09 party markets drop

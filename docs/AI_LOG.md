@@ -95,6 +95,20 @@ Found by the evals (`python -m evals.run`) and by reading the extracted signals.
 - **Fix:** Code decides when a spoken limit counts: below the profile cap and not the profile budget said again. C-01's "keep total cash under about $320K" still counts. A new eval case checks the effect.
 - **Lesson:** When a prompt fix doesn't stick, move the decision into code, where it is tested.
 
+### LLM-07 Complaints inverted into their opposite
+- **What happened:** After switching to gpt-5.4-mini, all 16 cases still passed, but reading every client's signals showed "Too close to the neighbors" as *avoids privacy* (C-01, C-07, C-09, C-11) and "Family trips only, worried about parties" as *wants a party crowd* (C-09). Each would have pushed down exactly the homes those clients want.
+- **How it was caught:** Reading all 15 clients' signals after the model switch, not from the pass rate. No case checked polarity.
+- **Fix:** Direction is now in the schema: avoid_traits offers 9 traits, must_haves 15, so the model can't return "avoid privacy" at all, and validation rejects it in stored data. Two polarity cases were added. A prompt rule alone fixed privacy but not cabin feel.
+- **Lesson:** Make wrong answers unrepresentable where the domain allows it.
+
+### LLM-08 A complaint about a missing feature read as avoiding it
+- **What happened:** "Doesn't have a cabin feel inside" (C-08 on D-128, C-06 on D-118) came back as *avoids cabin feel*. With privacy no longer avoidable, the model also squeezed "Too close to the neighbors" into *avoids things to do nearby*.
+- **Fix:** A thumbs-down comment can only avoid a feature the house has; anything else is dropped and logged (`check_against_deals`). A first version also checked wishes and dropped real ones ("Great views" on a house the analyst never tagged with views), so it was narrowed to avoided features only.
+
+### LLM-09 Readings that contradict the profile
+- **What happened:** C-06's notes say "fine with a big renovation"; the model returned *avoids a heavy renovation*. C-04 came back both wanting and avoiding room to add amenities.
+- **Fix:** Readings that contradict the signed-off profile, or each other, don't move the ranking; the rep sees a "confirm with the client" alert with the quote. The profile stays the source of truth and the conflict becomes a question for the rep, not a silent re-rank.
+
 ## 3. How coding-assistant mistakes are prevented
 | Risk | Defense |
 |---|---|
@@ -111,7 +125,8 @@ Found by the evals (`python -m evals.run`) and by reading the extracted signals.
 | Invented quote or preference | Every signal must quote the client's own words verbatim; otherwise it is dropped and logged (LLM-05). Code settles which source a quote came from (LLM-01, LLM-03). |
 | Invented market or trait | Strict JSON schema: market ids from an enum of the 14 real ids; traits from the same closed vocabulary as deal tags. |
 | Malformed output | OpenAI Structured Outputs with a strict schema, then Pydantic validation; on failure the previous signals are kept. |
-| Misread tone (sarcasm, "bad timing", "Hmm. Maybe?") | 16 eval cases from the real data (16/16 on two runs). The model only classifies; code decides the effect (LLM-02, LLM-06). |
+| Misread tone (sarcasm, "bad timing", "Hmm. Maybe?") | 18 eval cases from the real data (18/18 on two runs). The model only classifies; code decides the effect (LLM-02, LLM-06). |
+| Inverted polarity ("too close to the neighbors" as avoiding privacy) | The schema limits which traits can be wanted or avoided; a thumbs down can only avoid a feature the house has; contradictions with the profile go to the rep (LLM-07 to LLM-09). |
 | A wrong reading changes what the client sees | Signals only re-rank; hard rules come from the profile. Every adjustment shows its quote on the card, so the rep can overrule it. |
 | Instructions hidden in a client comment | Comments are passed as data; the output can only be the schema; the LLM has no tools and can't change eligibility, which is decided in code. |
 | Run-to-run variation | Temperature 0, and results are cached by content hash, so the same input is not re-asked. |

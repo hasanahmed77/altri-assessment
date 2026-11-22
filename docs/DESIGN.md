@@ -81,6 +81,7 @@ Each entry: what was decided, what else was considered, and why. New decisions a
 
 ### D-12 Grounded, closed-vocabulary signals
 - **Decision:** The OpenAI response uses a strict JSON schema (Structured Outputs). Traits come from a closed list of 17 (`domain/signals.py`), each decided on deals by code from deal tags or market data; markets come from an enum of the 14 market ids. Every signal must quote the client's words verbatim (case, spacing and curly quotes normalized), or it is dropped and logged. Code, not the model, settles the citation: a copied header like `[call:2026-09-10] Call on…` resolves to its id, and a real quote cited to the wrong source is re-cited when exactly one source contains it.
+- **Direction is in the schema:** the wish list offers 15 traits and the avoid list 9; nobody avoids privacy or views and nobody wants a party crowd, so the model can't return those (LLM-07). A thumbs-down comment can only avoid a feature the house actually has (LLM-08).
 - **Why:** This prevents invented preferences or markets, lets the rep verify each signal, and makes signals directly comparable with deals. The model only reads; code decides what a signal means for a deal.
 
 ### D-13 Deal tags from a lookup table, not an LLM
@@ -126,7 +127,7 @@ Each entry: what was decided, what else was considered, and why. New decisions a
 - **Display:** cards are numbered by position within their tab ("#1" is the first deal to send), and the top 5 are shown before "show more", so the rep sees a short list first.
 
 ### D-22 Signals nudge the ranking; they never exclude
-- **Decision:** Fixed, documented weights in `domain/signal_fit.py`: must-have met +0.10, missing −0.15, avoided trait −0.40, market the client spoke against −0.40, over a spoken cash limit −0.30. A spoken limit counts only if it is below the profile cap and isn't the profile budget said again (LLM-06). A market the client mentioned counts like a profile market. Each adjustment is a reason on the card with the client's quote and its source.
+- **Decision:** Fixed, documented weights in `domain/signal_fit.py`: must-have met +0.10, missing −0.15, avoided trait −0.40, market the client spoke against −0.40, over a spoken cash limit −0.30. A spoken limit counts only if it is below the profile cap and isn't the profile budget said again (LLM-06). A reading that contradicts the profile (avoiding a heavy renovation when the profile says heavy, avoiding the #1 setting) or another reading (a trait both wanted and avoided) doesn't move the ranking; the rep gets a "confirm with the client" alert with the quote (LLM-09). A market the client mentioned counts like a profile market. Each adjustment is a reason on the card with the client's quote and its source.
 - **Why:** Hard rules come from the structured profile, which the client signed off; a model's reading of a comment is not strong enough to hide a deal. A −0.40 sinks a deal without removing it, and the rep sees why.
 
 ### D-23 The model classifies; code decides what it means
@@ -146,8 +147,9 @@ Each entry: what was decided, what else was considered, and why. New decisions a
 - **Why:** These are the things a rep must fix or ask about before sending anything, and each is a conflict between two pieces of data, which code can detect exactly.
 
 ### D-27 Model and evals
-- **Decision:** `gpt-4.1-mini` by default (`OPENAI_MODEL`), temperature 0, 1,500 output tokens max, 30 s timeout and one retry. `python -m evals.run` checks 15 labelled cases from the real data against the real model; it is not in CI.
-- **Why:** The task is short extraction into a fixed schema, so a small non-reasoning model is enough and supports temperature 0. Measured: about 2,000 input and 280 output tokens per client, $0.0013 per client, 16/16 cases on two consecutive runs. The cases were also used to fix the prompt, so they are a regression suite, not a held-out score.
+- **Decision:** `gpt-5.4-mini` by default (`OPENAI_MODEL`), temperature 0, 1,500 output tokens max, 30 s timeout and one retry. `python -m evals.run` checks 18 labelled cases from the real data against the real model; it is not in CI.
+- **Alternatives:** `gpt-4.1-mini` passed the same evals at half the price ($0.0013 per client) but OpenAI lists it as deprecated; `gpt-5-mini` rejects temperature 0.
+- **Why:** The task is short extraction into a fixed schema, so a small model is enough. Measured: about 2,000 input and 270 output tokens per client, $0.003 per client ($0.75 / $4.50 per million tokens), 18/18 cases on two consecutive runs. gpt-5.4-mini also stopped quoting source headers, which gpt-4.1-mini did on every run. The cases were also used to fix the prompt, so they are a regression suite, not a held-out score. A newer snapshot is a new upsert migration (`…0005`), never an edit to an applied one.
 
 ## Assumptions
 - `clients.budget` is authoritative when it conflicts with `budget_range` (C-03, C-06, C-09); the conflict is shown to the rep.

@@ -7,7 +7,7 @@ from openai import OpenAI
 from app.domain.models import Market
 from app.domain.signals import TRAIT_DESCRIPTIONS, Signals
 
-PROMPT_VERSION = "signals-v4"
+PROMPT_VERSION = "signals-v5"
 MAX_OUTPUT_TOKENS = 1500
 TIMEOUT_SECONDS = 30.0
 
@@ -49,7 +49,10 @@ Rules:
 - "quote" is the client's words that express the item, copied character for character from
   inside that tag. Never quote the "about" text, and never paraphrase.
 - Record only the client's own wishes. Leave a field empty or null when nothing supports it.
-- must_haves / avoid_traits: use only these traits:
+- must_haves are traits the client wants or requires; avoid_traits are traits they do not
+  want the home to have. A complaint that a home lacks something is a must-have for it ("Too
+  close to the neighbors" is a must-have of privacy). Something the client would merely
+  tolerate ("fine with a big renovation") is neither. Use only these traits:
 {traits}
 - preferred_markets / avoided_markets: use only these markets. Map towns, regions and states
   to the markets they name ("Hunter" is M-05; "Florida" is every Florida market). Settings

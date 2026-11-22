@@ -72,6 +72,10 @@ CASES = [
          lambda s, _: "M-13" not in markets(s)),
     Case("C-12", "undecided", "'maybe mountains or a lake' is a setting, not a market",
          lambda s, _: not markets(s) and wants(s, Trait.LAKE_MOUNTAIN)),
+    Case("C-09", "polarity: neighbors", "'Too close to the neighbors' never avoids privacy",
+         lambda s, _: not avoids(s, Trait.PRIVACY)),
+    Case("C-08", "polarity: cabin feel", "'Doesn't have a cabin feel inside' never avoids it",
+         lambda s, _: not avoids(s, Trait.CABIN_FEEL)),
     Case("C-14", "innocuous", "'Numbers look solid. What would the hot tub add?' adds no wishes",
          lambda s, _: said_nothing_more(s, "feedback:33")),
 ]  # fmt: skip

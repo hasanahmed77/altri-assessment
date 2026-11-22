@@ -1,10 +1,11 @@
 import re
 from collections.abc import Callable, Mapping
+from dataclasses import dataclass
 from datetime import date
 from enum import StrEnum
-from typing import Literal
+from typing import Annotated, Literal
 
-from pydantic import BaseModel, ConfigDict
+from pydantic import AfterValidator, BaseModel, ConfigDict, WithJsonSchema
 
 from app.domain.models import Deal, Market
 from app.domain.tags import Tag, deal_tags, renovation_level
@@ -100,6 +101,22 @@ TRAIT_MATCHERS: dict[Trait, Callable[[Deal, Market], bool]] = {
     Trait.NEAR_ATTRACTIONS: _tagged(Tag.NEAR_ATTRACTIONS),
     Trait.ROOM_TO_ADD: _tagged(Tag.ROOM_TO_ADD),
 }
+# Yes-or-no features read from a deal's highlights and notes, as opposed to judgments
+# (how much renovation is too much) or facts about the market
+FEATURE_TRAITS = frozenset(
+    {
+        Trait.WATER,
+        Trait.WATERFRONT,
+        Trait.SKI_ACCESS,
+        Trait.VIEWS,
+        Trait.PRIVACY,
+        Trait.NEWER_BUILD,
+        Trait.CABIN_FEEL,
+        Trait.DATED_INTERIOR,
+        Trait.NEAR_ATTRACTIONS,
+        Trait.ROOM_TO_ADD,
+    }
+)
 MARKET_TRAIT_MATCHERS: dict[Trait, Callable[[Market], bool]] = {
     Trait.LAKE_MOUNTAIN: lambda market: market.setting == "lake_mountain",
     Trait.BEACH_COASTAL: lambda market: market.setting == "beach_coastal",
@@ -139,6 +156,47 @@ class TraitSignal(Evidence):
     trait: Trait
 
 
+# Which way a trait can point is decided here, not by the model. Nobody avoids privacy or
+# views and nobody wants a party crowd, yet models invert complaints into exactly that
+# ("Too close to the neighbors" read as avoiding privacy). The schema sent to the model offers
+# only the allowed traits for each list, and validation rejects the rest.
+WANTABLE = frozenset(Trait) - {Trait.PARTY_MARKET, Trait.DATED_INTERIOR}
+AVOIDABLE = frozenset(
+    {
+        Trait.DATED_INTERIOR,
+        Trait.HEAVY_RENOVATION,
+        Trait.CABIN_FEEL,
+        Trait.NEAR_ATTRACTIONS,
+        Trait.ROOM_TO_ADD,
+        Trait.LAKE_MOUNTAIN,
+        Trait.BEACH_COASTAL,
+        Trait.URBAN,
+        Trait.PARTY_MARKET,
+    }
+)
+
+
+def _only(allowed: frozenset[Trait]) -> Callable[[Trait], Trait]:
+    def check(trait: Trait) -> Trait:
+        if trait not in allowed:
+            raise ValueError(f"{trait.value} is not allowed here")
+        return trait
+
+    return check
+
+
+def _enum_of(allowed: frozenset[Trait]) -> WithJsonSchema:
+    return WithJsonSchema({"type": "string", "enum": sorted(t.value for t in allowed)})
+
+
+class WishSignal(TraitSignal):
+    trait: Annotated[Trait, AfterValidator(_only(WANTABLE)), _enum_of(WANTABLE)]
+
+
+class AvoidSignal(TraitSignal):
+    trait: Annotated[Trait, AfterValidator(_only(AVOIDABLE)), _enum_of(AVOIDABLE)]
+
+
 class MarketSignal(Evidence):
     market_id: MarketId
 
@@ -169,8 +227,8 @@ class Signals(BaseModel):
 
     model_config = ConfigDict(frozen=True)
 
-    must_haves: list[TraitSignal]
-    avoid_traits: list[TraitSignal]
+    must_haves: list[WishSignal]
+    avoid_traits: list[AvoidSignal]
     preferred_markets: list[MarketSignal]
     avoided_markets: list[MarketSignal]
     soft_budget_cap: AmountSignal | None
@@ -269,6 +327,36 @@ def ground(signals: Signals, sources: Mapping[str, str]) -> tuple[Signals, list[
         ),
         dropped,
     )
+
+
+@dataclass(frozen=True)
+class ReactedDeal:
+    deal: Deal
+    market: Market
+    liked: bool
+
+
+def check_against_deals(
+    signals: Signals, reacted: Mapping[str, ReactedDeal]
+) -> tuple[Signals, list[str]]:
+    """Models invert complaints: "Doesn't have a cabin feel inside" comes back as avoiding cabin
+    feel. A thumbs down can only avoid a feature the house has, so an avoided feature the house
+    lacks is dropped. Wishes are left alone: tags miss things a client noticed ("Great views")."""
+    dropped: list[str] = []
+
+    def fits(signal: TraitSignal) -> bool:
+        about = reacted.get(signal.source)
+        if about is None or about.liked or signal.trait not in FEATURE_TRAITS:
+            return True
+        if has_trait(signal.trait, about.deal, about.market):
+            return True
+        dropped.append(
+            f"avoid_trait: {about.deal.id} has no {signal.trait.value} to avoid ({signal.quote!r})"
+        )
+        return False
+
+    kept = [s for s in signals.avoid_traits if fits(s)]
+    return signals.model_copy(update={"avoid_traits": kept}), dropped
 
 
 def deadline_date(signals: Signals) -> date | None:

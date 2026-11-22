@@ -10,7 +10,13 @@ from typing import Literal
 from sqlalchemy import Connection, Engine
 
 from app import repository
-from app.domain.signals import EMPTY_SIGNALS, Signals, ground
+from app.domain.signals import (
+    EMPTY_SIGNALS,
+    ReactedDeal,
+    Signals,
+    check_against_deals,
+    ground,
+)
 from app.llm.extractor import PROMPT_VERSION, SignalExtractor, Source
 from app.repository import FeedbackRecord, Reference, StoredSignals
 
@@ -48,6 +54,24 @@ def client_sources(
         context = f"{thumb} on {deal.id} in {deal.city} ({market.name}), {record.created_at}"
         sources.append(Source(f"feedback:{item.id}", context, item.comment))
     return sources
+
+
+def verify(
+    signals: Signals,
+    sources: Sequence[Source],
+    reference: Reference,
+    feedback: Sequence[FeedbackRecord],
+) -> tuple[Signals, list[str]]:
+    """Everything the model said, minus what the client never said or the data contradicts."""
+    grounded, unquoted = ground(signals, {s.id: s.text for s in sources})
+    reacted = {}
+    for record in feedback:
+        deal = reference.deals_by_id[record.feedback.deal_id]
+        reacted[f"feedback:{record.feedback.id}"] = ReactedDeal(
+            deal, reference.markets[deal.market_id], record.feedback.reaction == "up"
+        )
+    consistent, contradicted = check_against_deals(grounded, reacted)
+    return consistent, unquoted + contradicted
 
 
 def source_hash(sources: Sequence[Source], model: str) -> str:
@@ -114,7 +138,7 @@ class SignalService:
                 return
 
         extraction = extractor.extract(sources)
-        signals, dropped = ground(extraction.signals, {s.id: s.text for s in sources})
+        signals, dropped = verify(extraction.signals, sources, self._reference, feedback)
         for reason in dropped:
             log.warning("Dropped ungrounded signal for %s: %s", client_id, reason)
 

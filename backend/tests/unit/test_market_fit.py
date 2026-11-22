@@ -3,7 +3,7 @@ from dataclasses import replace
 from app.domain.market_fit import market_fit
 from app.domain.models import Client
 from app.domain.recommend import recommend
-from app.domain.signals import Signals, Trait, TraitSignal
+from app.domain.signals import AvoidSignal, Signals, Trait
 from tests.factories import MARKET, make_client, make_deal, make_signals
 
 BEACH = replace(MARKET, id="M-08", name="Clearwater Area", setting="beach_coastal")
@@ -33,7 +33,7 @@ def test_the_top_setting_leads_and_avoided_markets_go_last() -> None:
 def test_a_party_market_drops_for_a_client_who_avoids_them() -> None:
     client = make_client(setting_rank={"urban_hybrid": 1, "lake_mountain": 2, "beach_coastal": 3})
     avoid = make_signals(
-        avoid_traits=[TraitSignal(trait=Trait.PARTY_MARKET, quote="q", source="notes")]
+        avoid_traits=[AvoidSignal(trait=Trait.PARTY_MARKET, quote="q", source="notes")]
     )
     assert order(client)[0] == "M-12"
     assert order(client, avoid)[-1] == "M-12"
