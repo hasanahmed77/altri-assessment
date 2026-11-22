@@ -76,6 +76,10 @@ CASES = [
          lambda s, _: not avoids(s, Trait.PRIVACY)),
     Case("C-08", "polarity: cabin feel", "'Doesn't have a cabin feel inside' never avoids it",
          lambda s, _: not avoids(s, Trait.CABIN_FEEL)),
+    Case("C-15", "request", "'can we get a walkthrough video?' is a question for the rep",
+         lambda s, _: any("walkthrough" in q.quote for q in s.client_questions)),
+    Case("C-11", "question", "'What would the hot tub add?' is a question for the rep",
+         lambda s, _: any("hot tub" in q.quote for q in s.client_questions)),
     Case("C-14", "innocuous", "'Numbers look solid. What would the hot tub add?' adds no wishes",
          lambda s, _: said_nothing_more(s, "feedback:33")),
 ]  # fmt: skip

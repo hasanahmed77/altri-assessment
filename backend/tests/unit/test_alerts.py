@@ -62,3 +62,8 @@ def test_a_budget_said_again_is_not_a_cash_limit() -> None:
     client = make_client(budget=275_000, budget_flexibility="flexible")
     restated = make_signals(soft_budget_cap=AmountSignal(amount=275_000, quote="q", source="notes"))
     assert "SOFT_BUDGET_CAP" not in codes(client, restated)
+
+
+def test_a_question_from_the_client_becomes_a_follow_up() -> None:
+    asked = Evidence(quote="What would the hot tub add?", source="feedback:22")
+    assert "CLIENT_QUESTION" in codes(make_client(), make_signals(client_questions=[asked]))

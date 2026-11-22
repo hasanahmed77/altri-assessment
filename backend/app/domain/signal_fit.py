@@ -9,6 +9,7 @@ from app.domain.signals import (
     AmountSignal,
     AvoidSignal,
     Evidence,
+    FeedbackReading,
     Signals,
     Trait,
     TraitSignal,
@@ -151,13 +152,15 @@ def reaction_weights(latest: Mapping[str, Feedback], signals: Signals) -> dict[i
     weights: dict[int, float] = {}
     for item in latest.values():
         reading = readings.get(item.id)
-        if reading is None:
-            weights[item.id] = 1.0 if item.reaction == "up" else -1.0
-        elif reading.reason in NOT_ABOUT_THE_HOUSE:
-            weights[item.id] = 0.0
-        else:
-            weights[item.id] = SENTIMENT_SIGNS[reading.sentiment]
+        thumb = 1.0 if item.reaction == "up" else -1.0
+        weights[item.id] = reading_weight(reading) if reading else thumb
     return weights
+
+
+def reading_weight(reading: FeedbackReading) -> float:
+    if reading.reason in NOT_ABOUT_THE_HOUSE:
+        return 0.0
+    return SENTIMENT_SIGNS[reading.sentiment]
 
 
 def _first_per_trait[S: TraitSignal](signals: list[S]) -> list[S]:

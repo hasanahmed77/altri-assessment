@@ -18,6 +18,7 @@ WIP limit: **1** card in progress. Move a card by moving its line. Commits refer
 - Tag `v1.0` once the video link is in
 
 ## Done
+- **R-01** Deep review against the brief and every client's text: Part A recomputed independently (0 mismatches over 675 pairs); named markets now rank first; the "nothing in your markets" alert counts deals still to send and says how close the nearest miss is; quotes must mention what they support; client questions become alerts; signals panel grouped; no retry storm after a failed extraction; live comment → model → refreshed page verified in the browser · 94 tests, 20/20 evals on two runs
 - **S-11** Fresh copy (only files git publishes, no `.env`): `docker compose up` healthy, signals `fresh` without a key, web 200, 90 tests pass
 - **S-10** `docs/AI_LOG.md`: AI-01..08 and LLM-01..09, each with how it was caught
 - **S-09** README, 2 pages at 11 pt; research with sources folded in (replaces S-15's separate notes)

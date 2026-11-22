@@ -140,3 +140,15 @@ def test_profile_conflicts_and_unknown_markets_raise_alerts(api: TestClient) -> 
 
     assert {"BUDGET_RANGE_CONFLICT", "UNRESOLVED_MARKET"} <= c03
     assert "UNRESOLVED_MARKET" in c13
+
+
+def test_a_failed_extraction_is_not_retried_on_every_page_view(
+    api: TestClient, extractor: FakeExtractor
+) -> None:
+    extractor.fail = True
+    recommendations(api, "C-05")
+    assert len(extractor.calls) == 1
+
+    body = recommendations(api, "C-05")
+    assert body["signals_status"] == "stale"
+    assert len(extractor.calls) == 1

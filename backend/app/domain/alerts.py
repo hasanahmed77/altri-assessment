@@ -6,8 +6,9 @@ from typing import Literal
 
 from app.domain.market_fit import MarketFit
 from app.domain.models import Client, Market
-from app.domain.recommend import Recommendations
-from app.domain.rules import max_cash
+from app.domain.near_miss import MONEY_RULES
+from app.domain.recommend import ExcludedDeal, Recommendations
+from app.domain.rules import RuleCode, max_cash
 from app.domain.signal_fit import cash_limit, signal_preferred_markets, usable_traits
 from app.domain.signals import (
     MARKET_TRAITS,
@@ -89,6 +90,10 @@ def alerts(
             text = f"No eligible deal has {TRAIT_LABELS[wish.trait]}, which the client asked for"
             found.append(Alert.quoted("MUST_HAVE_UNMET", "warning", text, wish))
 
+    for question in signals.client_questions:
+        text = "The client asked something; reply before sending more deals"
+        found.append(Alert.quoted("CLIENT_QUESTION", "warning", text, question))
+
     for term in unresolved_terms:
         text = f"'{term}' doesn't match a market we cover; ask what they meant"
         found.append(Alert("UNRESOLVED_MARKET", "info", text))
@@ -96,16 +101,15 @@ def alerts(
     wanted = client.preferred_market_ids | signal_preferred_markets(signals).keys()
     if wanted:
         names = ", ".join(sorted(markets[m].name for m in wanted))
-        if not any(f.eligible for f in fits if f.market.id in wanted):
-            closest = [
-                e for e in recommendations.excluded if e.near_miss and e.deal.market_id in wanted
-            ]
-            text = f"Nothing eligible in {names}"
-            text += (
-                f"; closest is {closest[0].deal.id}: {closest[0].near_miss.text.lower()}"
-                if closest and closest[0].near_miss
-                else "; see Where to buy for alternatives"
+        in_wanted = [r for r in recommendations.ranked if r.candidate.deal.market_id in wanted]
+        if not any(r.status != "already_shared" for r in in_wanted):
+            text = (
+                f"Every eligible deal in {names} has been shared; nothing new to send there"
+                if in_wanted
+                else f"Nothing eligible in {names}"
             )
+            nearby = [e for e in recommendations.excluded if e.deal.market_id in wanted]
+            text += _closest(nearby, client)
             found.append(Alert("NO_DEALS_IN_PREFERRED", "warning", text))
     else:
         text = "Hasn't picked a market yet; see Where to buy"
@@ -113,6 +117,21 @@ def alerts(
 
     order = {"urgent": 0, "warning": 1, "info": 2}
     return sorted(found, key=lambda a: order[a.severity])
+
+
+def _closest(excluded: Sequence[ExcludedDeal], client: Client) -> str:
+    """How near the nearest money-only miss is, so the rep can talk about price or budget."""
+    money_only = [e for e in excluded if all(v.code in MONEY_RULES for v in e.violations)]
+    priced = [(e.deal.id, e.near_miss) for e in money_only if e.near_miss is not None]
+    if priced:
+        deal_id, miss = min(priced, key=lambda pair: pair[1].discount)
+        return f"; closest is {deal_id}: {miss.text[0].lower()}{miss.text[1:]}"
+    over = [e for e in money_only if {v.code for v in e.violations} == {RuleCode.OVER_BUDGET}]
+    if over:
+        cheapest = min(over, key=lambda e: e.numbers.cash_needed)
+        gap = cheapest.numbers.cash_needed - max_cash(client)
+        return f"; cheapest there is {cheapest.deal.id}, ${gap:,.0f} over the client's cash cap"
+    return "; see Where to buy for alternatives"
 
 
 def parse_budget_range(text: str) -> tuple[float, float] | None:

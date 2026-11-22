@@ -12,7 +12,10 @@ class FakeExtractor:
     def __init__(self, signals: Signals = EMPTY_SIGNALS) -> None:
         self.signals = signals
         self.calls: list[list[Source]] = []
+        self.fail = False
 
     def extract(self, sources: Sequence[Source]) -> Extraction:
         self.calls.append(list(sources))
+        if self.fail:
+            raise TimeoutError("model unavailable")
         return Extraction(self.signals, self.model, input_tokens=100, output_tokens=20)

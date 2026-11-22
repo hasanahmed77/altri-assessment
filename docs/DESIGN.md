@@ -76,11 +76,12 @@ Each entry: what was decided, what else was considered, and why. New decisions a
 - **Why:** Editing deals, clients and markets is out of scope, so this data never changes at runtime. If it became editable, an ETag or TTL cache would replace this.
 
 ### D-11 LLM calls only when a client's text changes
-- **Decision:** Signals are cached per client (`client_signals`) with a hash of the prompt version, the model and all of that client's text (notes, calls, feedback comments). Extraction runs only when the hash changes: never for an unchanged page load, never for a thumbs click without a comment. It runs as a FastAPI background task after the feedback is saved, so the write never waits on or fails because of the LLM. A page load that finds a changed hash schedules the same task, so a missed extraction heals itself; an in-process set keeps it to one extraction per client at a time. Status is derived, not stored: `fresh`, `updating`, `stale` (no key) or `unavailable`. While `updating`, the page refreshes itself every 2 s, at most 5 times.
+- **Decision:** Signals are cached per client (`client_signals`) with a hash of the prompt version, the model and all of that client's text (notes, calls, feedback comments). Extraction runs only when the hash changes: never for an unchanged page load, never for a thumbs click without a comment. It runs as a FastAPI background task after the feedback is saved, so the write never waits on or fails because of the LLM. A page load that finds a changed hash schedules the same task, so a missed extraction heals itself; an in-process set keeps it to one extraction per client at a time. Status is derived, not stored: `fresh`, `updating`, `stale` (no key, or the last attempt failed) or `unavailable`. A failed extraction isn't retried for the same text for 10 minutes, so an outage can't turn page views into paid calls. While `updating`, the page refreshes itself every 2 s, at most 5 times.
 - **Why:** Cost and reliability. Real token usage is stored per extraction, so the cost per client in the README is measured, not estimated.
 
 ### D-12 Grounded, closed-vocabulary signals
 - **Decision:** The OpenAI response uses a strict JSON schema (Structured Outputs). Traits come from a closed list of 17 (`domain/signals.py`), each decided on deals by code from deal tags or market data; markets come from an enum of the 14 market ids. Every signal must quote the client's words verbatim (case, spacing and curly quotes normalized), or it is dropped and logged. Code, not the model, settles the citation: a copied header like `[call:2026-09-10] Call on…` resolves to its id, and a real quote cited to the wrong source is re-cited when exactly one source contains it.
+- **A quote must mention what it supports:** each trait has cue words (`TRAIT_CUES`) and each market its aliases; "Will use a co-host" can't be evidence for a turnkey house, and a market inferred from "worried about parties" is dropped unless the quote names it (or is a comment about a deal in that market). A necessary condition only; the model still decides what was meant.
 - **Direction is in the schema:** the wish list offers 15 traits and the avoid list 9; nobody avoids privacy or views and nobody wants a party crowd, so the model can't return those (LLM-07). A thumbs-down comment can only avoid a feature the house actually has (LLM-08).
 - **Why:** This prevents invented preferences or markets, lets the rep verify each signal, and makes signals directly comparable with deals. The model only reads; code decides what a signal means for a deal.
 
@@ -147,9 +148,18 @@ Each entry: what was decided, what else was considered, and why. New decisions a
 - **Why:** These are the things a rep must fix or ask about before sending anything, and each is a conflict between two pieces of data, which code can detect exactly.
 
 ### D-27 Model and evals
-- **Decision:** `gpt-5.4-mini` by default (`OPENAI_MODEL`), temperature 0, 1,500 output tokens max, 30 s timeout and one retry. `python -m evals.run` checks 18 labelled cases from the real data against the real model; it is not in CI.
+- **Decision:** `gpt-5.4-mini` by default (`OPENAI_MODEL`), temperature 0, 1,500 output tokens max, 30 s timeout and one retry. `python -m evals.run` checks 20 labelled cases from the real data against the real model; it is not in CI.
 - **Alternatives:** `gpt-4.1-mini` passed the same evals at half the price ($0.0013 per client) but OpenAI lists it as deprecated; `gpt-5-mini` rejects temperature 0.
-- **Why:** The task is short extraction into a fixed schema, so a small model is enough. Measured: about 2,000 input and 270 output tokens per client, $0.003 per client ($0.75 / $4.50 per million tokens), 18/18 cases on two consecutive runs. gpt-5.4-mini also stopped quoting source headers, which gpt-4.1-mini did on every run. The cases were also used to fix the prompt, so they are a regression suite, not a held-out score. A newer snapshot is a new upsert migration (`…0005`), never an edit to an applied one.
+- **Why:** The task is short extraction into a fixed schema, so a small model is enough. Measured: about 2,000 input and 270 output tokens per client, $0.003 per client ($0.75 / $4.50 per million tokens), 20/20 cases on two consecutive runs. gpt-5.4-mini also stopped quoting source headers, which gpt-4.1-mini did on every run. The cases were also used to fix the prompt, so they are a regression suite, not a held-out score. A newer snapshot is a new upsert migration (`…0005`), never an edit to an applied one.
+
+### D-28 Markets the client named come first
+- **Decision:** Eligible deals in a market the client named (profile or spoken, minus any they spoke against) rank ahead of all others; within each group the score decides. The rep screen marks where the client's markets end. Clients who named none are unaffected.
+- **Why:** With focus at 70% and a named market worth about 0.1, one high-return outlier (D-116, 23% CoC low) outranked every deal in the markets clients asked for: C-15 said "Florida panhandle or Gulf coast" and got a Poconos house first, its best Florida deal at #6. A client who names markets is telling us where they will buy.
+- **Trade-off:** A much better deal elsewhere waits below the client's own markets. It is still on the list, and Where to buy compares markets directly.
+
+### D-29 What the rep is asked to do
+- **Decision:** Questions or requests in a client's comments ("What would the hot tub add?", "can we get a walkthrough video?") become alerts. When nothing is left to send in the client's markets, the alert says why (none eligible, or all already shared) and how close the nearest money-only miss is.
+- **Why:** These are the next actions for a rep, and none of them is visible in the structured data.
 
 ## Assumptions
 - `clients.budget` is authoritative when it conflicts with `budget_range` (C-03, C-06, C-09); the conflict is shown to the rep.

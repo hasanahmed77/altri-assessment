@@ -1,3 +1,5 @@
+import { Fragment } from "react";
+
 import { ExcludedDealCard, RankedDealCard } from "@/components/deal-cards";
 import { MarketList } from "@/components/market-list";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
@@ -22,6 +24,7 @@ export function DealTabs({
     (a, b) => Number(b.near_miss !== null) - Number(a.near_miss !== null),
   );
   const whereFirst = alerts.some((a) => WHERE_FIRST.has(a.code));
+  const firstOutside = toSend.find((r) => r.outside_client_markets)?.deal.id;
 
   return (
     <Tabs defaultValue={whereFirst ? "markets" : "recommended"}>
@@ -37,7 +40,11 @@ export function DealTabs({
       </TabsContent>
 
       <TabsContent value="recommended" className="flex flex-col gap-4">
-        <DealList items={toSend.slice(0, SHOWN_FIRST)} clientId={clientId} />
+        <DealList
+          items={toSend.slice(0, SHOWN_FIRST)}
+          clientId={clientId}
+          dividerBefore={firstOutside}
+        />
         {toSend.length > SHOWN_FIRST && (
           <details className="group">
             <summary className="text-muted-foreground cursor-pointer text-sm">
@@ -48,6 +55,7 @@ export function DealTabs({
                 items={toSend.slice(SHOWN_FIRST)}
                 clientId={clientId}
                 firstPosition={SHOWN_FIRST + 1}
+                dividerBefore={firstOutside}
               />
             </div>
           </details>
@@ -77,20 +85,24 @@ function DealList({
   items,
   clientId,
   firstPosition = 1,
+  dividerBefore,
 }: {
   items: RankedDeal[];
   clientId: string;
   firstPosition?: number;
+  dividerBefore?: string;
 }) {
   return (
     <div className="flex flex-col gap-4">
       {items.map((item, index) => (
-        <RankedDealCard
-          key={item.deal.id}
-          item={item}
-          clientId={clientId}
-          position={firstPosition + index}
-        />
+        <Fragment key={item.deal.id}>
+          {item.deal.id === dividerBefore && (
+            <p className="text-muted-foreground border-t pt-3 text-sm">
+              Outside the markets this client named, best first
+            </p>
+          )}
+          <RankedDealCard item={item} clientId={clientId} position={firstPosition + index} />
+        </Fragment>
       ))}
     </div>
   );

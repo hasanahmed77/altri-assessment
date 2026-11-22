@@ -3,6 +3,7 @@ from pydantic import ValidationError
 
 from app.domain.signals import (
     MARKET_TRAIT_MATCHERS,
+    TRAIT_CUES,
     TRAIT_DESCRIPTIONS,
     TRAIT_LABELS,
     TRAIT_MATCHERS,
@@ -14,6 +15,7 @@ from app.domain.signals import (
     Trait,
     WishSignal,
     check_against_deals,
+    check_mentions,
     ground,
     has_trait,
 )
@@ -90,7 +92,7 @@ def test_traits_are_decided_from_deal_tags_and_market_data() -> None:
 
 def test_every_trait_has_a_label_a_description_and_a_matcher() -> None:
     matched = set(TRAIT_MATCHERS) | set(MARKET_TRAIT_MATCHERS)
-    assert set(TRAIT_LABELS) == set(TRAIT_DESCRIPTIONS) == matched == set(Trait)
+    assert set(TRAIT_LABELS) == set(TRAIT_DESCRIPTIONS) == set(TRAIT_CUES) == matched == set(Trait)
 
 
 def test_a_thumbs_down_cannot_avoid_a_feature_the_house_lacks() -> None:
@@ -114,3 +116,25 @@ def test_the_schema_decides_which_way_a_trait_can_point() -> None:
         AvoidSignal(trait=Trait.PRIVACY, quote="Too close to the neighbors", source="notes")
     with pytest.raises(ValidationError):
         WishSignal(trait=Trait.PARTY_MARKET, quote="worried about parties", source="notes")
+
+
+def test_a_quote_must_mention_the_trait_or_market_it_supports() -> None:
+    turnkey = WishSignal(trait=Trait.TURNKEY, quote="Will use a co-host.", source="notes")
+    water = WishSignal(trait=Trait.WATER, quote="Being on the water is a must", source="notes")
+    named = MarketSignal(market_id="M-05", quote="Mentioned Hunter and Windham.", source="notes")
+    inferred = MarketSignal(market_id="M-12", quote="worried about parties", source="notes")
+    party_deal = MarketSignal(market_id="M-01", quote="This is a party town", source="feedback:1")
+    signals = make_signals(
+        must_haves=[turnkey, water],
+        preferred_markets=[named],
+        avoided_markets=[inferred, party_deal],
+    )
+    aliases = {"M-05": ("hunter", "windham"), "M-12": ("scottsdale",), "M-01": ("poconos",)}
+    reacted = {"feedback:1": ReactedDeal(make_deal(), MARKET, liked=False)}
+
+    kept, dropped = check_mentions(signals, aliases, reacted)
+
+    assert kept.must_haves == [water]
+    assert kept.preferred_markets == [named]
+    assert kept.avoided_markets == [party_deal]
+    assert len(dropped) == 2

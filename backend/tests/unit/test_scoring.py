@@ -106,3 +106,16 @@ def test_each_house_leads_with_one_plan_and_other_plans_follow() -> None:
     assert by_id["D-126"].status == "alternative_plan"
     assert "same house as D-116" in by_id["D-126"].reasons[-1].text
     assert ids(ranked).index("D-2") < ids(ranked).index("D-126")
+
+
+def test_deals_in_markets_the_client_named_come_first() -> None:
+    client = make_client(preferred_market_ids=frozenset({"M-09"}))
+    named = make_deal(id="D-1", property_key="1", market_id="M-09")
+    better_elsewhere = make_deal(
+        id="D-2", property_key="2", revenue=LowMidHigh(150_000, 160_000, 170_000)
+    )
+
+    ranked = ranking([better_elsewhere, named], client)
+
+    assert ids(ranked) == ["D-1", "D-2"]
+    assert [r.outside_client_markets for r in ranked] == [False, True]

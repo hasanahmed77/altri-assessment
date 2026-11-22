@@ -234,6 +234,7 @@ class Signals(BaseModel):
     soft_budget_cap: AmountSignal | None
     deadline: DateSignal | None
     uses_cohost: Evidence | None
+    client_questions: list[Evidence]
     feedback_readings: list[FeedbackReading]
 
 
@@ -245,6 +246,7 @@ EMPTY_SIGNALS = Signals(
     soft_budget_cap=None,
     deadline=None,
     uses_cohost=None,
+    client_questions=[],
     feedback_readings=[],
 )
 
@@ -323,6 +325,7 @@ def ground(signals: Signals, sources: Mapping[str, str]) -> tuple[Signals, list[
             soft_budget_cap=keep_one(signals.soft_budget_cap, "soft_budget_cap"),
             deadline=deadline,
             uses_cohost=keep_one(signals.uses_cohost, "uses_cohost"),
+            client_questions=keep(signals.client_questions, "client_question"),
             feedback_readings=keep_readings(signals.feedback_readings),
         ),
         dropped,
@@ -357,6 +360,74 @@ def check_against_deals(
 
     kept = [s for s in signals.avoid_traits if fits(s)]
     return signals.model_copy(update={"avoid_traits": kept}), dropped
+
+
+# A quote must mention what it is evidence for. Grounding proves the client said it; this
+# catches a real quote attached to the wrong trait ("Will use a co-host" read as wanting a
+# turnkey house). A necessary condition only: the model still decides what was meant.
+TRAIT_CUES: dict[Trait, tuple[str, ...]] = {
+    Trait.WATER: ("water", "lake", "dock", "beach", "ocean", "river", "shore"),
+    Trait.WATERFRONT: ("waterfront", "on the water", "dock", "lakefront", "beachfront"),
+    Trait.SKI_ACCESS: ("ski", "slope", "lift"),
+    Trait.VIEWS: ("view", "vista", "scenic"),
+    Trait.PRIVACY: ("privacy", "private", "seclu", "neighbor", "quiet", "isolat"),
+    Trait.NEWER_BUILD: ("new", "modern", "recent", "built"),
+    Trait.CABIN_FEEL: ("cabin", "rustic", "log"),
+    Trait.DATED_INTERIOR: ("dated", "old", "1970", "1980", "fix", "kitchen"),
+    Trait.TURNKEY: ("turnkey", "renovat", "move-in", "ready", "manage", "work"),
+    Trait.HEAVY_RENOVATION: ("renovat", "transform", "rehab", "fixer", "project", "work"),
+    Trait.NEAR_ATTRACTIONS: (
+        "to do", "dining", "downtown", "restaurant", "attraction", "nightlife", "activit",
+    ),
+    Trait.ROOM_TO_ADD: ("add", "amenit", "pool", "sauna", "yard", "space", "game"),
+    Trait.LAKE_MOUNTAIN: (
+        "lake", "mountain", "cabin", "ski", "smok", "pocono", "catskill", "blue ridge",
+        "shenandoah", "broken bow", "finger lakes",
+    ),
+    Trait.BEACH_COASTAL: ("beach", "coast", "gulf", "ocean", "shore", "florida", "panhandle"),
+    Trait.URBAN: ("city", "urban", "downtown"),
+    Trait.PARTY_MARKET: ("party", "parties", "bachelor", "spring break", "group", "event"),
+    Trait.NEAR_NYC: ("drive", "nj", "jersey", "nyc", "new york", "brooklyn", "hour"),
+}  # fmt: skip
+
+
+def check_mentions(
+    signals: Signals,
+    market_aliases: Mapping[str, tuple[str, ...]],
+    reacted: Mapping[str, ReactedDeal],
+) -> tuple[Signals, list[str]]:
+    """Drop traits whose quote never mentions them, and markets whose quote never names them
+    (a comment about a deal counts as naming that deal's market)."""
+    dropped: list[str] = []
+
+    def about_trait[S: TraitSignal](signal: S) -> bool:
+        quote = _normalized(signal.quote)
+        if any(cue in quote for cue in TRAIT_CUES[signal.trait]):
+            return True
+        dropped.append(f"{signal.trait.value}: {signal.quote!r} doesn't mention it")
+        return False
+
+    def about_market(signal: MarketSignal) -> bool:
+        quote = _normalized(signal.quote)
+        if any(alias in quote for alias in market_aliases.get(signal.market_id, ())):
+            return True
+        about = reacted.get(signal.source)
+        if about is not None and about.market.id == signal.market_id:
+            return True
+        dropped.append(f"{signal.market_id}: {signal.quote!r} doesn't name it")
+        return False
+
+    return (
+        signals.model_copy(
+            update={
+                "must_haves": [s for s in signals.must_haves if about_trait(s)],
+                "avoid_traits": [s for s in signals.avoid_traits if about_trait(s)],
+                "preferred_markets": [s for s in signals.preferred_markets if about_market(s)],
+                "avoided_markets": [s for s in signals.avoided_markets if about_market(s)],
+            }
+        ),
+        dropped,
+    )
 
 
 def deadline_date(signals: Signals) -> date | None:

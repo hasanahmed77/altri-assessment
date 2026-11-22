@@ -345,6 +345,13 @@ export interface components {
             cash_flow: components["schemas"]["LowMidHighOut"];
             coc: components["schemas"]["LowMidHighOut"];
         };
+        /** QuoteOut */
+        QuoteOut: {
+            /** Quote */
+            quote: string;
+            /** Source */
+            source: string;
+        };
         /** RankedDealOut */
         RankedDealOut: {
             /** Rank */
@@ -360,6 +367,8 @@ export interface components {
             status: "new" | "alternative_plan" | "already_shared";
             /** Reaction */
             reaction: ("up" | "down") | null;
+            /** Outside Client Markets */
+            outside_client_markets: boolean;
             /** Explanation */
             explanation: components["schemas"]["ReasonOut"][];
         };
@@ -400,10 +409,8 @@ export interface components {
             kind: string;
             /** Text */
             text: string;
-            /** Quote */
-            quote: string;
-            /** Source */
-            source: string;
+            /** Quotes */
+            quotes: components["schemas"]["QuoteOut"][];
         };
         /** ValidationError */
         ValidationError: {

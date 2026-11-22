@@ -68,6 +68,7 @@ class RankedDeal:
     status: Status
     reaction: Reaction | None
     reasons: tuple[Reason, ...]
+    outside_client_markets: bool = False
 
 
 def _cash_flow_metric(c: Candidate) -> float:
@@ -108,6 +109,7 @@ def rank(
     weights = reaction_weights(latest, signals)
     readings = {r.feedback_id: r for r in signals.feedback_readings}
     mentioned_markets = signal_preferred_markets(signals)
+    named_markets = client.preferred_market_ids | mentioned_markets.keys()
     focus_weight, preference_weight = FOCUS_WEIGHTS[client.main_focus]
     metric = FOCUS_METRICS[client.main_focus]
     focus_scores = normalize([metric(c) for c in candidates])
@@ -158,13 +160,16 @@ def rank(
                 )
                 reasons.append(Reason.quoted("SOFT_PASS", text, 0.0, reading))
 
-        ranked.append(RankedDeal(candidate, score, status, reaction, _ordered(reasons)))
+        outside = bool(named_markets) and candidate.deal.market_id not in named_markets
+        ranked.append(RankedDeal(candidate, score, status, reaction, _ordered(reasons), outside))
 
     return _demote_alternative_plans(sorted(ranked, key=_rank_order))
 
 
-def _rank_order(r: RankedDeal) -> tuple[float, str]:
-    return (-r.score, r.candidate.deal.id)
+def _rank_order(r: RankedDeal) -> tuple[bool, float, str]:
+    """Deals in markets the client named come first. A client who names markets is telling
+    us where they will buy; a better return elsewhere is worth showing, but after them."""
+    return (r.outside_client_markets, -r.score, r.candidate.deal.id)
 
 
 def _demote_alternative_plans(ranked: list[RankedDeal]) -> list[RankedDeal]:

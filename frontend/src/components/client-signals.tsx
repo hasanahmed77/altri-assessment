@@ -37,14 +37,16 @@ export function ClientSignals({ signals, status }: { signals: Signal[]; status: 
         ) : (
           <ul className="grid gap-3 text-sm sm:grid-cols-2">
             {signals.map((signal) => (
-              <li key={signal.kind + signal.text + signal.source} className="flex flex-col gap-0.5">
+              <li key={signal.kind + signal.text} className="flex flex-col gap-0.5">
                 <span>
                   <Badge variant="outline" className="mr-2">
                     {signal.kind}
                   </Badge>
                   {signal.text}
                 </span>
-                <Quote quote={signal.quote} source={signal.source} />
+                {signal.quotes.map((q) => (
+                  <Quote key={q.source + q.quote} quote={q.quote} source={q.source} />
+                ))}
               </li>
             ))}
           </ul>

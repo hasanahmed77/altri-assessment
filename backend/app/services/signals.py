@@ -2,6 +2,7 @@ import hashlib
 import json
 import logging
 import threading
+import time
 from collections.abc import Mapping, Sequence
 from dataclasses import dataclass
 from datetime import UTC, datetime
@@ -15,6 +16,7 @@ from app.domain.signals import (
     ReactedDeal,
     Signals,
     check_against_deals,
+    check_mentions,
     ground,
 )
 from app.llm.extractor import PROMPT_VERSION, SignalExtractor, Source
@@ -23,6 +25,9 @@ from app.repository import FeedbackRecord, Reference, StoredSignals
 log = logging.getLogger(__name__)
 
 SignalsStatus = Literal["fresh", "updating", "stale", "unavailable"]
+# After a failed extraction the same text isn't retried for a while, so an outage can't turn
+# every page view into another paid call
+RETRY_AFTER_SECONDS = 600.0
 
 
 @dataclass(frozen=True)
@@ -71,7 +76,8 @@ def verify(
             deal, reference.markets[deal.market_id], record.feedback.reaction == "up"
         )
     consistent, contradicted = check_against_deals(grounded, reacted)
-    return consistent, unquoted + contradicted
+    relevant, unrelated = check_mentions(consistent, reference.market_aliases, reacted)
+    return relevant, unquoted + contradicted + unrelated
 
 
 def source_hash(sources: Sequence[Source], model: str) -> str:
@@ -94,6 +100,7 @@ class SignalService:
         self._extractor = extractor
         self._model = model
         self._in_flight: set[str] = set()
+        self._failed: dict[str, tuple[str, float]] = {}
         self._lock = threading.Lock()
 
     def current(
@@ -104,10 +111,11 @@ class SignalService:
         stored = repository.client_signals(conn, client_id)
         if not sources:
             return CurrentSignals(EMPTY_SIGNALS, "fresh", False, labels)
-        if stored is not None and stored.source_hash == source_hash(sources, self._model):
+        digest = source_hash(sources, self._model)
+        if stored is not None and stored.source_hash == digest:
             return CurrentSignals(stored.signals, "fresh", False, labels)
         signals = stored.signals if stored is not None else EMPTY_SIGNALS
-        if self._extractor is not None:
+        if self._extractor is not None and not self._failed_recently(client_id, digest):
             return CurrentSignals(signals, "updating", True, labels)
         return CurrentSignals(signals, "stale" if stored else "unavailable", False, labels)
 
@@ -124,9 +132,24 @@ class SignalService:
             self._refresh(client_id, self._extractor)
         except Exception:
             log.exception("Signal extraction failed for %s; keeping previous signals", client_id)
+            with self._lock:
+                self._failed[client_id] = (self._current_hash(client_id), time.monotonic())
         finally:
             with self._lock:
                 self._in_flight.discard(client_id)
+
+    def _failed_recently(self, client_id: str, digest: str) -> bool:
+        with self._lock:
+            failure = self._failed.get(client_id)
+        if failure is None:
+            return False
+        failed_hash, at = failure
+        return failed_hash == digest and time.monotonic() - at < RETRY_AFTER_SECONDS
+
+    def _current_hash(self, client_id: str) -> str:
+        with self._engine.connect() as conn:
+            feedback = repository.client_feedback(conn, client_id)
+        return source_hash(client_sources(self._reference, client_id, feedback), self._model)
 
     def _refresh(self, client_id: str, extractor: SignalExtractor) -> None:
         with self._engine.connect() as conn:

@@ -57,7 +57,7 @@ def get_recommendations(
     return RecommendationsOut(
         client_id=client_id,
         signals_status=view.current.status,
-        signals=signal_items(view.current.signals, labels, reference.markets),
+        signals=signal_items(view.current.signals, labels, reference.markets, view.thumbs),
         alerts=[AlertOut.from_domain(a, labels) for a in view.alerts],
         ranked=[
             RankedDealOut.from_domain(i, r, labels)
@@ -88,6 +88,7 @@ class _ClientView:
     recommendations: Recommendations
     fits: list[MarketFit]
     alerts: list[Alert]
+    thumbs: dict[int, float]
 
 
 def _evaluate(
@@ -117,4 +118,5 @@ def _evaluate(
         current.signals,
         today=date.today(),
     )
-    return _ClientView(current, result, fits, found)
+    thumbs = {r.feedback.id: 1.0 if r.feedback.reaction == "up" else -1.0 for r in records}
+    return _ClientView(current, result, fits, found, thumbs)

@@ -54,6 +54,7 @@ class Reference:
     deals_by_id: Mapping[str, Deal]
     clients: Mapping[str, ClientProfile]
     calls: Mapping[str, tuple[CallSummary, ...]]
+    market_aliases: Mapping[str, tuple[str, ...]]
 
 
 @dataclass(frozen=True)
@@ -75,6 +76,7 @@ def load_reference(conn: Connection) -> Reference:
         deals_by_id={d.id: d for d in deals},
         clients=_load_clients(conn),
         calls=_load_calls(conn),
+        market_aliases=_load_market_aliases(conn),
     )
 
 
@@ -184,6 +186,14 @@ def _load_calls(conn: Connection) -> dict[str, tuple[CallSummary, ...]]:
     for client_id, call_date, summary in rows:
         calls.setdefault(client_id, []).append(CallSummary(call_date, summary))
     return {client_id: tuple(items) for client_id, items in calls.items()}
+
+
+def _load_market_aliases(conn: Connection) -> dict[str, tuple[str, ...]]:
+    rows = conn.execute(text("SELECT market_id, alias_key FROM market_aliases ORDER BY alias_key"))
+    aliases: dict[str, list[str]] = {}
+    for market_id, alias in rows:
+        aliases.setdefault(market_id, []).append(alias)
+    return {market_id: tuple(names) for market_id, names in aliases.items()}
 
 
 def _load_markets(conn: Connection) -> dict[str, Market]:

@@ -11,6 +11,7 @@ from app.domain.models import Deal, LowMidHigh, Market
 from app.domain.near_miss import NearMiss
 from app.domain.recommend import ExcludedDeal
 from app.domain.scoring import RankedDeal, Reason
+from app.domain.signal_fit import reading_weight
 from app.domain.signals import TRAIT_LABELS, Signals
 from app.repository import CallSummary, ClientProfile, FeedbackRecord
 from app.services.signals import SignalsStatus
@@ -124,6 +125,7 @@ class RankedDealOut(BaseModel):
     score: float
     status: Literal["new", "alternative_plan", "already_shared"]
     reaction: Literal["up", "down"] | None
+    outside_client_markets: bool
     explanation: list[ReasonOut]
 
     @classmethod
@@ -136,6 +138,7 @@ class RankedDealOut(BaseModel):
             score=round(r.score, RATIO_PLACES),
             status=r.status,
             reaction=r.reaction,
+            outside_client_markets=r.outside_client_markets,
             explanation=[ReasonOut.from_domain(x, labels) for x in r.reasons],
         )
 
@@ -184,42 +187,54 @@ class AlertOut(BaseModel):
         return cls(code=a.code, severity=a.severity, text=a.text, quote=a.quote, source=source)
 
 
-class SignalOut(BaseModel):
-    kind: str
-    text: str
+class QuoteOut(BaseModel):
     quote: str
     source: str
 
 
+class SignalOut(BaseModel):
+    kind: str
+    text: str
+    quotes: list[QuoteOut]
+
+
 def signal_items(
-    signals: Signals, labels: Labels, markets: Mapping[str, Market]
+    signals: Signals,
+    labels: Labels,
+    markets: Mapping[str, Market],
+    thumbs: Mapping[int, float],
 ) -> list[SignalOut]:
-    """The signals as a flat list the rep can read, each with the words it came from."""
+    """The signals the rep should read, each once, with every quote behind it. A comment
+    reading is listed only when it changes how its thumb counts (`thumbs`: id to ±1)."""
+    grouped: dict[tuple[str, str], list[QuoteOut]] = {}
 
-    def item(kind: str, text: str, quote: str, source: str) -> SignalOut:
-        return SignalOut(kind=kind, text=text, quote=quote, source=labels.get(source, source))
+    def add(kind: str, text: str, quote: str, source: str) -> None:
+        quotes = grouped.setdefault((kind, text), [])
+        quotes.append(QuoteOut(quote=quote, source=labels.get(source, source)))
 
-    items: list[SignalOut] = []
     if signals.deadline:
         d = signals.deadline
-        items.append(item("Deadline", d.date, d.quote, d.source))
+        add("Deadline", d.date, d.quote, d.source)
     if signals.soft_budget_cap:
         c = signals.soft_budget_cap
-        items.append(item("Cash limit", f"${c.amount:,}", c.quote, c.source))
+        add("Cash limit", f"${c.amount:,}", c.quote, c.source)
     for t in signals.must_haves:
-        items.append(item("Wants", TRAIT_LABELS[t.trait], t.quote, t.source))
+        add("Wants", TRAIT_LABELS[t.trait], t.quote, t.source)
     for a in signals.avoid_traits:
-        items.append(item("Avoids", TRAIT_LABELS[a.trait], a.quote, a.source))
+        add("Avoids", TRAIT_LABELS[a.trait], a.quote, a.source)
     for m in signals.preferred_markets:
-        items.append(item("Market", markets[m.market_id].name, m.quote, m.source))
+        add("Market", markets[m.market_id].name, m.quote, m.source)
     for m in signals.avoided_markets:
-        items.append(item("Against market", markets[m.market_id].name, m.quote, m.source))
+        add("Against market", markets[m.market_id].name, m.quote, m.source)
     if signals.uses_cohost:
         u = signals.uses_cohost
-        items.append(item("Co-host", "Plans to use one", u.quote, u.source))
+        add("Co-host", "Plans to use one", u.quote, u.source)
+    for q in signals.client_questions:
+        add("Asked", "A question to answer", q.quote, q.source)
     for r in signals.feedback_readings:
-        items.append(item("Comment read as", f"{r.sentiment} ({r.reason})", r.quote, r.source))
-    return items
+        if reading_weight(r) != thumbs.get(r.feedback_id):
+            add("Comment read as", f"{r.sentiment} ({r.reason})", r.quote, r.source)
+    return [SignalOut(kind=k, text=t, quotes=q) for (k, t), q in grouped.items()]
 
 
 class RecommendationsOut(BaseModel):

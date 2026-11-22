@@ -58,6 +58,12 @@ New entries go at the bottom, using the template at the end of this file.
 - **Fix:** Re-ran Prettier at width 100 (the style the code was written in) on the changed files only and put the remaining hunks back by hand, so the diff holds only real changes.
 - **Lesson:** Don't run a tool the project doesn't use; check the diff's file list after any bulk edit.
 
+### AI-09 Returns drowned out the markets clients asked for
+- **What happened:** The assistant's ranking gave a client's named markets about 0.1 of a score where the main focus spans 0.7. One outlier with 23% CoC on low revenue (D-116) topped the list for clients who asked for Florida, the Smokies, Shenandoah or San Antonio; C-15's best Florida deal sat at #6.
+- **How it was caught:** The same audit, measuring where each client's best named-market deal ranked. Every test passed: none checked that a client's own markets lead.
+- **Fix:** Named markets first, then the score (D-28), with a unit test. The same audit found the "nothing in your markets" alert counting already-shared deals, so C-10 and C-13 never got it; it now counts deals still to send.
+- **Lesson:** Tests check the rules you thought of. Look at the output through the client's eyes.
+
 ### AI-08 A near-miss price past its own limit
 - **What happened:** The price solver rounded its answer down to the nearest $1,000 after checking the discount limit, so one deal (C-10 / D-115) came out 10.1% under asking with a 10% limit.
 - **How it was caught:** Reading the solver's output for all 15 clients before wiring it into the API.
@@ -109,6 +115,11 @@ Found by the evals (`python -m evals.run`) and by reading the extracted signals.
 - **What happened:** C-06's notes say "fine with a big renovation"; the model returned *avoids a heavy renovation*. C-04 came back both wanting and avoiding room to add amenities.
 - **Fix:** Readings that contradict the signed-off profile, or each other, don't move the ranking; the rep sees a "confirm with the client" alert with the quote. The profile stays the source of truth and the conflict becomes a question for the rep, not a silent re-rank.
 
+### LLM-10 Real quotes attached to the wrong trait
+- **What happened:** Grounding proves the client said the words, not that they mean the trait. "Will use a co-host" came back as *wants a turnkey house* (C-01), "Five bedrooms minimum" as *wants room to add amenities* (C-06), "Open to anywhere with steady demand" as *wants things to do nearby* (C-04), and "worried about parties" as *against Scottsdale*, a market the client never named (C-09). Each produced a false alert or a quiet re-rank.
+- **How it was caught:** A full audit of every client's signals, alerts and top three against their notes, calls and comments.
+- **Fix:** A quote must mention what it supports: cue words per trait, aliases per market (plus "north Georgia", "Gulf coast", "panhandle"). Every drop is logged; on the last run each one was a misreading.
+
 ## 3. How coding-assistant mistakes are prevented
 | Risk | Defense |
 |---|---|
@@ -125,7 +136,8 @@ Found by the evals (`python -m evals.run`) and by reading the extracted signals.
 | Invented quote or preference | Every signal must quote the client's own words verbatim; otherwise it is dropped and logged (LLM-05). Code settles which source a quote came from (LLM-01, LLM-03). |
 | Invented market or trait | Strict JSON schema: market ids from an enum of the 14 real ids; traits from the same closed vocabulary as deal tags. |
 | Malformed output | OpenAI Structured Outputs with a strict schema, then Pydantic validation; on failure the previous signals are kept. |
-| Misread tone (sarcasm, "bad timing", "Hmm. Maybe?") | 18 eval cases from the real data (18/18 on two runs). The model only classifies; code decides the effect (LLM-02, LLM-06). |
+| Misread tone (sarcasm, "bad timing", "Hmm. Maybe?") | 20 eval cases from the real data (20/20 on two runs). The model only classifies; code decides the effect (LLM-02, LLM-06). |
+| A real quote attached to the wrong trait or market | The quote must mention what it supports (LLM-10). |
 | Inverted polarity ("too close to the neighbors" as avoiding privacy) | The schema limits which traits can be wanted or avoided; a thumbs down can only avoid a feature the house has; contradictions with the profile go to the rep (LLM-07 to LLM-09). |
 | A wrong reading changes what the client sees | Signals only re-rank; hard rules come from the profile. Every adjustment shows its quote on the card, so the rep can overrule it. |
 | Instructions hidden in a client comment | Comments are passed as data; the output can only be the schema; the LLM has no tools and can't change eligibility, which is decided in code. |

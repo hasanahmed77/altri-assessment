@@ -7,7 +7,7 @@ from openai import OpenAI
 from app.domain.models import Market
 from app.domain.signals import TRAIT_DESCRIPTIONS, Signals
 
-PROMPT_VERSION = "signals-v5"
+PROMPT_VERSION = "signals-v6"
 MAX_OUTPUT_TOKENS = 1500
 TIMEOUT_SECONDS = 30.0
 
@@ -65,6 +65,8 @@ Rules:
 - deadline: a date the client must act by, as YYYY-MM-DD; when no year is given, use the
   first such date on or after the date of the source.
 - uses_cohost: the client says they will use or are fine with a co-host or property manager.
+- client_questions: questions or requests the client put to the rep that need a reply
+  ("What would the hot tub add?", "can we get a walkthrough video?"), quoted exactly.
 - feedback_readings: one per feedback comment, keyed by its number. sentiment is how the
   client feels about that home, read through sarcasm and hedging: a pass caused only by
   timing is neutral, an unsure comment is neutral. reason is the main cause.
