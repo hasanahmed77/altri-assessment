@@ -26,15 +26,33 @@ export function FeedbackForm({ clientId, dealId }: { clientId: string; dealId: s
         name="comment"
         rows={2}
         maxLength={1000}
-        placeholder="Client's comment (optional)"
+        placeholder="Client's comment (optional), saved with the reaction below"
         aria-label={`Comment on ${dealId}`}
       />
       <div className="flex gap-2">
-        <Button type="submit" name="reaction" value="up" variant="outline" size="sm" disabled={pending}>
-          <ThumbsUp /> Thumbs up
+        <Button
+          type="submit"
+          name="reaction"
+          value="up"
+          variant="outline"
+          size="icon"
+          aria-label="Thumbs up"
+          title="Thumbs up"
+          disabled={pending}
+        >
+          <ThumbsUp />
         </Button>
-        <Button type="submit" name="reaction" value="down" variant="outline" size="sm" disabled={pending}>
-          <ThumbsDown /> Thumbs down
+        <Button
+          type="submit"
+          name="reaction"
+          value="down"
+          variant="outline"
+          size="icon"
+          aria-label="Thumbs down"
+          title="Thumbs down"
+          disabled={pending}
+        >
+          <ThumbsDown />
         </Button>
       </div>
     </form>

@@ -27,9 +27,9 @@ No `.env` needed: compose runs its own Postgres, and the model's extracted signa
 Why: a rep must defend every deal to someone spending $200K+, so rules and arithmetic decide and the LLM only reads, with the client's words attached. C-03 now gets Bradenton first.
 
 ## What I researched, and what changed
-- **"STR loophole"** ([CBIZ](https://www.cbiz.com/insights/article/short-term-rental-tax-strategy-unlocking-tax-savings), [JofA](https://www.journalofaccountancy.com/issues/2000/jan/shorttermrentalsclassifiedaspassiveactivitylosses.html)): stays of 7 days or less plus material participation let STR losses offset W-2 income (C-02). A co-host makes that harder, so C-09's tax savings may not apply: a question below, not an invented rule.
-- **Bonus depreciation** ([RSM](https://www.rsmus.com/insights/services/business-tax/obba-tax-bonus-depreciation)): back to 100% after Jan 19, 2025, explaining the large year-1 tax numbers.
-- **1031** ([CBIZ](https://www.cbiz.com/insights/article/1031-exchange-deadlines-45-day-and-180-day-rules-explained)): 45 days to identify, almost never extended, so C-13's deadline became an urgent alert, not a ranking nudge.
+- **"STR loophole"** ([CBIZ](https://www.cbiz.com/insights/article/short-term-rental-tax-strategy-unlocking-tax-savings), [JofA](https://www.journalofaccountancy.com/issues/2000/jan/shorttermrentalsclassifiedaspassiveactivitylosses.html)): stays of 7 days or less plus material participation let STR losses offset W-2 income (C-02). A co-host makes that harder. **Changed:** C-09's tax savings may not apply, so it's a question below, not an invented rule.
+- **Bonus depreciation** ([RSM](https://www.rsmus.com/insights/services/business-tax/obba-tax-bonus-depreciation)): back to 100% after Jan 19, 2025. **Changed:** the large year-1 tax numbers looked like a data error; they're plausible, so tax-focused clients rank on them as given.
+- **1031** ([CBIZ](https://www.cbiz.com/insights/article/1031-exchange-deadlines-45-day-and-180-day-rules-explained)): 45 days to identify, almost never extended. **Changed:** C-13's deadline is an urgent alert, not a ranking nudge.
 
 ## Assumptions
 Debt service = monthly payment × 12 (an annual payment flips 9 decisions). `budget` beats `budget_range`; the conflict is flagged. Boundaries (10% over, 3% CoC, $0 cash flow) pass. No bedroom count, no recommendation. D-116/D-126 are one house. `seed.sql` is untouched; changes are additive migrations, ids kept. More in [`docs/DESIGN.md`](docs/DESIGN.md).

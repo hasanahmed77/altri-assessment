@@ -19,13 +19,14 @@ export async function submitFeedback(
   if (reaction !== "up" && reaction !== "down") {
     return { status: "error", message: "Choose thumbs up or thumbs down" };
   }
+  const comment = String(formData.get("comment") ?? "");
 
   try {
     await api.createFeedback({
       client_id: String(formData.get("client_id")),
       deal_id: String(formData.get("deal_id")),
       reaction,
-      comment: String(formData.get("comment") ?? ""),
+      comment,
     });
   } catch (error) {
     const message = error instanceof ApiError ? error.message : "Could not save feedback";
@@ -33,5 +34,6 @@ export async function submitFeedback(
   }
 
   refresh();
-  return { status: "saved", message: `Thumbs ${reaction} saved; recommendations updated` };
+  const saved = comment.trim() ? `Thumbs ${reaction} and comment` : `Thumbs ${reaction}`;
+  return { status: "saved", message: `${saved} saved; recommendations updated` };
 }
