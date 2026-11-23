@@ -18,6 +18,7 @@ WIP limit: **1** card in progress. Move a card by moving its line. Commits refer
 - Tag `v1.0` once the video link is in
 
 ## Done
+- **R-04** One-screen architecture diagram (`docs/architecture.pdf`), linked from the README and used in the video
 - **R-03** "See N deals to send" on each Where to buy card opens Recommended filtered to that market, in ranked order, with a clear button · frontend only; checked in the browser, including a reaction while filtered and switching clients
 - **R-02** "Fine managing a heavier renovation" no longer counts as wanting one: it shows as "Open to", with no nudge, because the profile's renovation appetite already scores it (LLM-11) · only C-02 and C-06 re-rank; no eligibility or alert changes · 95 tests
 - **R-01** Deep review against the brief and every client's text: Part A recomputed independently (0 mismatches over 675 pairs); named markets now rank first; the "nothing in your markets" alert counts deals still to send and says how close the nearest miss is; quotes must mention what they support; client questions become alerts; signals panel grouped; no retry storm after a failed extraction; live comment → model → refreshed page verified in the browser · 94 tests, 20/20 evals on two runs

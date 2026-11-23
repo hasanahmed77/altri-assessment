@@ -1,6 +1,6 @@
 # STR Search: client deal recommendations
 
-Fewer, better-fit deals per client, with reasons, and help for clients unsure where to buy. Next.js + shadcn/ui, FastAPI, Postgres (Supabase or local), OpenAI. Video: _[link]_
+Fewer, better-fit deals per client, with reasons, and help for clients unsure where to buy. Next.js + shadcn/ui, FastAPI, Postgres (Supabase or local), OpenAI. [Architecture diagram](docs/architecture.pdf). Video: _[link]_
 
 ## Run it
 ```bash

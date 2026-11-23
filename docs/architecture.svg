@@ -1,0 +1,93 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" width="1600" height="900" role="img" aria-labelledby="title desc" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif">
+  <title id="title">STR Search architecture</title>
+  <desc id="desc">A rep uses the website, which calls the backend. The backend's plain code does the deal math, hard rules, ranking and alerts, using the database. In the background, the AI reads new client words, code checks its notes, and verified notes are saved.</desc>
+  <defs>
+    <marker id="solid" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 1L10 5L0 9L2.5 5z" fill="#d4d4d4"/></marker>
+    <marker id="amber" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 1L10 5L0 9L2.5 5z" fill="#fbbf24"/></marker>
+    <style>
+      .h { font-size: 23px; font-weight: 650; fill: #ffffff; }
+      .t { font-size: 17px; fill: #b3b3b3; }
+      .card { fill: #000000; stroke: #3f3f3f; stroke-width: 1.5; }
+      .node { fill: #121212; stroke: #3f3f3f; stroke-width: 1.5; }
+      .code { fill: #141414; stroke: #8a8a8a; stroke-width: 2; }
+      .ai { fill: #1f1703; stroke: #f59e0b; stroke-width: 2; }
+      .flow { fill: none; stroke: #d4d4d4; stroke-width: 1.4; }
+      .bg-flow { fill: none; stroke: #fbbf24; stroke-width: 1.4; stroke-dasharray: 6 5; }
+      .label { font-size: 17px; fill: #fcd34d; }
+    </style>
+  </defs>
+
+  <rect width="1600" height="900" fill="#000000"/>
+
+  <text x="800" y="62" text-anchor="middle" font-size="38" font-weight="700" fill="#ffffff">How a recommendation is made</text>
+  <text x="800" y="99" text-anchor="middle" font-size="23" fill="#b3b3b3">The AI reads. Code decides.</text>
+
+  <rect x="70" y="165" width="260" height="120" rx="14" class="node"/>
+  <text x="200" y="211" text-anchor="middle" class="h">Rep</text>
+  <text x="200" y="241" text-anchor="middle" class="t">picks a client,</text>
+  <text x="200" y="264" text-anchor="middle" class="t">logs reactions</text>
+
+  <rect x="70" y="355" width="260" height="120" rx="14" class="node"/>
+  <text x="200" y="401" text-anchor="middle" class="h">Website</text>
+  <text x="200" y="431" text-anchor="middle" class="t">Next.js</text>
+  <text x="200" y="454" text-anchor="middle" class="t">shows the results</text>
+
+  <rect x="480" y="130" width="640" height="380" rx="18" class="code"/>
+  <text x="800" y="174" text-anchor="middle" font-size="26" font-weight="700" fill="#ffffff">Backend (FastAPI)</text>
+  <text x="800" y="203" text-anchor="middle" font-size="18" fill="#d4d4d4">Every decision is plain, tested code</text>
+
+  <rect x="504" y="226" width="286" height="126" rx="12" class="card"/>
+  <text x="647" y="264" text-anchor="middle" class="h">Deal math</text>
+  <text x="647" y="294" text-anchor="middle" class="t">Cash needed and returns,</text>
+  <text x="647" y="320" text-anchor="middle" class="t">worked out per client</text>
+
+  <rect x="810" y="226" width="286" height="126" rx="12" class="card"/>
+  <text x="953" y="264" text-anchor="middle" class="h">4 hard rules</text>
+  <text x="953" y="294" text-anchor="middle" class="t">The only thing that can</text>
+  <text x="953" y="320" text-anchor="middle" class="t">remove a house</text>
+
+  <rect x="504" y="366" width="286" height="126" rx="12" class="card"/>
+  <text x="647" y="404" text-anchor="middle" class="h">Ranking</text>
+  <text x="647" y="434" text-anchor="middle" class="t">Goal, likes and feedback,</text>
+  <text x="647" y="460" text-anchor="middle" class="t">plus small AI nudges</text>
+
+  <rect x="810" y="366" width="286" height="126" rx="12" class="card"/>
+  <text x="953" y="404" text-anchor="middle" class="h">Rep guidance</text>
+  <text x="953" y="434" text-anchor="middle" class="t">Alerts, where to buy</text>
+  <text x="953" y="460" text-anchor="middle" class="t">and close calls</text>
+
+  <rect x="1270" y="230" width="260" height="180" rx="14" class="node"/>
+  <text x="1400" y="280" text-anchor="middle" class="h">Database</text>
+  <text x="1400" y="310" text-anchor="middle" class="t">Postgres</text>
+  <text x="1400" y="340" text-anchor="middle" class="t">clients, houses,</text>
+  <text x="1400" y="364" text-anchor="middle" class="t">feedback, AI notes</text>
+
+  <line x1="200" y1="287" x2="200" y2="353" class="flow" marker-start="url(#solid)" marker-end="url(#solid)"/>
+  <line x1="332" y1="415" x2="478" y2="415" class="flow" marker-start="url(#solid)" marker-end="url(#solid)"/>
+  <line x1="1122" y1="320" x2="1268" y2="320" class="flow" marker-start="url(#solid)" marker-end="url(#solid)"/>
+
+  <path d="M620 512V608" class="bg-flow" marker-end="url(#amber)"/>
+  <text x="638" y="566" class="label">Only when a client's words change</text>
+
+  <rect x="480" y="610" width="280" height="160" rx="14" class="ai"/>
+  <text x="620" y="652" text-anchor="middle" class="h">AI (OpenAI)</text>
+  <text x="620" y="684" text-anchor="middle" class="t">Reads notes, calls, comments</text>
+  <text x="620" y="710" text-anchor="middle" class="t">Writes notes with exact quotes</text>
+  <text x="620" y="738" text-anchor="middle" font-size="17" font-weight="650" fill="#fcd34d">Can't remove a house</text>
+
+  <path d="M762 690H838" class="bg-flow" marker-end="url(#amber)"/>
+
+  <rect x="840" y="610" width="280" height="160" rx="14" class="code"/>
+  <text x="980" y="652" text-anchor="middle" class="h">Code checks it</text>
+  <text x="980" y="684" text-anchor="middle" class="t">Client's exact words?</text>
+  <text x="980" y="710" text-anchor="middle" class="t">On topic?</text>
+  <text x="980" y="738" text-anchor="middle" class="t">Clashes go to the rep</text>
+
+  <path d="M1122 690H1400V412" class="bg-flow" marker-end="url(#amber)"/>
+  <text x="1150" y="672" class="label">Verified notes saved</text>
+
+  <line x1="390" y1="840" x2="450" y2="840" class="flow" marker-end="url(#solid)"/>
+  <text x="466" y="846" class="t">Instant: a reaction re-ranks the list</text>
+  <line x1="810" y1="840" x2="870" y2="840" class="bg-flow" marker-end="url(#amber)"/>
+  <text x="886" y="846" class="t">Background: the AI reads a new comment</text>
+</svg>
