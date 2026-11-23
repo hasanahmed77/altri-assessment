@@ -1,11 +1,20 @@
-import { Ban, CircleCheck, Info, TriangleAlert } from "lucide-react";
+import { ArrowRight, Ban, CircleCheck, Info, TriangleAlert } from "lucide-react";
 
 import { Quote } from "@/components/quote";
+import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import type { MarketFit } from "@/lib/api";
 import { pct, words } from "@/lib/format";
 
-export function MarketList({ markets }: { markets: MarketFit[] }) {
+export function MarketList({
+  markets,
+  toSendByMarket,
+  onSeeHouses,
+}: {
+  markets: MarketFit[];
+  toSendByMarket: Record<string, number>;
+  onSeeHouses: (marketId: string) => void;
+}) {
   return (
     <div className="flex flex-col gap-4">
       <p className="text-muted-foreground text-sm">
@@ -13,13 +22,26 @@ export function MarketList({ markets }: { markets: MarketFit[] }) {
         deals they can buy there and the returns on them.
       </p>
       {markets.map((fit) => (
-        <MarketCard key={fit.market.id} fit={fit} />
+        <MarketCard
+          key={fit.market.id}
+          fit={fit}
+          toSend={toSendByMarket[fit.market.id] ?? 0}
+          onSeeHouses={onSeeHouses}
+        />
       ))}
     </div>
   );
 }
 
-function MarketCard({ fit }: { fit: MarketFit }) {
+function MarketCard({
+  fit,
+  toSend,
+  onSeeHouses,
+}: {
+  fit: MarketFit;
+  toSend: number;
+  onSeeHouses: (marketId: string) => void;
+}) {
   const { market } = fit;
   const supply =
     fit.eligible_deals === 0
@@ -56,6 +78,16 @@ function MarketCard({ fit }: { fit: MarketFit }) {
               </li>
             ))}
           </ul>
+        )}
+        {toSend > 0 && (
+          <Button
+            variant="outline"
+            size="sm"
+            className="self-start"
+            onClick={() => onSeeHouses(market.id)}
+          >
+            See {toSend} {toSend === 1 ? "deal" : "deals"} to send <ArrowRight />
+          </Button>
         )}
       </CardContent>
     </Card>

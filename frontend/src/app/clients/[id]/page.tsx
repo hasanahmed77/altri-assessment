@@ -34,7 +34,7 @@ async function ClientView({ params }: { params: Promise<{ id: string }> }) {
       <ClientAlerts alerts={recommendations.alerts} />
       <ClientSummary client={client} />
       <ClientSignals signals={recommendations.signals} status={recommendations.signals_status} />
-      <DealTabs recommendations={recommendations} markets={markets} />
+      <DealTabs key={id} recommendations={recommendations} markets={markets} />
     </div>
   );
 }
