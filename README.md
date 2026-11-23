@@ -5,7 +5,7 @@ Fewer, better-fit deals per client, with reasons, and help for clients unsure wh
 ## Run it
 ```bash
 docker compose up                    # http://localhost:3000 (API docs: :8000/docs)
-docker compose run --rm api pytest   # 94 tests, against a throwaway local database
+docker compose run --rm api pytest   # 95 tests, against a throwaway local database
 ```
 No `.env` needed: compose runs its own Postgres, and the model's extracted signals ship as a migration. Optional (`.env.example`): `DATABASE_URL` for Supabase; `OPENAI_API_KEY` to read new comments live and run the evals (`python -m evals.run`).
 

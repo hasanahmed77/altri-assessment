@@ -129,3 +129,15 @@ def test_readings_that_contradict_the_profile_or_each_other_are_held_back() -> N
     assert [w.trait for w in usable.wishes] == [Trait.VIEWS]
     assert usable.avoids == []
     assert len(usable.conflicts) == 3
+
+
+def test_being_fine_with_a_heavy_renovation_is_not_a_wish() -> None:
+    client = make_client(renovation_appetite="heavy")
+    signals = make_signals(must_haves=[wish(Trait.HEAVY_RENOVATION)])
+
+    usable = usable_traits(client, signals)
+    reasons = ranking([make_deal()], signals, client=client)["D-900"].reasons
+
+    assert usable.wishes == []
+    assert usable.conflicts == []
+    assert not any(r.code.startswith("MUST_HAVE") for r in reasons)

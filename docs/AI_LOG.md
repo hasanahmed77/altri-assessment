@@ -120,6 +120,11 @@ Found by the evals (`python -m evals.run`) and by reading the extracted signals.
 - **How it was caught:** A full audit of every client's signals, alerts and top three against their notes, calls and comments.
 - **Fix:** A quote must mention what it supports: cue words per trait, aliases per market (plus "north Georgia", "Gulf coast", "panhandle"). Every drop is logged; on the last run each one was a misreading.
 
+### LLM-11 Willingness read as a wish
+- **What happened:** C-02 said "Fine managing a heavier renovation if the tax benefit is there"; the model returned *wants a heavy renovation*. The quote is real and mentions renovation, so every check passed. Heavy projects got +0.10 and every easier house got −0.15 for "lacking" one, moving D-141 from 11th to 4th in C-02's list. C-06 had the same reading.
+- **How it was caught:** Reading the "What the client said" panel in the running app while preparing the demo.
+- **Fix:** A heavy renovation is no longer a wish in code. The profile's renovation appetite already scores it, so the reading shows as "Open to" and moves nothing; saying no to a big renovation still counts.
+
 ## 3. How coding-assistant mistakes are prevented
 | Risk | Defense |
 |---|---|

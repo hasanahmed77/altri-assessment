@@ -11,7 +11,7 @@ from app.domain.models import Deal, LowMidHigh, Market
 from app.domain.near_miss import NearMiss
 from app.domain.recommend import ExcludedDeal
 from app.domain.scoring import RankedDeal, Reason
-from app.domain.signal_fit import reading_weight
+from app.domain.signal_fit import WILLING_NOT_WANTED, reading_weight
 from app.domain.signals import TRAIT_LABELS, Signals
 from app.repository import CallSummary, ClientProfile, FeedbackRecord
 from app.services.signals import SignalsStatus
@@ -219,7 +219,8 @@ def signal_items(
         c = signals.soft_budget_cap
         add("Cash limit", f"${c.amount:,}", c.quote, c.source)
     for t in signals.must_haves:
-        add("Wants", TRAIT_LABELS[t.trait], t.quote, t.source)
+        kind = "Open to" if t.trait in WILLING_NOT_WANTED else "Wants"
+        add(kind, TRAIT_LABELS[t.trait], t.quote, t.source)
     for a in signals.avoid_traits:
         add("Avoids", TRAIT_LABELS[a.trait], a.quote, a.source)
     for m in signals.preferred_markets:

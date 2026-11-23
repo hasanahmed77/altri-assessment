@@ -29,6 +29,9 @@ SENTIMENT_SIGNS = {"positive": 1.0, "neutral": 0.0, "negative": -1.0}
 # unsure says nothing about the house, whatever sentiment the model attached to it.
 NOT_ABOUT_THE_HOUSE = frozenset({"timing", "undecided"})
 RESTATED_BUDGET_TOLERANCE = 0.01
+# "Fine managing a heavier renovation" is willingness, which the profile's renovation appetite
+# already scores. Read as a wish, it would mark down every easier house for lacking a big project.
+WILLING_NOT_WANTED = frozenset({Trait.HEAVY_RENOVATION})
 
 
 @dataclass(frozen=True)
@@ -81,7 +84,7 @@ def usable_traits(client: Client, signals: Signals) -> UsableTraits:
 
     held = {id(signal) for signal, _ in conflicts}
     return UsableTraits(
-        wishes=[w for w in wishes if id(w) not in held],
+        wishes=[w for w in wishes if id(w) not in held and w.trait not in WILLING_NOT_WANTED],
         avoids=[a for a in avoids if id(a) not in held],
         conflicts=conflicts,
     )
