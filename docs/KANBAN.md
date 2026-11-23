@@ -13,9 +13,9 @@ WIP limit: **1** card in progress. Move a card by moving its line. Commits refer
 ## Backlog
 
 ### M5 Ship → tag v1.0
-- **S-12** Record the video (~10 min, script ready) · AC: repo is public and video unlisted; both links opened in a private window without signing in; video link added to the README
+- **S-12** Record the video (~10 min, script ready) · AC: repo is public and video unlisted; both links opened in a private window without signing in
 - **S-13** Rehearse: trace any recommendation from the screen to `finance.py` in under a minute
-- Tag `v1.0` once the video link is in
+- Tag `v1.0` once the video is recorded
 
 ## Done
 - **R-04** One-screen architecture diagram (`docs/architecture.pdf`), linked from the README and used in the video
